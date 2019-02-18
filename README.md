@@ -1,2 +1,2 @@
-UVA Housing App
+# UVA Housing App
 Heroku link: http://uvahousing.herokuapp.com/housing/search/
