@@ -43,7 +43,7 @@ class SuggestView(TemplateView):
 
 
             args = {'form': form, 'text': text}
-        return HttpResponseRedirect("/polls/suggestions/list")
+        return HttpResponseRedirect("/housing/search/results")
 
 
 

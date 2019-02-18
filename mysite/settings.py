@@ -27,7 +27,7 @@ SECRET_KEY = '*&dzwqhzc)(76o9@kbn(x9m&o32rq&)j_%x0p6cj0ml9sx@5zg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['uvahousing.herokuapp.com']
+ALLOWED_HOSTS = ['uvahousing.herokuapp.com','127.0.0.1']
 
 
 # Application definition
