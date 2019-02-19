@@ -31,7 +31,7 @@ class Choice(models.Model):
 class Post(models.Model):
     name = models.CharField(max_length=20, db_column='user')
     search = models.CharField(max_length=40, db_column='post')
-
+    rating = models.IntegerField()
 
     def __str__(self):
         return self.search
