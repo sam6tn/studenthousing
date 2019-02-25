@@ -7,6 +7,9 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
 
+
+
+
     {% load static %}
     <link rel="stylesheet" href="{% static 'polls/style.css' %}" type="text/css">
 </head>
@@ -18,17 +21,28 @@
             <div class="mx-auto" >
             {{ form.as_p }}
         </div>
-             <div class="btn-group">
-  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Filter
-  </button>
-                 <button class="btn btn-success" type="submit" style="width: 900px">Find Housing!</button>
-  <div class="dropdown-menu">
-    <a class="dropdown-item" href="#">Availability</a>
-    <a class="dropdown-item" href="#">Pricing</a>
-    <a class="dropdown-item" href="#">Distance</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">See Suggested</a>
+
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Filter On:
+                    <span id="selected">(Select)&nbsp&nbsp&nbsp&nbsp&nbsp</span><span class="caret"></span></button>
+
+
+
+                 <button class="btn btn-success btn-block" type="submit" style="width: 900px">Find Housing!</button>
+
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Availability</a>
+                    <a class="dropdown-item" href="#">Pricing&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+                    <a class="dropdown-item" href="#">Distance&nbsp&nbsp&nbsp    </a>
+                <div class="dropdown-divider"></div>
+
+    <a class="dropdown-item" href="#">Suggested</a>
+
+                    <script> $('.dropdown-menu a').click(function(){
+    $('#selected').text($(this).text());
+  });</script>
+
   </div>
 </div>
 
