@@ -33,7 +33,7 @@ ALLOWED_HOSTS = ['uvahousing.herokuapp.com','127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
-    'polls.apps.PollsConfig',
+    'search.apps.SearchConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'bootstrap4',
     'social_django',
+
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

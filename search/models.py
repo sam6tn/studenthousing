@@ -28,12 +28,10 @@ class Choice(models.Model):
     def __str__(self):
         return self.choice_text
 
-class Post(models.Model):
+class Search(models.Model):
     name = models.CharField(max_length=20, db_column='user')
     search = models.CharField(max_length=40, db_column='post')
     #rating = models.IntegerField(MinValueValidator=1, MaxValueValidator=5)
 
     def __str__(self):
         return self.search
-
-
