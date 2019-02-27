@@ -1,0 +1,17 @@
+{% block body %}
+
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<span class="border-right-0"></span>
+<div class ="container">
+        <h3>Housing found for: {{posts.last}}</h3>
+
+<img src="https://cimg5.ibsrv.net/ibimg/www.apartmentratings.com/650x350_85-1/s/v/1/sv1jqv0X7QZ.jpg" alt="HGWells" class="img-fluid img-rounded" class="img-fluid" alt="Responsive image">
+</div>
+{% endblock %}
