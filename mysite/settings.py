@@ -41,6 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.messages',
     'bootstrap4',
+    'social_django',
+]
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -54,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -66,15 +73,16 @@ TEMPLATES = [
     'APP_DIRS': True,
     'OPTIONS': {
         'context_processors': [
-
             'django.contrib.auth.context_processors.auth',
             'django.template.context_processors.debug',
             'django.template.context_processors.i18n',
             'django.template.context_processors.media',
             'django.template.context_processors.static',
             'django.template.context_processors.tz',
-                'django.contrib.messages.context_processors.messages',
-            ],
+            'django.contrib.messages.context_processors.messages',
+            'social_django.context_processors.backends',
+            'social_django.context_processors.login_redirect',
+          ],
         },
     },
 ]
