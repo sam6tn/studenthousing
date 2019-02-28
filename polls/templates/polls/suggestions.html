@@ -1,3 +1,21 @@
+Skip to content
+ 
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ @cc8en Sign out
+5
+0 0 UVA-CS3240-S19/project-103-team1 Private
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights  Settings
+project-103-team1/polls/templates/polls/suggestions.html
+@cc8en cc8en Sorry fixing the master branch by commenting out the ratings code
+a6cd760  2 days ago
+82 lines (60 sloc)  3.18 KB
+    
+
 <html>
 <head>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -5,6 +23,9 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+
+
+
 
     {% load static %}
     <link rel="stylesheet" href="{% static 'polls/style.css' %}" type="text/css">
@@ -17,17 +38,28 @@
             <div class="mx-auto" >
             {{ form.as_p }}
         </div>
-             <div class="btn-group">
-  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Filter
-  </button>
-                 <button class="btn btn-success" type="submit" style="width: 900px">Find Housing!</button>
-  <div class="dropdown-menu">
-    <a class="dropdown-item" href="#">Availability</a>
-    <a class="dropdown-item" href="#">Pricing</a>
-    <a class="dropdown-item" href="#">Distance</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">See Suggested</a>
+
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Filter On:
+                    <span id="selected">(Select)&nbsp&nbsp&nbsp&nbsp&nbsp</span><span class="caret"></span></button>
+
+
+
+                 <button class="btn btn-success btn-block" type="submit" style="width: 900px">Find Housing!</button>
+
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Availability</a>
+                    <a class="dropdown-item" href="#">Pricing&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+                    <a class="dropdown-item" href="#">Distance&nbsp&nbsp&nbsp    </a>
+                <div class="dropdown-divider"></div>
+
+    <a class="dropdown-item" href="#">Suggested</a>
+
+                    <script> $('.dropdown-menu a').click(function(){
+    $('#selected').text($(this).text());
+  });</script>
+
   </div>
 </div>
 
