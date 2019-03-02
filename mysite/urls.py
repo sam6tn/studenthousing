@@ -19,4 +19,6 @@ from django.urls import path, include
 urlpatterns = [
     path('housing/', include('polls.urls')),
     path('admin/', admin.site.urls),
+    path('',include('django.contrib.auth.urls')),
+    path('oauth/', include('social_django.urls', namespace="social")),
 ]

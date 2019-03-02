@@ -28,7 +28,7 @@ class Choice(models.Model):
 		return self.choice_text
 
 class Post(models.Model):
-	name = models.CharField(max_length=40)
+	name = models.CharField(default='',max_length=40)
 	info = models.CharField(default='',max_length=200)
 	rating = models.IntegerField(default=1,validators=[MinValueValidator(1),MaxValueValidator(5)])
 	

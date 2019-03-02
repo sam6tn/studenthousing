@@ -71,6 +71,11 @@
     </label>
   </div>
   <button type="submit" class="btn btn-primary">Sign in</button>
+
+  <p>  --- OR ---  </p>
+  <a href="{% url 'social:begin' 'google-oauth2' %}">
+    <button type="button" name="button" class="btn btn-danger">Google</button>
+  </a>
 </form>
 </div>
         </form>
@@ -79,4 +84,3 @@
 
 
 </html>
-

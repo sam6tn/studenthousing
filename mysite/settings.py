@@ -144,3 +144,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join('mysite', 'static'),
 ]
+
+LOGIN_REDIRECT_URL = '/housing/search/results/'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '180552666297-jrksmi08lq7198tqd53gc78akae2bucd.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'w-wVK5mRfjsDQ8-WTu1RzzrW'
