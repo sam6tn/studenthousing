@@ -3,7 +3,16 @@ from django.contrib import admin
 from .models import Question, Choice, Post
 
 class PostAdmin(admin.ModelAdmin):
-	search_fields = ['search']
+    fieldsets = [
+        (None, {'fields': ['name']}),
+        (None, {'fields': ['info']}),
+        (None, {'fields': ['rating']}),
+    ]
+    list_display = ('name', 'info', 'rating')
+
+    list_filter = ['rating']
+
+    search_fields = ['name']
 
 
 class ChoiceInline(admin.TabularInline):
