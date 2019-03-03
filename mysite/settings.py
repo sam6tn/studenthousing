@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.messages',
     'bootstrap4',
+    'social_django',
 ]
 
 AUTHENTICATION_BACKENDS = [
