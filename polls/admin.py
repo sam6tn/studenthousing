@@ -1,25 +1,18 @@
 from django.contrib import admin
 #change
-from .models import Question, Choice
+from .models import Question, Choice, Post
 
-
-class ChoiceInline(admin.TabularInline):
-    model = Choice
-    extra = 3
-
-class QuestionAdmin(admin.ModelAdmin):
+class PostAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None,               {'fields': ['question_text']}),
-        ('Date information', {'fields': ['pub_date'], 'classes': ['collapse']}),
+        (None, {'fields': ['name']}),
+        (None, {'fields': ['info']}),
+        (None, {'fields': ['rating']}),
     ]
-    inlines = [ChoiceInline]
+    list_display = ('name', 'info', 'rating')
 
+    list_filter = ['rating']
 
-    list_display = ('question_text', 'pub_date', 'was_published_recently')
+    search_fields = ['name']
 
-    list_filter = ['pub_date']
-
-    search_fields = ['question_text']
-
-admin.site.register(Question, QuestionAdmin)
+admin.site.register(Post, PostAdmin)
 

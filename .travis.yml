@@ -1,4 +1,14 @@
 language: python
-install:
-  - pip install -r requirements.txt
-  - pip install .
+    python:
+      - "3.7"
+    services:
+      - sqlite
+    env:
+      -DJANGO=2.1 DB=sqlite
+    install:
+      - pip install -r requirements.txt
+    before_script:
+      - sqlite -e 'create database test;' -u root
+    script: # => 7
+      - python manage.py test
+
