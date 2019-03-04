@@ -7,7 +7,7 @@ from django.views.generic import TemplateView
 from django.utils import timezone
 from django.views.generic import CreateView
 
-from .models import Question, Choice, Post
+from .models import Question, Post
 
 class PostCreateView(CreateView):
     model = Post
