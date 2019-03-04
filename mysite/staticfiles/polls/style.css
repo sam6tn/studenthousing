@@ -1,0 +1,13 @@
+.form-group{
+    width: 300px;
+}
+
+#login-box{
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.navbar{
+    margin-bottom: 50px;
+    color:orange;
+}
