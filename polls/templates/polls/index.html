@@ -8,11 +8,11 @@
 
 
     {% load static %}
-    <link rel="stylesheet" href="{% static 'polls/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'housing/style.css' %}" type="text/css">
 
     <style>
         .form-group{
-            width: 200px;
+            width: 300px;
         }
 
         #login-box{
@@ -24,6 +24,11 @@
             margin-bottom: 50px;
             color:orange;
         }
+        .logo{
+            height:60px;
+            width:80px;
+            margin-right:10px;
+        }
     </style>
 
     <title>Housing Log In</title>
@@ -33,19 +38,23 @@
 <body>
 
     <nav class="navbar navbar-expand-md bg-primary navbar-dark">
-        <h1>Off Grounds Housing</h1>   
+        <img class="logo" src="https://i0.wp.com/rockbridgereport.academic.wlu.edu/files/2011/11/UVA.gif">
+        <h1>Off Grounds Housing</h1>
     </nav>
         
     <form method="Post" class="form-signin text-center">
         {% csrf_token %}
+        <div class="mx-auto" >
+            {{ form.as_p }}
+        </div>
         
         <div class="col-sm-4" id="login-box">
             <h3>Sign-in:</h3>
-            <div class="form-group" id="login-box" style="width: 200px";>
+            <div class="form-group" id="login-box">
                 <label for="exampleDropdownFormEmail2" class="sr-only">Email address</label>
                 <input type="email" class="form-control" id="exampleDropdownFormEmail2" placeholder="email@example.com">
             </div>
-            <div class="form-group" id="login-box" style="width: 200px";>
+            <div class="form-group" id="login-box">
                 <label for="exampleDropdownFormPassword2" class="sr-only">Password</label>
                 <input type="password" class="form-control" id="exampleDropdownFormPassword2" placeholder="Password">
             </div>

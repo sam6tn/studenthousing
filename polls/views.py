@@ -18,14 +18,14 @@ class IndexView(generic.ListView):
     context_object_name = 'latest_question_list'
 
     def get_queryset(self):
-        return Question.objects.filter(
-        pub_date__lte=timezone.now()
-    ).order_by('-pub_date')[:5]
+        return Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
 
+    def post(self, request):
+        return HttpResponseRedirect("/search/")
 
 
 class SuggestView(TemplateView):
-    template_name = 'polls/suggestions.html'
+    template_name = 'polls/search.html'
 
     def get(self, request):
         form = SuggestForm()
@@ -43,8 +43,7 @@ class SuggestView(TemplateView):
 
 
             args = {'form': form, 'text': text}
-        return HttpResponseRedirect("/housing/search/results")
-
+        return HttpResponseRedirect("/search/results/")
 
 
 class ListView(TemplateView):
