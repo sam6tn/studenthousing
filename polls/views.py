@@ -55,9 +55,12 @@ class ListView(TemplateView):
     def get(self, request):
         if request.user.is_authenticated:
             search = request.session.get('search')
-            #posts = Post.objects.all()
-            posts = Post.objects.filter(name__icontains=search)
-            #posts = Post.objects.order_by('search')
+
+            if(search is not None):
+                posts = Post.objects.filter(name__icontains=search)
+            else:
+                posts = Post.objects.all()
+                
             args = {'posts': posts}
             return render(request, self.template_name, args)
         else:
