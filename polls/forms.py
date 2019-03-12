@@ -7,7 +7,3 @@ class SuggestForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('search',)
-
-# class LoginForm(forms.ModelForm):
-#     email = forms.CharField(widget=forms.Textarea(attrs={'cols': 100, 'rows': 1}))
-#     password = forms.CharField(widget=forms.Textarea(attrs={'cols': 100, 'rows': 1}))

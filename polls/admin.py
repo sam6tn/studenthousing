@@ -1,18 +1,29 @@
 from django.contrib import admin
-#change
-from .models import Post
+
+from .models import Post, Review
+
+class ReviewInline(admin.TabularInline):
+    model = Review
+    extra = 1
 
 class PostAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['name']}),
         (None, {'fields': ['info']}),
+        (None, {'fields': ['address']}),
+        (None, {'fields': ['price']}),
         (None, {'fields': ['rating']}),
+        (None, {'fields': ['image_url']}),
     ]
-    list_display = ('name', 'info', 'rating')
+    list_display = ('name', 'info', 'address', 'price', 'rating', 'image_url')
 
-    list_filter = ['rating']
+    list_filter = ['name']
 
     search_fields = ['name']
+
+    inlines = [ReviewInline]
+
+
 """
 
 class PostInline(admin.TabularInline):
