@@ -1,4 +1,4 @@
-from .forms import SuggestForm
+from .forms import SearchForm, ReviewForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
@@ -12,26 +12,19 @@ from django.contrib.messages import get_messages
 
 from .models import Post, Review
 
-class PostCreateView(CreateView):
-    model = Post
-    fields = ('user', 'post')
-
 class LoginView(TemplateView):
     template_name = 'polls/index.html'
-    context_object_name = 'latest_question_list'
-
-    def get_queryset(self):
-        return Post.objects
 
     def post(self, request):
         return HttpResponseRedirect("/search/")
 
+#view for user to enter search input
 class SearchView(TemplateView):
     template_name = 'polls/search.html'
 
     def get(self, request):
         if request.user.is_authenticated:
-            form = SuggestForm()
+            form = SearchForm()
             posts = Post.objects.all()
 
             args = {'form': form, 'posts': posts}
@@ -42,25 +35,25 @@ class SearchView(TemplateView):
             return HttpResponseRedirect("/")
 
     def post(self, request):
-        form = SuggestForm(request.POST)
+        form = SearchForm(request.POST)
         if form.is_valid():
-            search = form.cleaned_data['search']
-            #args = {'form': form, 'search': search}
-            request.session['search'] = search
+            search = form.cleaned_data['search']          
+            request.session['search'] = search     #sets session variable to search input
         return HttpResponseRedirect("/search/results/")
 
-
+#view for search results
 class ListView(TemplateView):
     template_name = 'polls/list.html'
+    model = Post
     def get(self, request):
         if request.user.is_authenticated:
             search = request.session.get('search')
 
             if(search is not None):
-                posts = Post.objects.filter(name__icontains=search)
+                posts = Post.objects.filter(name__icontains=search) #searches database based on substring
             else:
-                posts = Post.objects.all()
-                
+                posts = Post.objects.all() #if no search input, displays all posts
+
             args = {'posts': posts}
             return render(request, self.template_name, args)
         else:
@@ -68,3 +61,26 @@ class ListView(TemplateView):
                 messages.error(request, 'Please Sign In!')
             return HttpResponseRedirect("/")
 
+#view for individual housing posts
+class PostView(TemplateView):
+    template_name = 'polls/post.html'
+    model = Post
+    def get(self, request, post_id):
+        if request.user.is_authenticated:
+            post = Post.objects.get(id=post_id)
+            form = ReviewForm()
+            args = {'post': post, 'form':form}
+            return render(request, self.template_name, args)
+        else:
+            if (len(list(get_messages(request)))==0):
+                messages.error(request, 'Please Sign In!')
+            return HttpResponseRedirect("/")
+    def post(self, request, post_id):
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.cleaned_data['review_text']
+            p = Post.objects.get(id=post_id)
+            r = Review(post=p,review_text=review)
+            r.save()
+            #args = {'form': form, 'search': search}
+        return HttpResponseRedirect(reverse('housing:post',args=(post_id,)))

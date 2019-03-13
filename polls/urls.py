@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^$', views.LoginView.as_view(), name='login'),
     url(r'^search/$', views.SearchView.as_view(), name='home'),
     url(r'^search/results/$', views.ListView.as_view(), name='list'),
+    url(r'^search/(?P<post_id>\d+)/$', views.PostView.as_view(), name='post'),
 ]

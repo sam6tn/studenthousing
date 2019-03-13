@@ -1,13 +1,42 @@
-.form-group{
-    width: 300px;
+.checked {
+    color: orange;
 }
-
-#login-box{
-    margin: 0 auto;
-    padding: 10px;
-}
-
 .navbar{
-    margin-bottom: 50px;
-    color:orange;
+  margin-bottom: 50px;
+  color:orange;
+}
+#rating{
+  font-size: 16pt;
+}
+#results{
+  display:inline-block;
+  margin-bottom:10px;
+  border:1px solid black;
+  padding-bottom: 10px;
+}
+.img-results{
+  width: 400px;
+  height: 300px;
+  display: inline-block;
+  margin: 0 auto;
+  text-align: center;
+}
+#botmarg{
+  margin-bottom: 20px;
+}
+
+.logo{
+      height:60px;
+      width:80px;
+      margin-right:10px;
+}
+.rightmarg{
+  margin-right:50px;
+}
+.tabs{
+  font-size:16pt;
+}
+#price{
+  font-size:16pt;
+  margin-right:30px;
 }
