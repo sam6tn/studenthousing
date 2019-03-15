@@ -16,18 +16,39 @@ class LoginView(TemplateView):
     template_name = 'polls/index.html'
 
     def post(self, request):
-        return HttpResponseRedirect("/search/")
+        return HttpResponseRedirect("/housingsearch/")
 
-#view for user to enter search input
-class SearchView(TemplateView):
-    template_name = 'polls/search.html'
+# class SearchView(TemplateView):
+#     template_name = 'polls/search.html'
 
+#     def get(self, request):
+#         if request.user.is_authenticated:
+#             form = SearchForm()
+#             posts = Post.objects.all()
+
+#             args = {'form': form, 'posts': posts}
+#             return render(request, self.template_name, args)
+#         else:
+#             if (len(list(get_messages(request)))==0):
+#                 messages.error(request, 'Please Sign In!')
+#             return HttpResponseRedirect("/")
+
+#     def post(self, request):
+#         form = SearchForm(request.POST)
+#         if form.is_valid():
+#             search = form.cleaned_data['search']          
+#             request.session['search'] = search     
+#         return HttpResponseRedirect("/search/results/")
+
+#view for housing search
+class ListView(TemplateView):
+    template_name = 'polls/list.html'
+    model = Post
     def get(self, request):
+        form = SearchForm()
         if request.user.is_authenticated:
-            form = SearchForm()
-            posts = Post.objects.all()
-
-            args = {'form': form, 'posts': posts}
+            posts = Post.objects.all() #if no search input, displays all posts
+            args = {'posts': posts, 'form':form}
             return render(request, self.template_name, args)
         else:
             if (len(list(get_messages(request)))==0):
@@ -37,29 +58,13 @@ class SearchView(TemplateView):
     def post(self, request):
         form = SearchForm(request.POST)
         if form.is_valid():
-            search = form.cleaned_data['search']          
-            request.session['search'] = search     #sets session variable to search input
-        return HttpResponseRedirect("/search/results/")
-
-#view for search results
-class ListView(TemplateView):
-    template_name = 'polls/list.html'
-    model = Post
-    def get(self, request):
-        if request.user.is_authenticated:
-            search = request.session.get('search')
-
+            search = form.cleaned_data['search']
             if(search is not None):
                 posts = Post.objects.filter(name__icontains=search) #searches database based on substring
             else:
                 posts = Post.objects.all() #if no search input, displays all posts
-
-            args = {'posts': posts}
-            return render(request, self.template_name, args)
-        else:
-            if (len(list(get_messages(request)))==0):
-                messages.error(request, 'Please Sign In!')
-            return HttpResponseRedirect("/")
+        args = {'posts': posts,'form': form}
+        return render(request, self.template_name, args)
 
 #view for individual housing posts
 class PostView(TemplateView):

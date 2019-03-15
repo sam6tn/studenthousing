@@ -23,7 +23,7 @@ class PostTests(TestCase):
 
     def test_search_results_found(self):
         p = create_post(name="", info="", rating=1)
-        url = reverse('housing:list')
+        url = reverse('housing:housingsearch')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
 

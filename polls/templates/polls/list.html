@@ -1,6 +1,11 @@
 {% block body %}
 
 <head>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -8,6 +13,9 @@
 <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
 
 <style>
+	#filter-button{
+      width:200px;
+    }
 	.checked {
 		  color: orange;
 	}
@@ -31,8 +39,8 @@
 		margin: 0 auto;
 		text-align: center;
 	}
-	#botmarg{
-		margin-bottom: 20px;
+	.botmarg{
+		margin-bottom: 80px;
 	}
 
 	.logo{
@@ -50,6 +58,14 @@
 		font-size:16pt;
 		margin-right:30px;
 	}
+	#searchbox{
+		margin-bottom: 20px;
+	}
+	#resulttext {
+		font-size:20pt;
+		margin-right:20px;
+		font-weight: bold;
+	}
 
 </style>
 
@@ -57,17 +73,19 @@
 
 <body>
 
+
+
 <nav class="navbar navbar-expand-md bg-primary navbar-dark">
 	<img class="logo" src="https://i0.wp.com/rockbridgereport.academic.wlu.edu/files/2011/11/UVA.gif">
 	<h1>Off Grounds Housing</h1>
 
 	<div class="collapse navbar-collapse justify-content-end tabs" id="collapsibleNavbar">   
 		<ul class="navbar-nav">
-		  	<li class="nav-item"><a class="nav-link" href="/search/">Home</a></li>
+		  	<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">Roommates</a></li>
-			<li class="nav-item"> <a class="nav-link" href="/search/results/">Housing</a></li>        
+			<li class="nav-item"> <a class="nav-link" href="/housingsearch/">Housing</a></li>        
 			<li class="nav-item dropdown rightmarg">
-				<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.username }}</a>
+				<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.first_name }}</a>
 				<div class="dropdown-menu" aria-labelledby="dropdown01">
 					<a class="dropdown-item" href="#">Edit Profile</a>
 					<a class="dropdown-item" href="#">BlahBlahBlah</a>
@@ -82,11 +100,40 @@
 
 </nav>
 
-<span class="border-right-0"></span>
+
+	<h1>Search Offgrounds Housing</h1>
+
+	<p>{{user.first_name}}</p>
+
+	<form method="Post" style="width: 600px">
+		{% csrf_token %}
+		<div id="searchbox">
+			{{ form.search }}
+		</div>
+		<div class="btn-group">
+			<button class="btn btn-success btn-block" type="submit" style="width: 900px">Search Housing!</button>
+		</div>
+	</form>
 
 <div class ="container">
-	<h2 id="botmarg">Search Results:</h2>
+	<div class="row botmarg">
+		<span id="resulttext">Search Results:</span>
+		<button type="button" id="filter-button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+			Filter by: <span id="selected">(Select)</span><span class="caret"></span>
+		</button>
+		<div class="dropdown-menu">
+			<a class="dropdown-item" href="#">Availability</a>
+			<a class="dropdown-item" href="#">Pricing</a>
+			<a class="dropdown-item" href="#">Distance</a>
+			<!-- <div class="dropdown-divider"></div>
+			<a class="dropdown-item" href="#">Suggested</a> -->
+		</div>
+	</div>
 	
+	<script>
+		$('.dropdown-menu a').click(function(){$('#selected').text($(this).text());});
+	</script>
+
 	{% for post in posts.all %}
 	<div class="col-sm-5" id="results">
 		<form method="post">
@@ -112,8 +159,8 @@
 	
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script> -->
 
 {% endblock %}
 

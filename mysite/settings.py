@@ -146,7 +146,7 @@ STATICFILES_DIRS = [
 ]
 
 LOGIN_URL = '/'
-LOGIN_REDIRECT_URL = '/search/'
+LOGIN_REDIRECT_URL = '/housingsearch/'
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '180552666297-jrksmi08lq7198tqd53gc78akae2bucd.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'w-wVK5mRfjsDQ8-WTu1RzzrW'
 
