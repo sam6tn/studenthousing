@@ -18,28 +18,6 @@ class LoginView(TemplateView):
     def post(self, request):
         return HttpResponseRedirect("/housingsearch/")
 
-# class SearchView(TemplateView):
-#     template_name = 'polls/search.html'
-
-#     def get(self, request):
-#         if request.user.is_authenticated:
-#             form = SearchForm()
-#             posts = Post.objects.all()
-
-#             args = {'form': form, 'posts': posts}
-#             return render(request, self.template_name, args)
-#         else:
-#             if (len(list(get_messages(request)))==0):
-#                 messages.error(request, 'Please Sign In!')
-#             return HttpResponseRedirect("/")
-
-#     def post(self, request):
-#         form = SearchForm(request.POST)
-#         if form.is_valid():
-#             search = form.cleaned_data['search']          
-#             request.session['search'] = search     
-#         return HttpResponseRedirect("/search/results/")
-
 #view for housing search
 class ListView(TemplateView):
     template_name = 'polls/list.html'
@@ -70,9 +48,9 @@ class ListView(TemplateView):
 class PostView(TemplateView):
     template_name = 'polls/post.html'
     model = Post
-    def get(self, request, post_id):
+    def get(self, request, post_name):
         if request.user.is_authenticated:
-            post = Post.objects.get(id=post_id)
+            post = Post.objects.get(name=post_name)
             form = ReviewForm()
             args = {'post': post, 'form':form}
             return render(request, self.template_name, args)
@@ -80,12 +58,11 @@ class PostView(TemplateView):
             if (len(list(get_messages(request)))==0):
                 messages.error(request, 'Please Sign In!')
             return HttpResponseRedirect("/")
-    def post(self, request, post_id):
+    def post(self, request, post_name):
         form = ReviewForm(request.POST)
         if form.is_valid():
             review = form.cleaned_data['review_text']
             p = Post.objects.get(id=post_id)
             r = Review(post=p,review_text=review)
             r.save()
-            #args = {'form': form, 'search': search}
-        return HttpResponseRedirect(reverse('housing:post',args=(post_id,)))
+        return HttpResponseRedirect(reverse('housing:post',args=(post_name,)))

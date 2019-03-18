@@ -31,6 +31,7 @@
 		margin-bottom:10px;
 		border:1px solid black;
 		padding-bottom: 10px;
+		background-color:whitesmoke;
 	}
 	.img-results{
 		width: 400px;
@@ -137,7 +138,7 @@
 		<form method="post">
 		{% csrf_token %}
 
-		<h4><a href="{% url 'housing:post' post.id%}">{{ post.name }}</a></h4>
+		<h4><a href="{% url 'housing:post' post.name%}">{{ post.name }}</a></h4>
 		<p>{{post.address}}</p>
 		<p>{{post.info}}</p>
 		<span id="price">${{post.price}}</span><span id="rating">Rating:</span>
@@ -148,10 +149,6 @@
 		<span class="fa fa-star {% if post.rating >= 5 %}checked{% endif %}"></span>
 		<img src={{post.image_url}} class="img-results">
 		</form>
-		<!-- <h5>Reviews:</h5>
-		{% for review in post.review_set.all %}
-			<div>{{review.review_text}}</div>
-		{% endfor %} -->
 	</div>
 	{% endfor %}
 	
