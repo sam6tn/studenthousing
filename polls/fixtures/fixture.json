@@ -10,7 +10,8 @@
             "rating": 4,
             "image_url": "https://cimg5.ibsrv.net/ibimg/www.apartmentratings.com/650x350_85-1/s/v/1/sv1jqv0X7QZ.jpg",
             "baths": 0,
-            "rooms": 0
+            "rooms": 0,
+            "available": true
         }
     },
     {
@@ -24,7 +25,8 @@
             "rating": 5,
             "image_url": "http://www.wertlandsquareuva.com/-/media/375---Wertland-Square/Images/375-302.jpg?h=933&mh=1706&mw=2560&thn=0&w=1400&crop=1&hash=18F8E94E5D3181387FA38F0F25AE4273FDF5114C",
             "baths": 0,
-            "rooms": 0
+            "rooms": 0,
+            "available": true
         }
     },
     {
@@ -38,7 +40,8 @@
             "rating": 3,
             "image_url": "https://www.brac.com/photos/14/xlarge/14_181018_045422_9216.jpg",
             "baths": 0,
-            "rooms": 0
+            "rooms": 0,
+            "available": false
         }
     },
     {
@@ -52,7 +55,8 @@
             "rating": 3,
             "image_url": "https://rentpath-res.cloudinary.com/w_850,h_520,t_rp,e_improve,cs_tinysrgb,fl_force_strip,c_fill/e_unsharp_mask:50,f_webp,q_auto:low/c724ea481def2a1e02d12986c4e30afe",
             "baths": 0,
-            "rooms": 0
+            "rooms": 0,
+            "available": true
         }
     },
     {
@@ -97,6 +101,15 @@
         "fields": {
             "post": 10,
             "review_text": "Wertland Square is the place to live!",
+            "rating": 1
+        }
+    },
+    {
+        "model": "polls.review",
+        "pk": 10,
+        "fields": {
+            "post": 13,
+            "review_text": "THIS IS LOCAL",
             "rating": 1
         }
     }
