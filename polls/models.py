@@ -14,6 +14,7 @@ class Post(models.Model):
     image_url = models.URLField(null=True)
     baths = models.IntegerField(default=0)
     rooms = models.IntegerField(default=0)
+    available = models.BooleanField(default=True)
     def __str__(self):
         return self.name
 

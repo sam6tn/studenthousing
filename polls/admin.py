@@ -14,8 +14,9 @@ class PostAdmin(admin.ModelAdmin):
         (None, {'fields': ['price']}),
         (None, {'fields': ['rating']}),
         (None, {'fields': ['image_url']}),
+        (None, {'fields': ['available']}),
     ]
-    list_display = ('name', 'info', 'address', 'price', 'rating', 'image_url')
+    list_display = ('name', 'info', 'address', 'price', 'rating', 'image_url', 'available')
 
     list_filter = ['name']
 
