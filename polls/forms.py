@@ -1,5 +1,7 @@
 from django import forms
-from .models import Post, Review
+from .models import Post, Review, Profile
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.models import User
 
 class SearchForm(forms.ModelForm):
     search = forms.CharField(widget=forms.TextInput(attrs={'size': 115,}))
@@ -12,3 +14,22 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ('review_text',)
+
+
+class EditProfileForm(UserChangeForm):
+    bio = forms.IntegerField()
+    class Meta:
+        model = User
+        fields = (
+            'email',
+            'first_name',
+            'last_name',
+            'bio',
+            'password',
+
+
+        )
+
+        def save(self, commit=True):
+            # do something with self.cleaned_data['temp_id']
+            return super(EditProfileForm, self).save(commit=commit)

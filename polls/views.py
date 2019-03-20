@@ -9,8 +9,10 @@ from django.views.generic import CreateView
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.messages import get_messages
+from django.contrib.auth.forms import UserChangeForm
+from polls.forms import EditProfileForm
 
-from .models import Post, Review
+from .models import Post, Review, Profile
 
 class LoginView(TemplateView):
     template_name = 'polls/index.html'
@@ -44,7 +46,7 @@ class ListView(TemplateView):
         args = {'posts': posts,'form': form}
         return render(request, self.template_name, args)
 
-#view for individual housing posts
+#view for individual housing postspyth
 class PostView(TemplateView):
     template_name = 'polls/post.html'
     model = Post
@@ -62,7 +64,45 @@ class PostView(TemplateView):
         form = ReviewForm(request.POST)
         if form.is_valid():
             review = form.cleaned_data['review_text']
-            p = Post.objects.get(id=post_id)
+            p = Post.objects.get(name=post_name)
             r = Review(post=p,review_text=review)
             r.save()
         return HttpResponseRedirect(reverse('housing:post',args=(post_name,)))
+
+class ProfileView(TemplateView):
+    template_name = 'polls/edit_profile.html'
+
+    def get(self, request):
+        form = EditProfileForm()
+        profiles = Profile.objects.all()
+
+        args = {'form': form, 'profiles': profiles}
+        return render(request, self.template_name, args)
+
+    def post(self, request):
+        form = EditProfileForm(request.POST)
+        if form.is_valid():
+            form.save()
+            text = form.cleaned_data['profile']
+            form = EditProfileForm()
+
+
+            args = {'form': form, 'text': text}
+        return HttpResponseRedirect("/profile")
+
+
+def profile(request):
+    return render(request, 'polls/profile.html')
+
+def edit_profile(request):
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=request.user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/profile')
+    else:
+            form = EditProfileForm(instance=request.user)
+            args = {'form': form}
+            return render(request, 'polls/edit_profile.html', args)
+

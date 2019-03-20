@@ -89,6 +89,11 @@
     <div>
         
         <h1>{{ post.name }}</h1>
+        {% if post.available%}
+            <h2 style="color:green;">Available!</h2>
+        {% else %}
+            <h2 style="color:red;">Not Available</h2>
+        {% endif %}
         <p>{{post.address}}</p>
         <p>{{post.info}}</p>
         <span id="price">${{post.price}}</span><span id="rating">Rating:</span>
