@@ -17,8 +17,9 @@ class ReviewForm(forms.ModelForm):
 
 
 class EditProfileForm(UserChangeForm):
-    bio = forms.IntegerField()
+    bio = forms.CharField()
     class Meta:
+        exclude = ['password']
         model = User
         fields = (
             'email',
