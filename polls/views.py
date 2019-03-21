@@ -105,4 +105,3 @@ def edit_profile(request):
             form = EditProfileForm(instance=request.user)
             args = {'form': form}
             return render(request, 'polls/edit_profile.html', args)
-

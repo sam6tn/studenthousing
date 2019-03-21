@@ -17,15 +17,15 @@ class ReviewForm(forms.ModelForm):
 
 
 class EditProfileForm(UserChangeForm):
-    bio = forms.CharField()
+    password = None
     class Meta:
-        exclude = ['password']
         model = User
+
+        exclude = ("password",)
         fields = (
             'email',
             'first_name',
             'last_name',
-            'bio',
             'password',
 
 

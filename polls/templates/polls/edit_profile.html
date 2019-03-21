@@ -16,12 +16,10 @@
         .form-group{
             width: 300px;
         }
-
         #login-box{
             margin: 0 auto;
             padding: 10px;
         }
-
         .navbar{
             margin-bottom: 50px;
             color:orange;
@@ -71,8 +69,7 @@
 {% block content %}
 <form method="post">
     {% csrf_token %}
-    {{ user_form.as_p}}
-    {{ profile_form.as_p}}
+    {{ form.as_p}}
     <button type="submit">Submit </button>
 
 
