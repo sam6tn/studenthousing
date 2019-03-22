@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.messages import get_messages
 from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth import logout as user_logout
 from polls.forms import EditProfileForm
 
 from .models import Post, Review, Profile
@@ -105,3 +106,7 @@ def edit_profile(request):
             form = EditProfileForm(instance=request.user)
             args = {'form': form}
             return render(request, 'polls/edit_profile.html', args)
+
+def logout(request):
+    user_logout(request)
+    return HttpResponseRedirect('/')

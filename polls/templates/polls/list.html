@@ -59,22 +59,21 @@
 		font-size:16pt;
 		margin-right:30px;
 	}
-	#searchbox{
-		margin-bottom: 20px;
-	}
 	#resulttext {
 		font-size:20pt;
 		margin-right:20px;
 		font-weight: bold;
 	}
+	.centered {
+		text-align: center;
+		justify-content: center;
+		margin: 0 auto;
 
 </style>
 
 </head>
 
 <body>
-
-
 
 <nav class="navbar navbar-expand-md bg-primary navbar-dark">
 	<img class="logo" src="https://i0.wp.com/rockbridgereport.academic.wlu.edu/files/2011/11/UVA.gif">
@@ -90,29 +89,25 @@
 				<div class="dropdown-menu" aria-labelledby="dropdown01">
 					<a class="dropdown-item" href="/profile">Edit Profile</a>
 					<a class="dropdown-item" href="#">BlahBlahBlah</a>
-					<form method="post" action="{% url 'social:disconnect' 'google-oauth2' %}">
-						{% csrf_token %}
-						<button type="submit">Logout</button>
-					</form>
+					<a class="dropdown-item" href="/logout/">Logout</a>
 				</div>
 			</li>                            
 		</ul>
 	</div> 
 
 </nav>
+	
 
-
-	<h1>Search Offgrounds Housing</h1>
-
-	<form method="Post" style="width: 600px">
+<div class="container" class="centered">
+	<h2>Search Offgrounds Housing</h2>
+	<form method="Post" style="width: 600px;">
 		{% csrf_token %}
-		<div id="searchbox">
-			{{ form.search }}
-		</div>
+		<div style="display: inline-block; margin-bottom: 20px;">{{ form.search }}</div>
 		<div class="btn-group">
 			<button class="btn btn-success btn-block" type="submit" style="width: 900px">Search Housing!</button>
 		</div>
 	</form>
+</div>
 
 <div class ="container">
 	<div class="row botmarg">
