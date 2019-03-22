@@ -10,10 +10,11 @@ class SearchForm(forms.ModelForm):
         fields = ('search',)
 
 class ReviewForm(forms.ModelForm):
+    rating = forms.IntegerField(min_value=1,max_value=5)
     review_text = forms.CharField(widget=forms.Textarea(attrs={'cols': 120, 'rows': 3}))
     class Meta:
         model = Review
-        fields = ('review_text',)
+        fields = ('review_text','rating',)
 
 
 class EditProfileForm(UserChangeForm):

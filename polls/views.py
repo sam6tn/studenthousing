@@ -65,8 +65,9 @@ class PostView(TemplateView):
         form = ReviewForm(request.POST)
         if form.is_valid():
             review = form.cleaned_data['review_text']
+            rate = form.cleaned_data['rating']
             p = Post.objects.get(name=post_name)
-            r = Review(post=p,review_text=review)
+            r = Review(post=p,review_text=review,rating=rate)
             r.save()
         return HttpResponseRedirect(reverse('housing:post',args=(post_name,)))
 

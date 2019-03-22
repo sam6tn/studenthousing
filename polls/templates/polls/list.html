@@ -19,11 +19,11 @@
 	.checked {
 		  color: orange;
 	}
-  	.navbar{
+	.navbar{
         margin-bottom: 50px;
         color:orange;
 	}
-	#rating{
+	#ratingdisp{
 		font-size: 16pt;
 	}
 	#results{
@@ -45,12 +45,12 @@
 	}
 
 	.logo{
-            height:60px;
-            width:80px;
-            margin-right:10px;
+			height:60px;
+			width:80px;
+			margin-right:10px;
 	}
-	.rightmarg{
-		margin-right:50px;
+	.title {
+		text-shadow: 1px 1px #FFFFFF;
 	}
 	.tabs{
 		font-size:16pt;
@@ -68,8 +68,14 @@
 		text-align: center;
 		justify-content: center;
 		margin: 0 auto;
+	}
+	.dropdown {
+		width: 100px !important;
+	}
 
 </style>
+
+<title>Housing Search</title>
 
 </head>
 
@@ -77,18 +83,17 @@
 
 <nav class="navbar navbar-expand-md bg-primary navbar-dark">
 	<img class="logo" src="https://i0.wp.com/rockbridgereport.academic.wlu.edu/files/2011/11/UVA.gif">
-	<h1>Off Grounds Housing</h1>
+	<h1 class="title">Off Grounds Housing</h1>
 
 	<div class="collapse navbar-collapse justify-content-end tabs" id="collapsibleNavbar">   
 		<ul class="navbar-nav">
-		  	<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+		  <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">Roommates</a></li>
 			<li class="nav-item"> <a class="nav-link" href="/housingsearch/">Housing</a></li>        
-			<li class="nav-item dropdown rightmarg">
-				<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.first_name }}</a>
-				<div class="dropdown-menu" aria-labelledby="dropdown01">
-					<a class="dropdown-item" href="/profile">Edit Profile</a>
-					<a class="dropdown-item" href="#">BlahBlahBlah</a>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.first_name }}</a>
+				<div class="dropdown-menu dropdown-menu-right">
+					<a class="dropdown-item" href="/profile">Profile</a>
 					<a class="dropdown-item" href="/logout/">Logout</a>
 				</div>
 			</li>                            
@@ -98,20 +103,21 @@
 </nav>
 	
 
-<div class="container" class="centered">
+<div class="container">
 	<h2>Search Offgrounds Housing</h2>
-	<form method="Post" style="width: 600px;">
+	<form method="Post">
 		{% csrf_token %}
-		<div style="display: inline-block; margin-bottom: 20px;">{{ form.search }}</div>
+		<div style="margin-bottom: 20px;">{{ form.search }}</div>
 		<div class="btn-group">
 			<button class="btn btn-success btn-block" type="submit" style="width: 900px">Search Housing!</button>
 		</div>
 	</form>
+	<span id="resulttext">Search Results:</span>
 </div>
 
 <div class ="container">
 	<div class="row botmarg">
-		<span id="resulttext">Search Results:</span>
+
 		<button type="button" id="filter-button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
 			Filter by: <span id="selected">(Select)</span><span class="caret"></span>
 		</button>
@@ -128,6 +134,7 @@
 		$('.dropdown-menu a').click(function(){$('#selected').text($(this).text());});
 	</script>
 
+	<div class="container centered">
 	{% for post in posts.all %}
 	<div class="col-sm-5" id="results">
 		<form method="post">
@@ -136,7 +143,7 @@
 		<h4><a href="{% url 'housing:post' post.name%}">{{ post.name }}</a></h4>
 		<p>{{post.address}}</p>
 		<p>{{post.info}}</p>
-		<span id="price">${{post.price}}</span><span id="rating">Rating:</span>
+		<span id="price">${{post.price}}</span><span id="ratingdisp">Rating:</span>
 		<span class="fa fa-star {% if post.rating >= 1 %}checked{% endif %}"></span>
 		<span class="fa fa-star {% if post.rating >= 2 %}checked{% endif %}"></span>
 		<span class="fa fa-star {% if post.rating >= 3 %}checked{% endif %}"></span>
