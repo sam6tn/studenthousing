@@ -54,6 +54,22 @@
     .title {
 		text-shadow: 1px 1px #FFFFFF;
 	}
+	#rooms{
+		font-size:16pt;
+		margin-left:30px;
+	}
+	#baths{
+		font-size:16pt;
+		margin-left:30px;
+	}
+	#review_text{
+		font-size:16pt;
+		margin-left:30px;
+	}
+    #review_list{
+        font-size:10pt;
+    }
+
     </style>
 
     <title>{{post.name}}</title>
@@ -83,7 +99,7 @@
             
             </nav>
 
-    <div>
+    <div class="container centered">
         
         <h1>{{ post.name }}</h1>
         {% if post.available%}
@@ -100,6 +116,8 @@
         <span class="fa fa-star {% if post.rating >= 4 %}checked{% endif %}"></span>
         <span class="fa fa-star {% if post.rating >= 5 %}checked{% endif %}"></span>
         <div><img src={{post.image_url}} class="img-results"></div>
+        <div><span class="fa fa-bed"></span><span id="rooms">{{post.rooms}}</span></div>
+        <div><span class="fa fa-bath"></span><span id="baths">{{post.baths}}</span></div>
         <h3>Reviews:</h3>
         <input type="button" onClick="showReview()" name="review" id="review" value="Write a Review!" />
         <form method="Post">
@@ -111,7 +129,16 @@
         </form>
         <ul>
         {% for review in post.review_set.all %}
-            <li><h6>{{review.review_text}}</h6></li>
+            <span id="review_list">
+            <li>
+                <span class="fa fa-star {% if review.rating >= 1 %}checked{% endif %} fa-sm"></span>
+                <span class="fa fa-star {% if review.rating >= 2 %}checked{% endif %} fa-sm"></span>
+                <span class="fa fa-star {% if review.rating >= 3 %}checked{% endif %} fa-sm"></span>
+                <span class="fa fa-star {% if review.rating >= 4 %}checked{% endif %} fa-sm"></span>
+                <span class="fa fa-star {% if review.rating >= 5 %}checked{% endif %} fa-sm"></span>
+                <div><span id="review_text">{{review.review_text}}</span></div>
+            </li>
+            </span>
         {% endfor %}
         </ul>
     </div>
