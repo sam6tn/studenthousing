@@ -104,9 +104,9 @@ def edit_profile(request):
             form.save()
             return redirect('/profile')
     else:
-            form = EditProfileForm(instance=request.user)
-            args = {'form': form}
-            return render(request, 'polls/edit_profile.html', args)
+        form = EditProfileForm(instance=request.user)
+        args = {'form': form}
+        return render(request, 'polls/edit_profile.html', args)
 
 def logout(request):
     user_logout(request)
