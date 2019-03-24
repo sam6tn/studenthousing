@@ -32,10 +32,17 @@ class PostTests(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
 
+    def test_logout_response(self):
+        url = reverse('housing:logout')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+
     def test_wrong_response(self):
         url = reverse('social:begin', kwargs={'backend': 'blabla'})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
+
+
 
 
 "class PostSuggestView(TestCase):"
