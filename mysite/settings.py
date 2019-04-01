@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'bootstrap4',
     'social_django',
+    'django_google_maps',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -152,5 +153,7 @@ LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/housingsearch/'
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '180552666297-jrksmi08lq7198tqd53gc78akae2bucd.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'w-wVK5mRfjsDQ8-WTu1RzzrW'
+
+GOOGLE_MAPS_API_KEY = 'AIzaSyBYiPSla2mE7teCbpklfIOtWEGic3K0yt8'
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
