@@ -9,6 +9,12 @@ class SearchForm(forms.ModelForm):
         model = Post
         fields = ('search',)
 
+class RoommateForm(forms.ModelForm):
+    search = forms.CharField(widget=forms.TextInput(attrs={'size': 115,}))
+    class Meta:
+        model = User
+        fields = ('search',)
+
 class ReviewForm(forms.ModelForm):
     rating = forms.IntegerField(min_value=1,max_value=5)
     review_text = forms.CharField(widget=forms.Textarea(attrs={'cols': 120, 'rows': 3}))
@@ -27,6 +33,7 @@ class EditUserForm(forms.ModelForm):
         )
 
 class EditProfileForm(forms.ModelForm):
+    bio = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 4}))
     class Meta:
         model = Profile
         fields = (

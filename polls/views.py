@@ -11,7 +11,8 @@ from django.contrib import messages
 from django.contrib.messages import get_messages
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth import logout as user_logout
-from polls.forms import EditUserForm, EditProfileForm
+from polls.forms import EditUserForm, EditProfileForm, RoommateForm
+from django.contrib.auth.models import User
 
 from .models import Post, Review, Profile
 
@@ -74,18 +75,40 @@ class PostView(TemplateView):
 class ProfileView(TemplateView):
     template_name = 'polls/profile.html'
     def get(self, request):
-        # profiles = Profile.objects.all()
-        # args = {'form': form, 'profiles': profiles}
-        return render(request, self.template_name)
+        if request.user.is_authenticated:
+            return render(request, self.template_name)
+        else:
+            if (len(list(get_messages(request)))==0):
+                messages.error(request, 'Please Sign In!')
+            return HttpResponseRedirect("/")
 
     def post(self, request):
-        # form = EditProfileForm(request.POST)
-        # if form.is_valid():
-        #     form.save()
-        #     text = form.cleaned_data['profile']
-        #     form = EditProfileForm()
-        #     args = {'form': form, 'text': text}
         return HttpResponseRedirect("/profile/edit")
+
+class RoommateView(TemplateView):
+    template_name = 'polls/roommates.html'
+    model = User
+    def get(self, request):
+        form = RoommateForm()
+        if request.user.is_authenticated:
+            persons = User.objects.all()
+            args = {'persons': persons, 'form':form}
+            return render(request, self.template_name, args)
+        else:
+            if (len(list(get_messages(request)))==0):
+                messages.error(request, 'Please Sign In!')
+            return HttpResponseRedirect("/")
+    def post(self, request):
+        form = RoommateForm(request.POST)
+        if form.is_valid():
+            search = form.cleaned_data['search']
+            if(search is not None):
+                persons = User.objects.filter(first_name__icontains=search)
+            else:
+                persons = User.objects.all()
+        args = {'persons': persons,'form': form}
+        return render(request, self.template_name, args)
+    
 
 def profile(request):
     return render(request, 'polls/profile.html')

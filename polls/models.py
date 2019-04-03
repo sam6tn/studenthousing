@@ -13,10 +13,10 @@ from django_google_maps.fields import AddressField, GeoLocationField
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.CharField(max_length=100, blank=True)
+    bio = models.TextField(blank=True)
     # area = models.CharField(max_length=100, blank=True)
-    phone = models.IntegerField(default=0, blank=True)
-    image = models.ImageField(default='default.jpg', upload_to='')
+    phone = models.CharField(default='', max_length=20)
+    image = models.ImageField(default='avatar.jpg', upload_to='')
 
     def __str__(self):
         return f'{self.user.username} Profile'

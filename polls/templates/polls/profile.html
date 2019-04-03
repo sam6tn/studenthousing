@@ -64,7 +64,7 @@
                 <div class="collapse navbar-collapse justify-content-end tabs" id="collapsibleNavbar">   
                     <ul class="navbar-nav">
                           <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Roommates</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/roommates/">Roommates</a></li>
                         <li class="nav-item"> <a class="nav-link" href="/housingsearch/">Housing</a></li>        
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.first_name }}</a>
@@ -88,12 +88,12 @@
             <img class="profilepic" src="{{user.profile.image.url}}">
         </div>
 
-        <div class="media-body">
-            <p class="text-secondary"> First name: {{ user.first_name }}</p>
-            <p class="text-secondary">Last name: {{ user.last_name }}</p>
-            <p class="text-secondary">Email: {{ user.email }}</p>
-            <p class="text-secondary">Bio: {{ user.profile.bio }}</p>
-            <p class="text-secondary">Phone: {{ user.profile.phone }}</p>
+        <div>
+            <p> First name: {{ user.first_name }}</p>
+            <p>Last name: {{ user.last_name }}</p>
+            <p>Email: {{ user.email }}</p>
+            <p>Bio: {{ user.profile.bio }}</p>
+            <p>Phone: {{ user.profile.phone }}</p>
         </div>
       </div>
 
