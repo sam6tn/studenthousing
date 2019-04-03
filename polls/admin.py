@@ -19,14 +19,14 @@ class PostAdmin(admin.ModelAdmin):
         (None, {'fields': ['rating']}),
         (None, {'fields': ['image_url']}),
         (None, {'fields': ['available']}),
-        (None, {'fields': ['google_address']}),
-        (None, {'fields': ['geolocation']}),
+        # (None, {'fields': ['google_address']}),
+        # (None, {'fields': ['geolocation']}),
     ]
 
-    formfield_overrides = {
-        map_fields.AddressField: {
-          'widget': map_widgets.GoogleMapsAddressWidget(attrs={'data-map-type': 'roadmap'})},
-    }
+    # formfield_overrides = {
+    #     map_fields.AddressField: {
+    #       'widget': map_widgets.GoogleMapsAddressWidget(attrs={'data-map-type': 'roadmap'})},
+    # }
 
     list_display = ('name', 'info', 'address', 'price', 'rating', 'image_url', 'available')
 
