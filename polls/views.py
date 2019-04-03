@@ -12,6 +12,7 @@ from django.contrib.messages import get_messages
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth import logout as user_logout
 from polls.forms import EditProfileForm
+from django.db.models import Q
 
 from .models import Post, Review, Profile
 
@@ -41,7 +42,9 @@ class ListView(TemplateView):
         if form.is_valid():
             search = form.cleaned_data['search']
             if(search is not None):
-                posts = Post.objects.filter(name__icontains=search) #searches database based on substring
+                posts = Post.objects.filter(Q(name__icontains=search) |
+                                            Q(address__icontains=search) |
+                                            Q(info__icontains=search)) #searches database based on substring
             else:
                 posts = Post.objects.all() #if no search input, displays all posts
         args = {'posts': posts,'form': form}
@@ -111,3 +114,19 @@ def edit_profile(request):
 def logout(request):
     user_logout(request)
     return HttpResponseRedirect('/')
+
+
+def available_filter(request):
+    template_name = 'polls/list.html'
+    form = SearchForm(request.POST)
+    posts = Post.objects.order_by('available',)
+    args = {'posts': posts, 'form': form}
+    return render(request, template_name, args)
+
+
+def price_filter(request):
+    template_name = 'polls/list.html'
+    form = SearchForm(request.POST)
+    posts = Post.objects.order_by('price',)
+    args = {'posts': posts, 'form': form}
+    return render(request, template_name, args)
