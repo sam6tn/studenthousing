@@ -42,8 +42,8 @@ class Post(models.Model):
     rooms = models.IntegerField(default=0)
     available = models.BooleanField(default=True)
 
-    google_address = map_fields.AddressField(max_length=200, default="")
-    geolocation = map_fields.GeoLocationField(max_length=100, default="1207 Wertland Street")
+    # google_address = map_fields.AddressField(max_length=200, default="")
+    # geolocation = map_fields.GeoLocationField(max_length=100, default="1207 Wertland Street")
 
     def __str__(self):
         return self.name
