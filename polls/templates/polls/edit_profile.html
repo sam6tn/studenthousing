@@ -10,7 +10,7 @@
 
 
     {% load static %}
-    <link rel="stylesheet" href="{% static 'housing/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'polls/style.css' %}" type="text/css">
 
     <style>
         .form-group{
@@ -45,7 +45,7 @@
 		}
     </style>
 
-    <title>Housing Log In</title>
+    <title>Edit Profile</title>
 
 </head>
 
@@ -72,16 +72,16 @@
 
 
 {% block content %}
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p}}
+    <p>Email: {{ uform.email}}</p>
+    <p>First Name: {{uform.first_name}}</p>
+    <p>Last Name: {{uform.last_name}}</p>
+    {{pform.as_p}}
     <button type="submit">Submit </button>
-
-
 </form>
 <br>
-      <!-- FORM HERE -->
-    </div>
+
 
 
 

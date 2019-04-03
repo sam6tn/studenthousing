@@ -11,7 +11,7 @@ urlpatterns = [
     url(r'^logout/$', views.logout, name='logout'),
     url(r'^housingsearch/$', views.ListView.as_view(), name='housingsearch'),
     url(r'^housingsearch/(?P<post_name>.+)/$', views.PostView.as_view(), name='post'),
-    url(r'^profile/$', views.profile, name='profile'),
+    url(r'^profile/$',  views.ProfileView.as_view(), name='profile'),
     url(r'^profile/edit$', views.edit_profile, name='edit_profile'),
 ]
 

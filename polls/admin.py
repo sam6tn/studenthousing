@@ -1,6 +1,10 @@
 from django.contrib import admin
 
 from .models import Post, Review, Profile
+from django_google_maps import widgets as map_widgets
+from django_google_maps import fields as map_fields
+
+
 
 class ReviewInline(admin.TabularInline):
     model = Review
@@ -15,7 +19,15 @@ class PostAdmin(admin.ModelAdmin):
         (None, {'fields': ['rating']}),
         (None, {'fields': ['image_url']}),
         (None, {'fields': ['available']}),
+        (None, {'fields': ['google_address']}),
+        (None, {'fields': ['geolocation']}),
     ]
+
+    formfield_overrides = {
+        map_fields.AddressField: {
+          'widget': map_widgets.GoogleMapsAddressWidget(attrs={'data-map-type': 'roadmap'})},
+    }
+
     list_display = ('name', 'info', 'address', 'price', 'rating', 'image_url', 'available')
 
     list_filter = ['name']
@@ -49,5 +61,4 @@ class LocationAdmin(admin.ModelAdmin):
 admin.site.register(Location, LocationAdmin)
 """
 admin.site.register(Post, PostAdmin)
-
 admin.site.register(Profile)

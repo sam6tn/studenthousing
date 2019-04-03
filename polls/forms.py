@@ -17,21 +17,21 @@ class ReviewForm(forms.ModelForm):
         fields = ('review_text','rating',)
 
 
-class EditProfileForm(UserChangeForm):
-    password = None
+class EditUserForm(forms.ModelForm):
     class Meta:
         model = User
-
-        exclude = ("password",)
         fields = (
             'email',
             'first_name',
             'last_name',
-            'password',
-
-
         )
 
-        def save(self, commit=True):
-            # do something with self.cleaned_data['temp_id']
-            return super(EditProfileForm, self).save(commit=commit)
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = (
+            'bio',
+            'phone',
+            'image',
+        )
+
