@@ -49,8 +49,9 @@ class Post(models.Model):
         return self.name
 
 class Review(models.Model):
-    u = User(username="unknown",password="abc")
-    # user = models.ForeignKey(User, default=u, on_delete=models.CASCADE)
+    profile_pic = models.CharField(default='',max_length=400)
+    reviewer_name = models.CharField(default = '', max_length=100)
+    reviewer_username = models.CharField(default = '', max_length=100)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     review_text = models.CharField(max_length=1000)
     rating = models.IntegerField(default=1,validators=[MinValueValidator(1),MaxValueValidator(5)])

@@ -65,10 +65,13 @@ class PostView(TemplateView):
     def post(self, request, post_name):
         form = ReviewForm(request.POST)
         if form.is_valid():
+            username = request.POST.get('username')
+            name = request.POST.get('first_name')
+            avatar = request.POST.get('avatar')
             review = form.cleaned_data['review_text']
             rate = form.cleaned_data['rating']
             p = Post.objects.get(name=post_name)
-            r = Review(post=p,review_text=review,rating=rate)
+            r = Review(post=p,review_text=review,rating=rate,reviewer_name=name,reviewer_username=username,profile_pic=avatar)
             r.save()
         return HttpResponseRedirect(reverse('housing:post',args=(post_name,)))
 

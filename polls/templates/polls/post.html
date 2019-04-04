@@ -63,12 +63,19 @@
 		margin-left:30px;
 	}
 	#review_text{
-		font-size:16pt;
+		font-size:14pt;
 		margin-left:30px;
+        margin-top: 20px;
 	}
     #review_list{
-        list-style-type: none;
-        font-size:10pt;
+        margin-bottom: 50px;
+    }
+    .avatar{
+        height: 30px;
+        width: 30px;
+    }
+    .reviewer_name{
+        font-size: 18pt;
     }
 
     </style>
@@ -119,29 +126,32 @@
         <div><img src={{post.image_url}} class="img-results"></div>
         <div><span class="fa fa-bed"></span><span id="rooms">{{post.rooms}}</span></div>
         <div><span class="fa fa-bath"></span><span id="baths">{{post.baths}}</span></div>
+
         <h3>Reviews:</h3>
         <input type="button" onClick="showReview()" name="review" id="review" value="Write a Review!" />
         <form method="Post">
             {% csrf_token %}
+            <input name="avatar" id="avatar" type="hidden" value="{{user.profile.image.url}}">
             <input name="username" id="username" type="hidden" value="{{user.username}}">
+            <input name="first_name" id="first_name" type="hidden" value="{{user.first_name}}">
             <div name="rating" id="rate" style="display:none">Rating: {{form.rating}}</div>
             <div name="reviewtext" id="reviewtext" style="display:none">{{form.review_text}}</div>
             <input type="submit" id="submitReview" style="display:none">
         </form>
-        <ul>
+
         {% for review in post.review_set.all %}
-            <span id="review_list">
-            <li>
+            <div id="review_list">
+                <img class="avatar" src='{{review.profile_pic}}'>
+                <span class="reviewer_name">{{review.reviewer_name}} ({{review.reviewer_username}})</span>
                 <span class="fa fa-star {% if review.rating >= 1 %}checked{% endif %} fa-sm"></span>
                 <span class="fa fa-star {% if review.rating >= 2 %}checked{% endif %} fa-sm"></span>
                 <span class="fa fa-star {% if review.rating >= 3 %}checked{% endif %} fa-sm"></span>
                 <span class="fa fa-star {% if review.rating >= 4 %}checked{% endif %} fa-sm"></span>
                 <span class="fa fa-star {% if review.rating >= 5 %}checked{% endif %} fa-sm"></span>
-                <div><span id="review_text">{{review.review_text}}</span></div>
-            </li>
-            </span>
+                
+                <div id="review_text">{{review.review_text}}</div>
+            </div>
         {% endfor %}
-        </ul>
     </div>
 
     <script>
