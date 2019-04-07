@@ -30,6 +30,19 @@ class ListView(TemplateView):
         form = SearchForm()
         if request.user.is_authenticated:
             posts = Post.objects.all() #if no search input, displays all posts
+            for post in posts:
+                post_rating = 0
+                count = 0
+                for review in post.review_set.all():
+                    post_rating += review.rating
+                    count += 1
+                if (count==0):
+                    post.rating = 0
+                else:
+                    post_rating = int(round(post_rating/count))
+                    post.rating = post_rating
+                post.save()
+
             args = {'posts': posts, 'form':form}
             return render(request, self.template_name, args)
         else:
@@ -61,10 +74,15 @@ class PostView(TemplateView):
             for review in post.review_set.all():
                 post_rating += review.rating
                 count += 1
-            post_rating = int(round(post_rating/count))
+            if (count==0):
+                post.rating = 0
+            else:
+                post_rating = int(round(post_rating/count))
+                post.rating = post_rating
+            post.save()
 
             form = ReviewForm()
-            args = {'post': post, 'form':form, 'post_rating':post_rating}
+            args = {'post': post, 'form':form}
             return render(request, self.template_name, args)
         else:
             if (len(list(get_messages(request)))==0):

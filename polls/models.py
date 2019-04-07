@@ -36,7 +36,7 @@ class Post(models.Model):
     info = models.CharField(default='',max_length=200)
     address = models.CharField(default='No Address Found',max_length=100)
     price = models.IntegerField(default=0)
-    # rating = models.IntegerField(default=1,validators=[MinValueValidator(1),MaxValueValidator(5)])
+    rating = models.IntegerField(default=1,validators=[MinValueValidator(1),MaxValueValidator(5)])
     image_url = models.URLField(null=True)
     baths = models.IntegerField(default=0)
     rooms = models.IntegerField(default=0)
