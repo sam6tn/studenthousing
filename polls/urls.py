@@ -14,8 +14,9 @@ urlpatterns = [
     url(r'^housingsearch/$', views.price_filter, name='price'),
     #    url(r'^housingsearch/$', views.ListView.as_view(), name='distance'),
     url(r'^housingsearch/(?P<post_name>.+)/$', views.PostView.as_view(), name='post'),
-    url(r'^profile/$', views.profile, name='profile'),
+    url(r'^profile/$',  views.ProfileView.as_view(), name='profile'),
     url(r'^profile/edit$', views.edit_profile, name='edit_profile'),
+    url(r'^roommates/$', views.RoommateView.as_view(), name='roommates'),
 ]
 
 if settings.DEBUG:

@@ -11,8 +11,8 @@ from django.contrib import messages
 from django.contrib.messages import get_messages
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth import logout as user_logout
-from polls.forms import EditProfileForm
-from django.db.models import Q
+from polls.forms import EditUserForm, EditProfileForm, RoommateForm
+from django.contrib.auth.models import User
 
 from .models import Post, Review, Profile
 
@@ -50,7 +50,7 @@ class ListView(TemplateView):
         args = {'posts': posts,'form': form}
         return render(request, self.template_name, args)
 
-#view for individual housing postspyth
+#view for individual housing posts
 class PostView(TemplateView):
     template_name = 'polls/post.html'
     model = Post
@@ -67,48 +67,76 @@ class PostView(TemplateView):
     def post(self, request, post_name):
         form = ReviewForm(request.POST)
         if form.is_valid():
+            username = request.POST.get('username')
+            name = request.POST.get('first_name')
+            avatar = request.POST.get('avatar')
             review = form.cleaned_data['review_text']
             rate = form.cleaned_data['rating']
             p = Post.objects.get(name=post_name)
-            r = Review(post=p,review_text=review,rating=rate)
+            r = Review(post=p,review_text=review,rating=rate,reviewer_name=name,reviewer_username=username,profile_pic=avatar)
             r.save()
         return HttpResponseRedirect(reverse('housing:post',args=(post_name,)))
 
 class ProfileView(TemplateView):
-    template_name = 'polls/edit_profile.html'
-
+    template_name = 'polls/profile.html'
     def get(self, request):
-        form = EditProfileForm()
-        profiles = Profile.objects.all()
-
-        args = {'form': form, 'profiles': profiles}
-        return render(request, self.template_name, args)
+        if request.user.is_authenticated:
+            return render(request, self.template_name)
+        else:
+            if (len(list(get_messages(request)))==0):
+                messages.error(request, 'Please Sign In!')
+            return HttpResponseRedirect("/")
 
     def post(self, request):
-        form = EditProfileForm(request.POST)
+        return HttpResponseRedirect("/profile/edit")
+
+class RoommateView(TemplateView):
+    template_name = 'polls/roommates.html'
+    model = User
+    def get(self, request):
+        form = RoommateForm()
+        if request.user.is_authenticated:
+            persons = User.objects.all()
+            args = {'persons': persons, 'form':form}
+            return render(request, self.template_name, args)
+        else:
+            if (len(list(get_messages(request)))==0):
+                messages.error(request, 'Please Sign In!')
+            return HttpResponseRedirect("/")
+    def post(self, request):
+        form = RoommateForm(request.POST)
         if form.is_valid():
-            form.save()
-            text = form.cleaned_data['profile']
-            form = EditProfileForm()
-
-
-            args = {'form': form, 'text': text}
-        return HttpResponseRedirect("/profile")
-
+            search = form.cleaned_data['search']
+            if(search is not None):
+                persons = User.objects.filter(first_name__icontains=search)
+            else:
+                persons = User.objects.all()
+        args = {'persons': persons,'form': form}
+        return render(request, self.template_name, args)
+    
 
 def profile(request):
     return render(request, 'polls/profile.html')
 
 def edit_profile(request):
     if request.method == 'POST':
-        form = EditProfileForm(request.POST, instance=request.user)
-
-        if form.is_valid():
-            form.save()
+        uform = EditUserForm(request.POST, instance=request.user)
+        pform = EditProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        if pform.is_valid():
+            pform.save()
+        if uform.is_valid():
+            e = uform.cleaned_data['email']
+            first = uform.cleaned_data['first_name']
+            last = uform.cleaned_data['last_name']
+            request.user.email = e
+            request.user.first_name = first
+            request.user.last_name = last
+            request.user.save()
             return redirect('/profile')
     else:
-        form = EditProfileForm(instance=request.user)
-        args = {'form': form}
+        uform = EditUserForm(instance=request.user)
+        pform = EditProfileForm(instance=request.user.profile)
+        args = {'uform': uform, 'pform':pform}
         return render(request, 'polls/edit_profile.html', args)
 
 def logout(request):
