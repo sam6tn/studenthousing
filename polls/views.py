@@ -55,8 +55,16 @@ class PostView(TemplateView):
     def get(self, request, post_name):
         if request.user.is_authenticated:
             post = Post.objects.get(name=post_name)
+
+            post_rating = 0
+            count = 0
+            for review in post.review_set.all():
+                post_rating += review.rating
+                count += 1
+            post_rating = int(round(post_rating/count))
+
             form = ReviewForm()
-            args = {'post': post, 'form':form}
+            args = {'post': post, 'form':form, 'post_rating':post_rating}
             return render(request, self.template_name, args)
         else:
             if (len(list(get_messages(request)))==0):

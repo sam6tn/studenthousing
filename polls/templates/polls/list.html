@@ -103,14 +103,12 @@
 </nav>
 	
 
-<div class="container">
+<div class="centered">
 	<h2>Search Offgrounds Housing</h2>
 	<form method="Post">
 		{% csrf_token %}
 		<div style="margin-bottom: 20px;">{{ form.search }}</div>
-		<div class="btn-group">
-			<button class="btn btn-success btn-block" type="submit" style="width: 900px">Search Housing!</button>
-		</div>
+		<button class="btn btn-success btn-block" type="submit" style="width: 900px; margin-left: 180px;">Search Housing!</button>
 	</form>
 	<span id="resulttext">Search Results:</span>
 </div>

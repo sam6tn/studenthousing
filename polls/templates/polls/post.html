@@ -118,11 +118,11 @@
         <p>{{post.address}}</p>
         <p>{{post.info}}</p>
         <span id="price">${{post.price}}</span><span id="rating">Rating:</span>
-        <span class="fa fa-star {% if post.rating >= 1 %}checked{% endif %}"></span>
-        <span class="fa fa-star {% if post.rating >= 2 %}checked{% endif %}"></span>
-        <span class="fa fa-star {% if post.rating >= 3 %}checked{% endif %}"></span>
-        <span class="fa fa-star {% if post.rating >= 4 %}checked{% endif %}"></span>
-        <span class="fa fa-star {% if post.rating >= 5 %}checked{% endif %}"></span>
+        <span class="fa fa-star {% if post_rating >= 1 %}checked{% endif %}"></span>
+        <span class="fa fa-star {% if post_rating >= 2 %}checked{% endif %}"></span>
+        <span class="fa fa-star {% if post_rating >= 3 %}checked{% endif %}"></span>
+        <span class="fa fa-star {% if post_rating >= 4 %}checked{% endif %}"></span>
+        <span class="fa fa-star {% if post_rating >= 5 %}checked{% endif %}"></span>
         <div><img src={{post.image_url}} class="img-results"></div>
         <div><span class="fa fa-bed"></span><span id="rooms">{{post.rooms}}</span></div>
         <div><span class="fa fa-bath"></span><span id="baths">{{post.baths}}</span></div>
