@@ -29,10 +29,19 @@
 	#results{
 		display:inline-block;
 		margin-bottom:10px;
+		margin-right: 10px;
 		border:1px solid black;
 		padding-bottom: 10px;
 		background-color:whitesmoke;
 	}
+
+	.resultcontainer{
+		height: auto;
+  	display: flex;
+		flex-wrap: wrap;
+
+	}
+
 	.img-results{
 		width: 400px;
 		height: 300px;
@@ -71,10 +80,10 @@
 	.dropdown {
 		width: 100px !important;
 	}
-    .profilepic{
-        width:200px;
-        height:200px;
-    }
+  .profilepic{
+  	width:200px;
+  	height:200px;
+  }
 
 </style>
 
@@ -106,7 +115,7 @@
 </nav>
 	
 
-<div class="container">
+<div>
 	<h2>Search for Roommates</h2>
 	<form method="Post">
         {% csrf_token %}
@@ -118,7 +127,7 @@
 </div>
 
 
-<div class="container centered">
+<div class="resultcontainer centered">
 	{% for person in persons.all %}
 	<div class="col-sm-5" id="results">
         <h3>{{ person.first_name }} {{ person.last_name }}</h3>

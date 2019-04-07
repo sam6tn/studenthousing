@@ -26,12 +26,19 @@
 	#ratingdisp{
 		font-size: 16pt;
 	}
+
 	#results{
 		display:inline-block;
 		margin-bottom:10px;
+		margin-right: 10px;
 		border:1px solid black;
 		padding-bottom: 10px;
 		background-color:whitesmoke;
+	}
+	.resultcontainer{
+		height: auto;
+  	display: flex;
+		flex-wrap: wrap;
 	}
 	.img-results{
 		width: 400px;
@@ -132,7 +139,7 @@
 		$('.dropdown-menu a').click(function(){$('#selected').text($(this).text());});
 	</script>
 
-	<div class="container centered">
+	<div class="resultcontainer centered">
 	{% for post in posts.all %}
 	<div class="col-sm-5" id="results">
 		<form method="post">
