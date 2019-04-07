@@ -28,6 +28,7 @@
 		border:1px solid black;
 		padding-bottom: 10px;
 	}
+    
 	.img-results{
 		width: 400px;
 		height: 300px;
@@ -76,6 +77,9 @@
     }
     .reviewer_name{
         font-size: 18pt;
+    }
+    li{
+        display: inline;
     }
 
     </style>
@@ -128,7 +132,7 @@
         <div><span class="fa fa-bath"></span><span id="baths">{{post.baths}}</span></div>
 
         <h3>Reviews:</h3>
-        <input type="button" onClick="showReview()" name="review" id="review" value="Write a Review!" />
+        <input type="button" class="btn btn-primary" onClick="showReview()" name="review" id="review" value="Write a Review!" />
         <form method="Post">
             {% csrf_token %}
             <input name="avatar" id="avatar" type="hidden" value="{{user.profile.image.url}}">
@@ -157,7 +161,7 @@
     <script>
         function showReview(){
             document.getElementById("review").style.display = "none";
-            document.getElementById("rate").style.display = "block";
+            document.getElementById("rate").style.display = "inline";
             document.getElementById("reviewtext").style.display = "block";
             document.getElementById("submitReview").style.display = "block";
         }

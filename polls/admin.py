@@ -16,7 +16,7 @@ class PostAdmin(admin.ModelAdmin):
         (None, {'fields': ['info']}),
         (None, {'fields': ['address']}),
         (None, {'fields': ['price']}),
-        (None, {'fields': ['rating']}),
+        # (None, {'fields': ['rating']}),
         (None, {'fields': ['image_url']}),
         (None, {'fields': ['baths']}),
         (None, {'fields': ['rooms']}),
@@ -30,7 +30,7 @@ class PostAdmin(admin.ModelAdmin):
     #       'widget': map_widgets.GoogleMapsAddressWidget(attrs={'data-map-type': 'roadmap'})},
     # }
 
-    list_display = ('name', 'info', 'address', 'price', 'rating', 'image_url', 'available')
+    list_display = ('name', 'info', 'address', 'price', 'image_url', 'available')
 
     list_filter = ['name']
 
