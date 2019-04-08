@@ -180,6 +180,96 @@
   }
 },
 {
+  "model": "polls.post",
+  "pk": 9,
+  "fields": {
+    "name": "Jefferson Commons",
+    "info": "Fitness and movie centers, pets allowed, parking.",
+    "address": "1620 Jefferson Park Ave, Charlottesville, VA 22903",
+    "price": 700,
+    "rating": 0,
+    "image_url": "https://image1.apartmentfinder.com/i2/3DPYT_IWwobkie3uL5NnjDD5ZSSSh8xfAwzPMO9vEO4/117/jefferson-commons-charlottesville-va-primary-photo.jpg",
+    "baths": 2,
+    "rooms": 4,
+    "available": false
+  }
+},
+{
+  "model": "polls.post",
+  "pk": 10,
+  "fields": {
+    "name": "University Heights",
+    "info": "Affordable housing off ivy road, 1 2 3 4 bedrooms.",
+    "address": "250 Colonnade Dr, Charlottesville, VA 22903",
+    "price": 450,
+    "rating": 0,
+    "image_url": "https://image1.apartmentfinder.com/i2/U9HxjQ5kqwrsp75fadlDCCZLq2B4E0VB2kpkhXhrl2g/110/university-heights-charlottesville-va-building-photo.jpg",
+    "baths": 2,
+    "rooms": 4,
+    "available": true
+  }
+},
+{
+  "model": "polls.post",
+  "pk": 11,
+  "fields": {
+    "name": "1303 Wertland St",
+    "info": "Near the Corner",
+    "address": "1303 WERTLAND STREET,  CHARLOTTESVILLE, VA 22903",
+    "price": 600,
+    "rating": 0,
+    "image_url": "https://static1.squarespace.com/static/53025668e4b0c7fb3f1c4156/54874f22e4b07ac01733ddf4/556dc904e4b0970bf67f4704/1433258253576/IMG_9130asmall.jpg?format=1500w",
+    "baths": 2,
+    "rooms": 2,
+    "available": true
+  }
+},
+{
+  "model": "polls.post",
+  "pk": 12,
+  "fields": {
+    "name": "1910 JPA",
+    "info": "A full kitchen including range, refrigerator, and dishwasher. Also included within each apartment is a washer and dryer",
+    "address": "1910 Jefferson Park Avenue, Charlottesville, VA 22903",
+    "price": 600,
+    "rating": 0,
+    "image_url": "https://ivysquare.appfoliowebsites6.com/wp-content/uploads/sites/6136/2016/09/1910main.jpg",
+    "baths": 2,
+    "rooms": 3,
+    "available": true
+  }
+},
+{
+  "model": "polls.post",
+  "pk": 13,
+  "fields": {
+    "name": "The Greek",
+    "info": "Only one unit left!",
+    "address": "1510 Virginia Ave, Charlottesville, VA 22903",
+    "price": 825,
+    "rating": 0,
+    "image_url": "https://www.cbsrentals.com/majorphotos/large/majorphoto_190128_013342_7826.jpg",
+    "baths": 2,
+    "rooms": 4,
+    "available": true
+  }
+},
+{
+  "model": "polls.post",
+  "pk": 14,
+  "fields": {
+    "name": "Cavalier Crossing",
+    "info": "Living community with a shuttle to and from grounds.",
+    "address": "100 Wahoo Way, Charlottesville, VA 22903",
+    "price": 500,
+    "rating": 0,
+    "image_url": "https://images1.apartments.com/i2/prpYnOK95NcHws64oK4glHNUXsaArEDHwHf36oQ9qfQ/111/cavalier-crossing-charlottesville-va-primary-photo.jpg",
+    "baths": 3,
+    "rooms": 3,
+    "available": true
+  }
+},
+{
   "model": "polls.review",
   "pk": 3,
   "fields": {
