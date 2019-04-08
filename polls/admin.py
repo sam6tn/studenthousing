@@ -14,6 +14,8 @@ class PostAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['name']}),
         (None, {'fields': ['info']}),
+        (None, {'fields': ['rooms']}),
+        (None, {'fields': ['baths']}),
         (None, {'fields': ['address']}),
         (None, {'fields': ['price']}),
         # (None, {'fields': ['rating']}),
@@ -21,6 +23,8 @@ class PostAdmin(admin.ModelAdmin):
         (None, {'fields': ['available']}),
         # (None, {'fields': ['google_address']}),
         # (None, {'fields': ['geolocation']}),
+
+        
     ]
 
     # formfield_overrides = {

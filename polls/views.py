@@ -13,7 +13,7 @@ from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth import logout as user_logout
 from polls.forms import EditUserForm, EditProfileForm, RoommateForm
 from django.contrib.auth.models import User
-
+from django.db.models import Q
 from .models import Post, Review, Profile
 
 class LoginView(TemplateView):
@@ -55,7 +55,7 @@ class ListView(TemplateView):
         if form.is_valid():
             search = form.cleaned_data['search']
             if(search is not None):
-                posts = Post.objects.filter(name__icontains=search) #searches database based on substring
+                posts = Post.objects.filter(Q(name__icontains=search) | Q(info__icontains=search) | Q(address__icontains=search)) #searches database based on substring
             else:
                 posts = Post.objects.all() #if no search input, displays all posts
         args = {'posts': posts,'form': form}
