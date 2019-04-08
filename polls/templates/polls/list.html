@@ -26,7 +26,6 @@
 	#ratingdisp{
 		font-size: 16pt;
 	}
-
 	#results{
 		display:inline-block;
 		margin-bottom:10px;
@@ -50,7 +49,6 @@
 	.botmarg{
 		margin-bottom: 80px;
 	}
-
 	.logo{
 			height:100px;
 			width:100px;
@@ -79,7 +77,6 @@
 	.dropdown {
 		width: 100px !important;
 	}
-
 </style>
 
 <title>Housing Search</title>
@@ -88,7 +85,7 @@
 
 <body>
 
-<nav class="navbar navbar-expand-md bg-primary navbar-dark">
+<nav class="navbar sticky-top navbar-expand-md bg-primary navbar-dark">
 	<img class="logo" src="https://cdn.freebiesupply.com/logos/large/2x/university-of-virginia-3-logo-png-transparent.png">
 	<h1 class="title">Off Grounds Housing</h1>
 
@@ -108,33 +105,18 @@
 	</div> 
 
 </nav>
-	
 
 <div class="centered">
 	<h2>Search Offgrounds Housing</h2>
 	<form method="Post">
 		{% csrf_token %}
 		<div style="margin-bottom: 20px;">{{ form.search }}</div>
+        <div style="margin-bottom: 20px;">Sort by: {{ form.filter }}</div>
 		<button class="btn btn-success btn-block" type="submit" style="width: 900px; margin-left: 180px;">Search Housing!</button>
 	</form>
 	<span id="resulttext">Search Results:</span>
 </div>
 
-<div class ="container">
-	<div class="row botmarg">
-
-		<button type="button" id="filter-button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
-			Filter by: <span id="selected">(Select)</span><span class="caret"></span>
-		</button>
-		<div class="dropdown-menu">
-			<a class="dropdown-item" href="#">Availability</a>
-			<a class="dropdown-item" href="#">Pricing</a>
-			<a class="dropdown-item" href="#">Distance</a>
-			<!-- <div class="dropdown-divider"></div>
-			<a class="dropdown-item" href="#">Suggested</a> -->
-		</div>
-	</div>
-	
 	<script>
 		$('.dropdown-menu a').click(function(){$('#selected').text($(this).text());});
 	</script>
@@ -149,7 +131,7 @@
 		<p>{{post.address}}</p>
 		<p>{{post.info}}</p>
 		<span id="price">${{post.price}}</span><span id="ratingdisp">Rating:</span>
-		
+
 		<span class="fa fa-star {% if post.rating >= 1 %}checked{% endif %}"></span>
 		<span class="fa fa-star {% if post.rating >= 2 %}checked{% endif %}"></span>
 		<span class="fa fa-star {% if post.rating >= 3 %}checked{% endif %}"></span>
@@ -159,7 +141,7 @@
 		</form>
 	</div>
 	{% endfor %}
-	
+
 </div>
 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
