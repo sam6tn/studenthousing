@@ -5,10 +5,16 @@ from django.contrib.auth.models import User
 import itertools
 
 class SearchForm(forms.ModelForm):
-    search = forms.CharField(widget=forms.TextInput(attrs={'size': 115,}))
+    search = forms.CharField(widget=forms.TextInput(attrs={'size': 115,}), required=False, label="Search Locations, Addresses, or Info")
+    CHOICES = (
+        ('rating', 'Recommended'),
+        ('available', 'Availability'),
+        ('price', 'Price'),
+    )
+    filter = forms.ChoiceField(choices=CHOICES, widget=forms.Select, required=False)
     class Meta:
         model = Post
-        fields = ('search',)
+        fields = ('search', 'filter',)
 
 class RoommateForm(forms.ModelForm):
     search = forms.CharField(widget=forms.TextInput(attrs={'size': 115,}))
@@ -24,7 +30,7 @@ class ReviewForm(forms.ModelForm):
     review_text = forms.CharField(widget=forms.Textarea(attrs={'cols': 120, 'rows': 3}))
     class Meta:
         model = Review
-        fields = ('review_text','rating',)
+        fields = ('review_text', 'rating',)
 
 
 class EditUserForm(forms.ModelForm):
@@ -45,14 +51,3 @@ class EditProfileForm(forms.ModelForm):
             'phone',
             'image',
         )
-
-class FilterForm(forms.ModelForm):
-    CHOICES = (
-        ('rating', 'rating'),
-        ('available', 'available'),
-        ('price', 'price'),
-    )
-    filter = forms.ChoiceField(choices=CHOICES, widget=forms.Select)
-    class Meta:
-        model = Post
-        fields = ('filter',)

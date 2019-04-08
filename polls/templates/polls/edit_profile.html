@@ -40,9 +40,17 @@
         .rightmarg{
 		margin-right:50px;
 	    }
+	    .leftmarg{
+		margin-left:50px;
+	    }
 	    .title {
 		    text-shadow: 1px 1px #FFFFFF;
 		}
+		.centered {
+            text-align: center;
+            justify-content: center;
+            margin: 0 auto;
+	    }
     </style>
 
     <title>Edit Profile</title>
@@ -51,7 +59,7 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-md bg-primary navbar-dark">
+    <nav class="navbar sticky-top navbar-expand-md bg-primary navbar-dark">
         <img class="logo" src="https://cdn.freebiesupply.com/logos/large/2x/university-of-virginia-3-logo-png-transparent.png">
         <h1 class="title">Off Grounds Housing</h1>
         <div class="collapse navbar-collapse justify-content-end tabs" id="collapsibleNavbar">   
@@ -72,6 +80,8 @@
 
 
 {% block content %}
+
+    <div class="leftmarg">
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <p>First Name: {{uform.first_name}}</p>
@@ -80,6 +90,7 @@
     {{pform.as_p}}
     <button type="submit">Submit </button>
 </form>
+    </div>
 <br>
 
 

@@ -49,7 +49,7 @@ class Post(models.Model):
         return self.name
 
     class Meta:
-        ordering = ['-rating']
+        ordering = ['name']
 
 class Review(models.Model):
     profile_pic = models.CharField(default='',max_length=400)

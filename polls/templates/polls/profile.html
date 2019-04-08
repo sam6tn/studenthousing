@@ -48,7 +48,15 @@
         .profilepic{
             width:200px;
             height:200px;
+            justify-content: center;
+            text-align: center;
+            margin-bottom: 20px;
         }
+        .centered {
+		    text-align: center;
+		    justify-content: center;
+		    margin: 0 auto;
+	    }
     </style>
 
     <title>Profile</title>
@@ -57,7 +65,7 @@
 
 <body>
 
-        <nav class="navbar navbar-expand-md bg-primary navbar-dark">
+        <nav class="navbar sticky-top navbar-expand-md bg-primary navbar-dark">
                 <img class="logo" src="https://cdn.freebiesupply.com/logos/large/2x/university-of-virginia-3-logo-png-transparent.png">
                 <h1 class="title">Off Grounds Housing</h1>
             
@@ -83,25 +91,22 @@
 
 
 {% block content %}
+<div class="centered">
         <h2 class="account-heading">Welcome, {{ user.username }}!</h2>
-        <div class="profilepic">
             <img class="profilepic" src="{{user.profile.image.url}}">
-        </div>
-
         <div>
-            <p> First name: {{ user.first_name }}</p>
+            <p>First name: {{ user.first_name }}</p>
             <p>Last name: {{ user.last_name }}</p>
             <p>Email: {{ user.email }}</p>
             <p>Bio: {{ user.profile.bio }}</p>
             <p>Phone: {{ user.profile.phone }}</p>
         </div>
-      </div>
 
       <form method='POST'>
         {% csrf_token %}
         <input type="submit" value="Edit Profile">
         </form>
-
+</div>
 
 
 

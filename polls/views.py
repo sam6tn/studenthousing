@@ -13,6 +13,7 @@ from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth import logout as user_logout
 from polls.forms import EditUserForm, EditProfileForm, RoommateForm
 from django.contrib.auth.models import User
+from django.db.models import Q
 
 from .models import Post, Review, Profile
 
@@ -54,12 +55,29 @@ class ListView(TemplateView):
         form = SearchForm(request.POST)
         if form.is_valid():
             search = form.cleaned_data['search']
-            if(search is not None):
-                posts = Post.objects.filter(Q(name__icontains=search) |
-                                            Q(address__icontains=search) |
-                                            Q(info__icontains=search)) #searches database based on substring
+            filter = form.cleaned_data['filter']
+            if(search is not None and search is not ""):
+                if (filter is not ''):
+                    if (filter == "rating"):
+                        posts = Post.objects.filter(Q(name__icontains=search) |
+                                                    Q(address__icontains=search) |
+                                                    Q(info__icontains=search)).order_by('-rating')  # searches database based on substring
+                        print("ordered1",search,filter)
+                    else:
+                        posts = Post.objects.filter(Q(name__icontains=search) |
+                                                    Q(address__icontains=search) |
+                                                    Q(info__icontains=search)).order_by(filter)
+                        print("ordered2",search,filter)
             else:
-                posts = Post.objects.all() #if no search input, displays all posts
+                if(filter is not ''):
+                    if (filter=="rating"):
+                        posts = Post.objects.all().order_by('-rating')
+                        print("ordered3")
+                    else:
+                        posts = Post.objects.all().order_by(filter)
+                        print("ordered4")
+                else:
+                    posts = Post.objects.all()
         args = {'posts': posts,'form': form}
         return render(request, self.template_name, args)
 
@@ -168,13 +186,3 @@ def edit_profile(request):
 def logout(request):
     user_logout(request)
     return HttpResponseRedirect('/')
-
-def filter(request, template_name='polls/list.html'):
-    form = FilterForm()
-    if request.GET.get('filter'):
-        chosen_filter = request.GET.get('filter')
-        posts = Post.objects.order_by(chosen_filter)
-    else:
-        posts = Post.objects.all()
-    args = {'posts': posts, 'form': form}
-    return render(request, template_name, args)
