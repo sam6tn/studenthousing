@@ -1,33 +1,170 @@
 {% block body %}
 
-{% load static %}
-
 <head>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+
 <style>
-.checked {
-  color: orange;
-}
+	#filter-button{
+      width:200px;
+    }
+	.checked {
+		  color: orange;
+	}
+	.navbar{
+        margin-bottom: 50px;
+        color:orange;
+	}
+	#ratingdisp{
+		font-size: 16pt;
+	}
+
+	#results{
+		display:inline-block;
+		margin-bottom:10px;
+		margin-right: 10px;
+		border:1px solid black;
+		padding-bottom: 10px;
+		background-color:whitesmoke;
+	}
+	.resultcontainer{
+		height: auto;
+  	display: flex;
+		flex-wrap: wrap;
+	}
+	.img-results{
+		width: 400px;
+		height: 300px;
+		display: inline-block;
+		margin: 0 auto;
+		text-align: center;
+	}
+	.botmarg{
+		margin-bottom: 80px;
+	}
+
+	.logo{
+			height:100px;
+			width:100px;
+			margin-right:10px;
+	}
+	.title {
+		text-shadow: 1px 1px #FFFFFF;
+	}
+	.tabs{
+		font-size:16pt;
+	}
+	#price{
+		font-size:16pt;
+		margin-right:30px;
+	}
+	#resulttext {
+		font-size:20pt;
+		margin-right:20px;
+		font-weight: bold;
+	}
+	.centered {
+		text-align: center;
+		justify-content: center;
+		margin: 0 auto;
+	}
+	.dropdown {
+		width: 100px !important;
+	}
+
 </style>
+
+<title>Housing Search</title>
 
 </head>
 
 <body>
-<span class="border-right-0"></span>
-<div class ="container">
-	<h3>Housing found for: {{posts.last}}</h3>
-	<div>
-		<span>Rating: </span>
-		<span class="fa fa-star checked"></span>
-		<span class="fa fa-star checked"></span>
-		<span class="fa fa-star checked"></span>
-		<span class="fa fa-star checked"></span>
-		<span class="fa fa-star"></span>
-	</div>
 
-<img src="https://cimg5.ibsrv.net/ibimg/www.apartmentratings.com/650x350_85-1/s/v/1/sv1jqv0X7QZ.jpg" alt="HGWells" class="img-fluid img-rounded" class="img-fluid" alt="Responsive image">
+<nav class="navbar navbar-expand-md bg-primary navbar-dark">
+	<img class="logo" src="https://cdn.freebiesupply.com/logos/large/2x/university-of-virginia-3-logo-png-transparent.png">
+	<h1 class="title">Off Grounds Housing</h1>
+
+	<div class="collapse navbar-collapse justify-content-end tabs" id="collapsibleNavbar">   
+		<ul class="navbar-nav">
+		  <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+			<li class="nav-item"><a class="nav-link" href="/roommates/">Roommates</a></li>
+			<li class="nav-item"> <a class="nav-link" href="/housingsearch/">Housing</a></li>        
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.first_name }}</a>
+				<div class="dropdown-menu dropdown-menu-right">
+					<a class="dropdown-item" href="/profile">Profile</a>
+					<a class="dropdown-item" href="/logout/">Logout</a>
+				</div>
+			</li>                            
+		</ul>
+	</div> 
+
+</nav>
+	
+
+<div class="centered">
+	<h2>Search Offgrounds Housing</h2>
+	<form method="Post">
+		{% csrf_token %}
+		<div style="margin-bottom: 20px;">{{ form.search }}</div>
+		<button class="btn btn-success btn-block" type="submit" style="width: 900px; margin-left: 180px;">Search Housing!</button>
+	</form>
+	<span id="resulttext">Search Results:</span>
 </div>
+
+<div class ="container">
+	<div class="row botmarg">
+
+		<button type="button" id="filter-button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+			Filter by: <span id="selected">(Select)</span><span class="caret"></span>
+		</button>
+		<div class="dropdown-menu">
+			<a class="dropdown-item" href="#">Availability</a>
+			<a class="dropdown-item" href="#">Pricing</a>
+			<a class="dropdown-item" href="#">Distance</a>
+			<!-- <div class="dropdown-divider"></div>
+			<a class="dropdown-item" href="#">Suggested</a> -->
+		</div>
+	</div>
+	
+	<script>
+		$('.dropdown-menu a').click(function(){$('#selected').text($(this).text());});
+	</script>
+
+	<div class="resultcontainer centered">
+	{% for post in posts.all %}
+	<div class="col-sm-5" id="results">
+		<form method="post">
+		{% csrf_token %}
+
+		<h4><a href="{% url 'housing:post' post.name%}">{{ post.name }}</a></h4>
+		<p>{{post.address}}</p>
+		<p>{{post.info}}</p>
+		<span id="price">${{post.price}}</span><span id="ratingdisp">Rating:</span>
+		
+		<span class="fa fa-star {% if post.rating >= 1 %}checked{% endif %}"></span>
+		<span class="fa fa-star {% if post.rating >= 2 %}checked{% endif %}"></span>
+		<span class="fa fa-star {% if post.rating >= 3 %}checked{% endif %}"></span>
+		<span class="fa fa-star {% if post.rating >= 4 %}checked{% endif %}"></span>
+		<span class="fa fa-star {% if post.rating >= 5 %}checked{% endif %}"></span>
+		<img src={{post.image_url}} class="img-results">
+		</form>
+	</div>
+	{% endfor %}
+	
+</div>
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script> -->
+
 {% endblock %}
+
 </body>
