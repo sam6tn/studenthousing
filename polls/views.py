@@ -169,18 +169,12 @@ def logout(request):
     user_logout(request)
     return HttpResponseRedirect('/')
 
-
-def available_filter(request):
-    template_name = 'polls/list.html'
-    form = SearchForm(request.POST)
-    posts = Post.objects.order_by('available',)
-    args = {'posts': posts, 'form': form}
-    return render(request, template_name, args)
-
-
-def price_filter(request):
-    template_name = 'polls/list.html'
-    form = SearchForm(request.POST)
-    posts = Post.objects.order_by('price',)
+def filter(request, template_name='polls/list.html'):
+    form = FilterForm()
+    if request.GET.get('filter'):
+        chosen_filter = request.GET.get('filter')
+        posts = Post.objects.order_by(chosen_filter)
+    else:
+        posts = Post.objects.all()
     args = {'posts': posts, 'form': form}
     return render(request, template_name, args)

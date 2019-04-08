@@ -48,6 +48,9 @@ class Post(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['-rating']
+
 class Review(models.Model):
     profile_pic = models.CharField(default='',max_length=400)
     reviewer_name = models.CharField(default = '', max_length=100)

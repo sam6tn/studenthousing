@@ -46,33 +46,13 @@ class EditProfileForm(forms.ModelForm):
             'image',
         )
 
-
-"""
-class SearchFilterEx(django_filters.FilterSet):
-    ex = django_filters.MethodFilter()
-    search_fields = ['name', 'info', 'address', ]
-
-    def filter_ex(self, qs, value):
-        if value:
-            q_parts = value.split()
-
-            # Permutation code copied from http://stackoverflow.com/a/12935562/119071
-
-            list1 = self.search_fields
-            list2 = q_parts
-            perms = [zip(x, list2) for x in itertools.permutations(list1, len(list2))]
-
-            q_totals = Q()
-            for perm in perms:
-                q_part = Q()
-                for p in perm:
-                    q_part = q_part & Q(**{p[0] + '__icontains': p[1]})
-                q_totals = q_totals | q_part
-
-            qs = qs.filter(q_totals)
-        return qs
-
+class FilterForm(forms.ModelForm):
+    CHOICES = (
+        ('rating', 'rating'),
+        ('available', 'available'),
+        ('price', 'price'),
+    )
+    filter = forms.ChoiceField(choices=CHOICES, widget=forms.Select)
     class Meta:
         model = Post
-        fields = ['ex']
-"""
+        fields = ('filter',)

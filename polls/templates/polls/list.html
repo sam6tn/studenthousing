@@ -62,7 +62,7 @@
 	.tabs{
 		font-size:16pt;
 	}
-	#price{
+	#post_price{
 		font-size:16pt;
 		margin-right:30px;
 	}
@@ -120,23 +120,22 @@
 	<span id="resulttext">Search Results:</span>
 </div>
 
-<div class ="container">
-	<div class="row botmarg">
 
-		<button type="button" id="filter-button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
-			Filter by: <span id="selected">(Select)</span><span class="caret"></span>
-		</button>
-		<div class="dropdown-menu">
-			<a class="dropdown-item" href="{% url 'housing:available' %}">Availability</a>
-			<a class="dropdown-item" href="{% url 'housing:price' %}">Pricing</a>
-			<a class="dropdown-item" href="#">Distance</a>
-			<!-- <div class="dropdown-divider"></div>
-			<a class="dropdown-item" href="#">Suggested</a> -->
-		</div>
-	</div>
-	
-	<script>
-		$('.dropdown-menu a').click(function(){$('#selected').text($(this).text());});
+<div class ="container">
+<div class="row botmarg">
+    <form action="{% url 'housing:filter' %}" method="get">
+    <select name="filter" class="btn-group btn-group-toggle" data-toggle="buttons">
+        <option value="rating" class="btn btn-primary active" onclick="toggle" />Rating</option>
+        <option value="available" class="btn btn-primary active" onclick="toggle" />Available</option>
+        <option value="price" class="btn btn-primary active" onclick="toggle" />Price</option>
+    </select>
+    <input type="submit" class="btn btn-primary" id="filter" value="Filter" />
+    </form>
+</div>
+</div>
+
+<script>
+		$('.dropdown-menu a').toggle();
 	</script>
 
 	<div class="resultcontainer centered">
@@ -148,7 +147,7 @@
 		<h4><a href="{% url 'housing:post' post.name%}">{{ post.name }}</a></h4>
 		<p>{{post.address}}</p>
 		<p>{{post.info}}</p>
-		<span id="price">${{post.price}}</span><span id="ratingdisp">Rating:</span>
+		<span id="post_price">${{post.price}}</span><span id="ratingdisp">Rating:</span>
 		
 		<span class="fa fa-star {% if post.rating >= 1 %}checked{% endif %}"></span>
 		<span class="fa fa-star {% if post.rating >= 2 %}checked{% endif %}"></span>
