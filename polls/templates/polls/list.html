@@ -5,6 +5,9 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -86,7 +89,7 @@
 <body>
 
 <nav class="navbar sticky-top navbar-expand-md bg-primary navbar-dark">
-	<img class="logo" src="https://cdn.freebiesupply.com/logos/large/2x/university-of-virginia-3-logo-png-transparent.png">
+	<a href="/housingsearch/"><img  class="logo" src="https://cdn.freebiesupply.com/logos/large/2x/university-of-virginia-3-logo-png-transparent.png"></a>
 	<h1 class="title">Off Grounds Housing</h1>
 
 	<div class="collapse navbar-collapse justify-content-end tabs" id="collapsibleNavbar">   
@@ -124,13 +127,14 @@
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        height: 530px;
-        width:530px;
+        height: 300px;
+        width:300px;
        position: center;
+       position: sticky;
        position: -webkit-sticky;
        z-index: 1;
-       top: 20px;
-       left: 50px;
+       top: 5px;
+       left: 700px;
        background: #eee;
        overflow-x: hidden;
        padding: 8px 0;
