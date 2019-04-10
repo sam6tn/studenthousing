@@ -11,7 +11,7 @@
 
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 	#filter-button{
       width:200px;
@@ -33,6 +33,7 @@
 		border:1px solid black;
 		padding-bottom: 10px;
 		background-color:whitesmoke;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 	}
 	.resultcontainer{
 		height: auto;
@@ -101,8 +102,8 @@
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.first_name }}</a>
 				<div class="dropdown-menu dropdown-menu-right">
-					<a class="dropdown-item" href="/profile">Profile</a>
-					<a class="dropdown-item" href="/logout/">Logout</a>
+					<a class="dropdown-item" href="/profile"><span class = "glyphicon glyphicon-user"></span>Profile</a>
+					<a class="dropdown-item" href="/logout/"><span class = "glyphicon glyphicon-log-in"></span>Logout</a>
 				</div>
 			</li>                            
 		</ul>
