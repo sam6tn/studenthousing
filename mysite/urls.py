@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.conf.urls import url, include
 
 urlpatterns = [
-    url(r'^', include('polls.urls')),
+    url(r'^', include('housing.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^oauth/', include('social_django.urls', namespace="social")),
 ]
