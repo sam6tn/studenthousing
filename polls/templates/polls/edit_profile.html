@@ -4,6 +4,9 @@
 <head>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
@@ -40,9 +43,17 @@
         .rightmarg{
 		margin-right:50px;
 	    }
+	    .leftmarg{
+		margin-left:50px;
+	    }
 	    .title {
 		    text-shadow: 1px 1px #FFFFFF;
 		}
+		.centered {
+            text-align: center;
+            justify-content: center;
+            margin: 0 auto;
+	    }
     </style>
 
     <title>Edit Profile</title>
@@ -51,8 +62,8 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-md bg-primary navbar-dark">
-        <img class="logo" src="https://cdn.freebiesupply.com/logos/large/2x/university-of-virginia-3-logo-png-transparent.png">
+    <nav class="navbar sticky-top navbar-expand-md bg-primary navbar-dark">
+        <a href="/housingsearch/"><img class="logo" src="https://cdn.freebiesupply.com/logos/large/2x/university-of-virginia-3-logo-png-transparent.png"></a>
         <h1 class="title">Off Grounds Housing</h1>
         <div class="collapse navbar-collapse justify-content-end tabs" id="collapsibleNavbar">   
             <ul class="navbar-nav">
@@ -72,6 +83,8 @@
 
 
 {% block content %}
+
+    <div class="leftmarg">
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <p>First Name: {{uform.first_name}}</p>
@@ -80,6 +93,7 @@
     {{pform.as_p}}
     <button type="submit">Submit </button>
 </form>
+    </div>
 <br>
 
 

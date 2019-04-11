@@ -14,13 +14,19 @@ class PostAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['name']}),
         (None, {'fields': ['info']}),
+        (None, {'fields': ['rooms']}),
+        (None, {'fields': ['baths']}),
         (None, {'fields': ['address']}),
         (None, {'fields': ['price']}),
         # (None, {'fields': ['rating']}),
         (None, {'fields': ['image_url']}),
+        (None, {'fields': ['baths']}),
+        (None, {'fields': ['rooms']}),
         (None, {'fields': ['available']}),
         # (None, {'fields': ['google_address']}),
         # (None, {'fields': ['geolocation']}),
+
+        
     ]
 
     # formfield_overrides = {
@@ -36,29 +42,5 @@ class PostAdmin(admin.ModelAdmin):
 
     inlines = [ReviewInline]
 
-
-"""
-
-class PostInline(admin.TabularInline):
-    model = Post
-
-
-class LocationAdmin(admin.ModelAdmin):
-    fieldsets = [
-        (None, {'fields': ['location_name']}),
-        (None, {'fields': ['address']}),
-        (None, {'fields': ['owner']}),
-        (None, {'fields': ['rooms']}),
-        (None, {'fields': ['bathrooms']}),
-
-    ]
-    inlines = [PostInline]
-
-    list_display = ('location_name', 'address', 'owner')
-
-    search_fields = ['location_name']
-
-admin.site.register(Location, LocationAdmin)
-"""
 admin.site.register(Post, PostAdmin)
 admin.site.register(Profile)
