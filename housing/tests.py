@@ -3,8 +3,8 @@ from django.test import TestCase
 from django.utils import timezone
 from django.urls import reverse
 
-from polls.models import Post
-from polls.forms import SearchForm, ReviewForm
+from housing.models import Post
+from housing.forms import SearchForm, ReviewForm
 
 
 def create_post(name, info, rating):
