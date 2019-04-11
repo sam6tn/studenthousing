@@ -6,7 +6,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
@@ -55,10 +55,38 @@
             text-align: center;
             margin-bottom: 20px;
         }
+        
+        .title2 {
+         color: grey;
+        font-size: 18px;
+}
+
+        
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: black;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
         .centered {
 		    text-align: center;
 		    justify-content: center;
 		    margin: 0 auto;
+		    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                    max-width: 300px;
+                    margin: auto;
+                    text-align: center;
+                    font-family: arial;
+		   
 	    }
     </style>
 
@@ -96,18 +124,21 @@
 {% block content %}
 <div class="centered">
         <h2 class="account-heading">Welcome, {{ user.username }}!</h2>
-            <img class="profilepic" src="{{user.profile.image.url}}">
-        <div>
+            <img class="profilepic" style="width:100%" src="{{user.profile.image.url}}">
+        <div class = "title2">
             <p>First name: {{ user.first_name }}</p>
             <p>Last name: {{ user.last_name }}</p>
             <p>Email: {{ user.email }}</p>
             <p>Bio: {{ user.profile.bio }}</p>
             <p>Phone: {{ user.profile.phone }}</p>
         </div>
+        
 
       <form method='POST'>
+       <button>
         {% csrf_token %}
         <input type="submit" value="Edit Profile">
+        </button>
         </form>
 </div>
 
