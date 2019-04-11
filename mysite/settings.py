@@ -33,7 +33,7 @@ ALLOWED_HOSTS = ['uvahousing.herokuapp.com','127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
-    'polls.apps.PollsConfig',
+    'housing.apps.HousingConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -70,7 +70,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
     'BACKEND': 'django.template.backends.django.DjangoTemplates',
-    'DIRS': ['polls/templates'],
+    'DIRS': ['housing/templates'],
     'APP_DIRS': True,
     'OPTIONS': {
         'context_processors': [
