@@ -30,7 +30,7 @@ class ReviewForm(forms.ModelForm):
     review_text = forms.CharField(widget=forms.Textarea(attrs={'cols': 120, 'rows': 3}))
     class Meta:
         model = Review
-        fields = ('review_text', 'rating',)
+        fields = ('review_text', 'rating')
 
 
 class EditUserForm(forms.ModelForm):

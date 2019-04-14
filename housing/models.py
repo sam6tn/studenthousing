@@ -11,6 +11,12 @@ from django.db.models.signals import post_save
 from django_google_maps import fields as map_fields
 from django_google_maps.fields import AddressField, GeoLocationField
 
+# for latitude and longitude
+import certifi
+import ssl
+import geopy.geocoders
+from geopy.geocoders import Nominatim
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(blank=True)
@@ -41,9 +47,21 @@ class Post(models.Model):
     baths = models.IntegerField(default=0)
     rooms = models.IntegerField(default=0)
     available = models.BooleanField(default=True)
+    lat = models.FloatField(default=0.0)
+    lng = models.FloatField(default=0.0)
 
-    # google_address = map_fields.AddressField(max_length=200, default="")
-    # geolocation = map_fields.GeoLocationField(max_length=100, default="1207 Wertland Street")
+    # Override save method to update latitude and longitude information
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.name = 'unknown'
+        ctx = ssl.create_default_context(cafile=certifi.where())
+        geopy.geocoders.options.default_ssl_context = ctx
+        nom = Nominatim(scheme = 'http', user_agent='polls')
+        location = nom.geocode(self.address)
+        if (location):
+            self.lat = location.latitude
+            self.lng = location.longitude
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
