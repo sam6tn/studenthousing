@@ -2,12 +2,11 @@
 
 <head>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -16,35 +15,45 @@
 <link rel="stylesheet" type="text/css" href="{% static 'housing/style.css' %}">
 
 <style>
-	#filter-button{
-      width:200px;
-    }
-	.checked {
-		  color: orange;
-	}
 	.navbar{
-        margin-bottom: 50px;
-        color:orange;
+    color:rgb(236, 156, 5);
+    background-color: rgba(226, 226, 226);
 	}
+  .sidenav {
+    padding-top: 30px;
+    background-color: rgb(21, 46, 100);
+    height: 100%;
+    position: fixed;
+    }
 	#ratingdisp{
 		font-size: 16pt;
 	}
 	#results{
 		display:inline-block;
+    position: static;
 		margin-bottom:10px;
 		margin-right: 10px;
-		border:1px solid black;
+		box-shadow: 2pt;
 		padding-bottom: 10px;
 		background-color:whitesmoke;
 	}
-	.resultcontainer{
-		height: auto;
-  	display: flex;
-		flex-wrap: wrap;
+
+  .result_scroll{
+		display:inline-block;
+    position:relative;
+		margin-bottom:10px;
+		margin-right: 30px;
+    margin-left:500px;
 	}
+
+  #result_heading {
+    position: fixed;
+		font-size:24pt;
+		font-weight: bold;
+  }
 	.img-results{
-		width: 400px;
-		height: 300px;
+		width: 310px;
+		height: 280px;
 		display: inline-block;
 		margin: 0 auto;
 		text-align: center;
@@ -58,7 +67,7 @@
 			margin-right:10px;
 	}
 	.title {
-		text-shadow: 1px 1px #FFFFFF;
+		text-shadow: 1px 1px rgb(20, 43, 121);
 	}
 	.tabs{
 		font-size:16pt;
@@ -72,14 +81,24 @@
 		margin-right:20px;
 		font-weight: bold;
 	}
-	.centered {
-		text-align: center;
-		justify-content: center;
-		margin: 0 auto;
-	}
+
 	.dropdown {
 		width: 100px !important;
 	}
+
+  #map {
+    height: 390px;
+    width:390px;
+    /* position: sticky;
+    position: -webkit-sticky; */
+    /* z-index: 1;
+    top: 5px;
+    left: 500px; */
+    background: #eee;
+    overflow-x: hidden;
+    padding: 8px 8px;
+  }
+
 </style>
 
 <title>Housing Search</title>
@@ -88,7 +107,7 @@
 
 <body>
 
-<nav class="navbar sticky-top navbar-expand-md bg-primary navbar-dark">
+<nav class="navbar sticky-top navbar-expand-md  navbar">
 	<a href="/housingsearch/"><img  class="logo" src="https://cdn.freebiesupply.com/logos/large/2x/university-of-virginia-3-logo-png-transparent.png"></a>
 	<h1 class="title">Off Grounds Housing</h1>
 
@@ -108,374 +127,348 @@
 	</div> 
 
 </nav>
-
-<div class="centered">
-	<h2>Search Offgrounds Housing</h2>
-	
-	<form method="Post">
-		{% csrf_token %}
-		<div style="margin-bottom: 20px;">{{ form.search }}</div>
-        <div style="margin-bottom: 20px;">Sort by: {{ form.filter }}</div>
-		<button class="btn btn-success btn-block" type="submit" style="width: 900px; margin-left: 180px;">Search Housing!</button>
-	</form>
-	<html>
-  <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <title>Housing Location</title>
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 300px;
-        width:300px;
-       position: center;
-       position: sticky;
-       position: -webkit-sticky;
-       z-index: 1;
-       top: 5px;
-       left: 500px;
-       background: #eee;
-       overflow-x: hidden;
-       padding: 8px 0;
-   
-      }
-      .sidebar{
-       position: sticky;
-       position: -webkit-sticky;
-       z-index: 1;
-       top: 20px;
-       left: 10px
-       overflow-x: hidden;
-       padding: 8px 0;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height:100%;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
-    <script>
-	var allLocations = [
-{
-  "model": "housing.post",
-  "pk": 1,
-  
-    "name": "The Fred",
-    "info": "Live in this wonderful apartment that is close to the corner and very cost efficient",
-    "address": "1207 Wertland Street  Charlottesville, VA 22903",
-    "price": 650,
-    "rating": 3,
-    "image_url": "https://livewithmsc.com/wp-content/uploads/2018/10/fred.jpg",
-    "baths": 2,
-    "rooms": 2,
-    "available": true,
-    "lat": 38.0346159,
-    "lng": -78.4965872115102
-  
-},
-{
-  "model": "housing.post",
-  "pk": 2,
-  
-    "name": "Wertland Square",
-    "info": "Accessed",
-    "address": "216 14th Street Charlottesville, VA 22903",
-    "price": 850,
-    "rating": 4,
-    "image_url": "https://s2rf64.cloudimg.io/s/cdn/x/https://s3.amazonaws.com/cdn.ucribs.com/images/listings/11125/Wertland%20Square%202.jpg",
-    "baths": 2,
-    "rooms": 4,
-    "available": false,
-    "lat": 0.0,
-    "lng": 0.0
-  
-},
-{
-  "model": "housing.post",
-  "pk": 3,
-  
-    "name": "1815 JPA",
-    "info": "Great community, washer/dryer in unit, bus stop",
-    "address": "1815 Jefferson Park Ave, Charlottesville, VA 22903",
-    "price": 550,
-    "rating": 4,
-    "image_url": "https://www.martinhorn.com/wp-content/uploads/2013/08/1815JPA_ext_SS_710x468.jpg",
-    "baths": 2,
-    "rooms": 4,
-    "available": true,
-    "lat": 38.02850705,
-    "lng": -78.5106060695629
-  
-},
-{
-  "model": "housing.post",
-  "pk": 4,
- 
-    "name": "The Flats at West Village",
-    "info": "Included: washer/dryer in unit, trash, cable, internet, heat",
-    "address": "852 West Main Street Charlottesville, VA 22903",
-    "price": 800,
-    "rating": 0,
-    "image_url": "https://images1.apartments.com/i2/RWkEd_MSFPejCyjO6IWXjCW-ilssEmBL38ffVgsViJQ/111/the-flats-west-village-charlottesville-va-primary-photo.jpg",
-    "baths": 4,
-    "rooms": 4,
-    "available": true,
-    "lat": 38.031883,
-    "lng": -78.4929221396699
-  
-},
-{
-  "model": "housing.post",
-  "pk": 5,
- 
-    "name": "Oxbridge Place",
-    "info": "close to the corner, gym, and study lounges.",
-    "address": "313 13th St NW, Charlottesville, VA 22903",
-    "price": 700,
-    "rating": 4,
-    "image_url": "https://cdn.apartmenthomeliving.com/VA/Charlottesville/3632697/170218/Oxbridge-Place-Apartments-Charlottesville-VA-photo-001_sm.jpg",
-    "baths": 2,
-    "rooms": 3,
-    "available": false,
-    "lat": 38.0364704,
-    "lng": -78.497445057377
-  
-},
-{
-  "model": "housing.post",
-  "pk": 6,
-  
-    "name": "GrandMarc at the Corner",
-    "info": "Washer/Dryer in Unit Cable, Gas, High-Speed Internet, Recycling, Trash Removal, Water/Sewer included",
-    "address": "301 15th St. NW Charlottesville, VA 22903",
-    "price": 900,
-    "rating": 0,
-    "image_url": "https://img.offcampusimages.com/gFIhfde4s7vSPZ40Z4qRVB70KPk=/660x440/left/top/smart/images/loycivccswk4vzzlgqkai_k3qrqdgo5t9atpzzfazxg.jpeg",
-    "baths": 2,
-    "rooms": 4,
-    "available": true,
-    "lat": 38.0376871,
-    "lng": -78.4991617
-  
-},
-{
-  "model": "housing.post",
-  "pk": 7,
-  
-    "name": "Rugby McIntyre Efficiencies",
-    "info": "studio apartments on Rugby Ave",
-    "address": "611 Rugby Road Charlottesville, VA 22903",
-    "price": 850,
-    "rating": 0,
-    "image_url": "http://www.brac.com/photos/14/large/14_160108_111258_5482.jpg",
-    "baths": 1,
-    "rooms": 1,
-    "available": true,
-    "lat": 38.04286655,
-    "lng": -78.5000464769197
-  
-},
-{
-  "model": "housing.post",
-  "pk": 8,
-  
-    "name": "The Standard",
-    "info": "Modern living in fully furnished apartments with TV and a pool table.",
-    "address": "853 West Main Street, Charlottesville, VA 22903",
-    "price": 1000,
-    "rating": 0,
-    "image_url": "https://images1.apartments.com/i2/XL4c3SL88ZNx_3V9E_Z6UX2XsIc1zIl-pv4BnV78SWI/117/the-standard-at-charlottesville-charlottesville-va-primary-photo.jpg",
-    "baths": 4,
-    "rooms": 4,
-    "available": true,
-    "lat": 38.0322268377361,
-    "lng": -78.4927312250983
-  
-},
-{
-  "model": "housing.post",
-  "pk": 9,
-  
-    "name": "Jefferson Commons",
-    "info": "Fitness and movie centers, pets allowed, parking.",
-    "address": "1620 Jefferson Park Ave, Charlottesville, VA 22903",
-    "price": 700,
-    "rating": 0,
-    "image_url": "https://image1.apartmentfinder.com/i2/3DPYT_IWwobkie3uL5NnjDD5ZSSSh8xfAwzPMO9vEO4/117/jefferson-commons-charlottesville-va-primary-photo.jpg",
-    "baths": 2,
-    "rooms": 4,
-    "available": false,
-    "lat": 38.0307936,
-    "lng": -78.5079473761887
-  
-},
-{
-  "model": "housing.post",
-  "pk": 10,
-  
-    "name": "University Heights",
-    "info": "Affordable housing off ivy road, 1 2 3 4 bedrooms.",
-    "address": "250 Colonnade Dr, Charlottesville, VA 22903",
-    "price": 450,
-    "rating": 0,
-    "image_url": "https://image1.apartmentfinder.com/i2/U9HxjQ5kqwrsp75fadlDCCZLq2B4E0VB2kpkhXhrl2g/110/university-heights-charlottesville-va-building-photo.jpg",
-    "baths": 2,
-    "rooms": 4,
-    "available": true,
-    "lat": 0.0,
-    "lng": 0.0
-  
-},
-{
-  "model": "housing.post",
-  "pk": 11,
- 
-    "name": "1303 Wertland St",
-    "info": "Near the Corner",
-    "address": "1303 WERTLAND STREET,  CHARLOTTESVILLE, VA 22903",
-    "price": 600,
-    "rating": 0,
-    "image_url": "https://static1.squarespace.com/static/53025668e4b0c7fb3f1c4156/54874f22e4b07ac01733ddf4/556dc904e4b0970bf67f4704/1433258253576/IMG_9130asmall.jpg?format=1500w",
-    "baths": 2,
-    "rooms": 2,
-    "available": true,
-    "lat": 38.03507305,
-    "lng": -78.4976384480121
-  
-},
-{
-  "model": "housing.post",
-  "pk": 12,
-  
-    "name": "1910 JPA",
-    "info": "A full kitchen including range, refrigerator, and dishwasher. Also included within each apartment is a washer and dryer",
-    "address": "1910 Jefferson Park Avenue, Charlottesville, VA 22903",
-    "price": 600,
-    "rating": 0,
-    "image_url": "https://ivysquare.appfoliowebsites6.com/wp-content/uploads/sites/6136/2016/09/1910main.jpg",
-    "baths": 2,
-    "rooms": 3,
-    "available": true,
-    "lat": 38.02689405,
-    "lng": -78.5119541424778
-  
-},
-{
-  "model": "housing.post",
-  "pk": 13,
-  
-    "name": "The Greek",
-    "info": "Only one unit left!",
-    "address": "1510 Virginia Ave, Charlottesville, VA 22903",
-    "price": 825,
-    "rating": 0,
-    "image_url": "https://www.cbsrentals.com/majorphotos/large/majorphoto_190128_013342_7826.jpg",
-    "baths": 2,
-    "rooms": 4,
-    "available": true,
-    "lat": 38.0382064,
-    "lng": -78.4993202000322
-  
-},
-{
-  "model": "housing.post",
-  "pk": 14,
-    "name": "Cavalier Crossing",
-    "info": "Living community with a shuttle to and from grounds.",
-    "address": "100 Wahoo Way, Charlottesville, VA 22903",
-    "price": 500,
-    "rating": 0,
-    "image_url": "https://images1.apartments.com/i2/prpYnOK95NcHws64oK4glHNUXsaArEDHwHf36oQ9qfQ/111/cavalier-crossing-charlottesville-va-primary-photo.jpg",
-    "baths": 3,
-    "rooms": 3,
-    "available": true,
-    "lat": 0.0,
-    "lng": 0.0
-  
-}
-];
-<!-- // Initialize and add the map
-//function initMap() {
-  // The location of UVA
-  //var uva = {lat: 38.0336 , lng: -78.508};
-  // The map, centered at UVA
-  //var map = new google.maps.Map(
-      //document.getElementById('map'), {zoom: 15, center: uva});
-  // The marker, positioned at UVA
-  //var marker = new google.maps.Marker({position: uva, map: map});
-  
-  
-  
-//} -->
-function initMap() {
- map = new google.maps.Map(document.getElementById('map'), {
- center: {lat: 38.0336, lng:  -78.508},
- zoom: 14,
- mapTypeId: 'hybrid'
-});
-
-for(var i=0; i<=allLocations.length; i++){
-  var mypos = {lat: allLocations[i].lat, lng: allLocations[i].lng};
-  var marker = new google.maps.Marker({
-   position: mypos,
-   map: map,
-   title: allLocations[i].name
-   //icon: allLocations[i].image_url
-  });
- }
-}
-
-
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYiPSla2mE7teCbpklfIOtWEGic3K0yt8&callback=initMap">
-    </script>
-  </head>
-  <body>
-  
-    <div id= "map"></div>
+<script>
+    var allLocations = [
+  {
+    "model": "housing.post",
+    "pk": 1,
     
-  </body>
+      "name": "The Fred",
+      "info": "Live in this wonderful apartment that is close to the corner and very cost efficient",
+      "address": "1207 Wertland Street  Charlottesville, VA 22903",
+      "price": 650,
+      "rating": 3,
+      "image_url": "https://livewithmsc.com/wp-content/uploads/2018/10/fred.jpg",
+      "baths": 2,
+      "rooms": 2,
+      "available": true,
+      "lat": 38.0346159,
+      "lng": -78.4965872115102
+    
+  },
+  {
+    "model": "housing.post",
+    "pk": 2,
+    
+      "name": "Wertland Square",
+      "info": "Accessed",
+      "address": "216 14th Street Charlottesville, VA 22903",
+      "price": 850,
+      "rating": 4,
+      "image_url": "https://s2rf64.cloudimg.io/s/cdn/x/https://s3.amazonaws.com/cdn.ucribs.com/images/listings/11125/Wertland%20Square%202.jpg",
+      "baths": 2,
+      "rooms": 4,
+      "available": false,
+      "lat": 0.0,
+      "lng": 0.0
+    
+  },
+  {
+    "model": "housing.post",
+    "pk": 3,
+    
+      "name": "1815 JPA",
+      "info": "Great community, washer/dryer in unit, bus stop",
+      "address": "1815 Jefferson Park Ave, Charlottesville, VA 22903",
+      "price": 550,
+      "rating": 4,
+      "image_url": "https://www.martinhorn.com/wp-content/uploads/2013/08/1815JPA_ext_SS_710x468.jpg",
+      "baths": 2,
+      "rooms": 4,
+      "available": true,
+      "lat": 38.02850705,
+      "lng": -78.5106060695629
+    
+  },
+  {
+    "model": "housing.post",
+    "pk": 4,
+    
+      "name": "The Flats at West Village",
+      "info": "Included: washer/dryer in unit, trash, cable, internet, heat",
+      "address": "852 West Main Street Charlottesville, VA 22903",
+      "price": 800,
+      "rating": 0,
+      "image_url": "https://images1.apartments.com/i2/RWkEd_MSFPejCyjO6IWXjCW-ilssEmBL38ffVgsViJQ/111/the-flats-west-village-charlottesville-va-primary-photo.jpg",
+      "baths": 4,
+      "rooms": 4,
+      "available": true,
+      "lat": 38.031883,
+      "lng": -78.4929221396699
+    
+  },
+  {
+    "model": "housing.post",
+    "pk": 5,
+    
+      "name": "Oxbridge Place",
+      "info": "close to the corner, gym, and study lounges.",
+      "address": "313 13th St NW, Charlottesville, VA 22903",
+      "price": 700,
+      "rating": 4,
+      "image_url": "https://cdn.apartmenthomeliving.com/VA/Charlottesville/3632697/170218/Oxbridge-Place-Apartments-Charlottesville-VA-photo-001_sm.jpg",
+      "baths": 2,
+      "rooms": 3,
+      "available": false,
+      "lat": 38.0364704,
+      "lng": -78.497445057377
+    
+  },
+  {
+    "model": "housing.post",
+    "pk": 6,
+    
+      "name": "GrandMarc at the Corner",
+      "info": "Washer/Dryer in Unit Cable, Gas, High-Speed Internet, Recycling, Trash Removal, Water/Sewer included",
+      "address": "301 15th St. NW Charlottesville, VA 22903",
+      "price": 900,
+      "rating": 0,
+      "image_url": "https://img.offcampusimages.com/gFIhfde4s7vSPZ40Z4qRVB70KPk=/660x440/left/top/smart/images/loycivccswk4vzzlgqkai_k3qrqdgo5t9atpzzfazxg.jpeg",
+      "baths": 2,
+      "rooms": 4,
+      "available": true,
+      "lat": 38.0376871,
+      "lng": -78.4991617
+    
+  },
+  {
+    "model": "housing.post",
+    "pk": 7,
+    
+      "name": "Rugby McIntyre Efficiencies",
+      "info": "studio apartments on Rugby Ave",
+      "address": "611 Rugby Road Charlottesville, VA 22903",
+      "price": 850,
+      "rating": 0,
+      "image_url": "http://www.brac.com/photos/14/large/14_160108_111258_5482.jpg",
+      "baths": 1,
+      "rooms": 1,
+      "available": true,
+      "lat": 38.04286655,
+      "lng": -78.5000464769197
+    
+  },
+  {
+    "model": "housing.post",
+    "pk": 8,
+    
+      "name": "The Standard",
+      "info": "Modern living in fully furnished apartments with TV and a pool table.",
+      "address": "853 West Main Street, Charlottesville, VA 22903",
+      "price": 1000,
+      "rating": 0,
+      "image_url": "https://images1.apartments.com/i2/XL4c3SL88ZNx_3V9E_Z6UX2XsIc1zIl-pv4BnV78SWI/117/the-standard-at-charlottesville-charlottesville-va-primary-photo.jpg",
+      "baths": 4,
+      "rooms": 4,
+      "available": true,
+      "lat": 38.0322268377361,
+      "lng": -78.4927312250983
+    
+  },
+  {
+    "model": "housing.post",
+    "pk": 9,
+    
+      "name": "Jefferson Commons",
+      "info": "Fitness and movie centers, pets allowed, parking.",
+      "address": "1620 Jefferson Park Ave, Charlottesville, VA 22903",
+      "price": 700,
+      "rating": 0,
+      "image_url": "https://image1.apartmentfinder.com/i2/3DPYT_IWwobkie3uL5NnjDD5ZSSSh8xfAwzPMO9vEO4/117/jefferson-commons-charlottesville-va-primary-photo.jpg",
+      "baths": 2,
+      "rooms": 4,
+      "available": false,
+      "lat": 38.0307936,
+      "lng": -78.5079473761887
+    
+  },
+  {
+    "model": "housing.post",
+    "pk": 10,
+    
+      "name": "University Heights",
+      "info": "Affordable housing off ivy road, 1 2 3 4 bedrooms.",
+      "address": "250 Colonnade Dr, Charlottesville, VA 22903",
+      "price": 450,
+      "rating": 0,
+      "image_url": "https://image1.apartmentfinder.com/i2/U9HxjQ5kqwrsp75fadlDCCZLq2B4E0VB2kpkhXhrl2g/110/university-heights-charlottesville-va-building-photo.jpg",
+      "baths": 2,
+      "rooms": 4,
+      "available": true,
+      "lat": 0.0,
+      "lng": 0.0
+    
+  },
+  {
+    "model": "housing.post",
+    "pk": 11,
+    
+      "name": "1303 Wertland St",
+      "info": "Near the Corner",
+      "address": "1303 WERTLAND STREET,  CHARLOTTESVILLE, VA 22903",
+      "price": 600,
+      "rating": 0,
+      "image_url": "https://static1.squarespace.com/static/53025668e4b0c7fb3f1c4156/54874f22e4b07ac01733ddf4/556dc904e4b0970bf67f4704/1433258253576/IMG_9130asmall.jpg?format=1500w",
+      "baths": 2,
+      "rooms": 2,
+      "available": true,
+      "lat": 38.03507305,
+      "lng": -78.4976384480121
+    
+  },
+  {
+    "model": "housing.post",
+    "pk": 12,
+    
+      "name": "1910 JPA",
+      "info": "A full kitchen including range, refrigerator, and dishwasher. Also included within each apartment is a washer and dryer",
+      "address": "1910 Jefferson Park Avenue, Charlottesville, VA 22903",
+      "price": 600,
+      "rating": 0,
+      "image_url": "https://ivysquare.appfoliowebsites6.com/wp-content/uploads/sites/6136/2016/09/1910main.jpg",
+      "baths": 2,
+      "rooms": 3,
+      "available": true,
+      "lat": 38.02689405,
+      "lng": -78.5119541424778
+    
+  },
+  {
+    "model": "housing.post",
+    "pk": 13,
+    
+      "name": "The Greek",
+      "info": "Only one unit left!",
+      "address": "1510 Virginia Ave, Charlottesville, VA 22903",
+      "price": 825,
+      "rating": 0,
+      "image_url": "https://www.cbsrentals.com/majorphotos/large/majorphoto_190128_013342_7826.jpg",
+      "baths": 2,
+      "rooms": 4,
+      "available": true,
+      "lat": 38.0382064,
+      "lng": -78.4993202000322
+    
+  },
+  {
+    "model": "housing.post",
+    "pk": 14,
+      "name": "Cavalier Crossing",
+      "info": "Living community with a shuttle to and from grounds.",
+      "address": "100 Wahoo Way, Charlottesville, VA 22903",
+      "price": 500,
+      "rating": 0,
+      "image_url": "https://images1.apartments.com/i2/prpYnOK95NcHws64oK4glHNUXsaArEDHwHf36oQ9qfQ/111/cavalier-crossing-charlottesville-va-primary-photo.jpg",
+      "baths": 3,
+      "rooms": 3,
+      "available": true,
+      "lat": 0.0,
+      "lng": 0.0
+    
+  }
+  ];
+  <!-- // Initialize and add the map
+  //function initMap() {
+    // The location of UVA
+    //var uva = {lat: 38.0336 , lng: -78.508};
+    // The map, centered at UVA
+    //var map = new google.maps.Map(
+        //document.getElementById('map'), {zoom: 15, center: uva});
+    // The marker, positioned at UVA
+    //var marker = new google.maps.Marker({position: uva, map: map});
+    
+    
+    
+  //} -->
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 38.0336, lng:  -78.508},
+    zoom: 14,
+    mapTypeId: 'hybrid'
+  });
   
-</html>
-	
-	<span id="resulttext">Search Results:</span>
+  for(var i=0; i<=allLocations.length; i++){
+    var mypos = {lat: allLocations[i].lat, lng: allLocations[i].lng};
+    var marker = new google.maps.Marker({
+      position: mypos,
+      map: map,
+      title: allLocations[i].name
+      //icon: allLocations[i].image_url
+    });
+    }
+  }
+  
+  
+</script>
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYiPSla2mE7teCbpklfIOtWEGic3K0yt8&callback=initMap">
+</script>
+
+<div class="container-fluid"> 
+	<div class="row">
+      <div class="col-6">
+      </div>
+      <div class="col-6 result_heading">
+          <h1>Search Results</h1>
+      </div>
+  </div>
 </div>
-
-	<script>
-		$('.dropdown-menu a').click(function(){$('#selected').text($(this).text());});
-	</script>
-
-	<div class="resultcontainer centered">
-	{% for post in posts.all %}
-	<div class="col-sm-5" id="results">
-		<form method="post">
-		{% csrf_token %}
-
-		<h4><a href="{% url 'housing:post' post.name%}">{{ post.name }}</a></h4>
-		<p>{{post.address}}</p>
-		<p>{{post.info}}</p>
-		<span id="price">${{post.price}}</span><span id="ratingdisp">Rating:</span>
-
-		<span class="fa fa-star {% if post.rating >= 1 %}checked{% endif %}"></span>
-		<span class="fa fa-star {% if post.rating >= 2 %}checked{% endif %}"></span>
-		<span class="fa fa-star {% if post.rating >= 3 %}checked{% endif %}"></span>
-		<span class="fa fa-star {% if post.rating >= 4 %}checked{% endif %}"></span>
-		<span class="fa fa-star {% if post.rating >= 5 %}checked{% endif %}"></span>
-		<img src={{post.image_url}} class="img-results">
-		</form>
-	</div>
-	{% endfor %}
-
+<div class="container-fluid text-center">
+  <div class="row">
+      <div class="col-4 sidenav">
+        <form method="Post" style="margin: 0">
+          {% csrf_token %}
+          <div>
+          <input style="width: 320px; margin-bottom: 10px; color: rgb(194, 113, 21);" id="search" type="text" name="search" placeholder="Search Housing..." >
+          <button style="color: black;" class="searchbutton" type="submit">
+            <i class="fa fa-search"></i>
+          </button>
+          </div>
+          <div style="object-fit:fill; margin-bottom: 20px; margin-bottom: 20px; color: rgb(194, 113, 21);">Sort by: {{ form.filter }}
+          <button style="object-fit:fill; color:black;" class="searchbutton" type="submit">
+            <i class="fa fa-search"></i>
+          </button>
+          </div>
+        </form>
+        <div id= "map"></div>
+      </div>
+      <div class="col-8 result_scroll">
+        <script>
+            $('.dropdown-menu a').click(function(){$('#selected').text($(this).text());});
+        </script>
+        <div class="row">
+        {% for post in posts.all %}
+          <div class="col-5" id="results">
+            <form method="post">
+            {% csrf_token %}
+        
+            <h4><a href="{% url 'housing:post' post.name%}">{{ post.name }}</a></h4>
+            <p>{{post.address}}</p>
+            <p>{{post.info}}</p>
+            <span id="price">${{post.price}}</span><span id="ratingdisp">Rating:</span>
+        
+            <span class="fa fa-star {% if post.rating >= 1 %}checked{% endif %}"></span>
+            <span class="fa fa-star {% if post.rating >= 2 %}checked{% endif %}"></span>
+            <span class="fa fa-star {% if post.rating >= 3 %}checked{% endif %}"></span>
+            <span class="fa fa-star {% if post.rating >= 4 %}checked{% endif %}"></span>
+            <span class="fa fa-star {% if post.rating >= 5 %}checked{% endif %}"></span>
+            <img src={{post.image_url}} class="img-results">
+            </form>
+          </div>
+          {% if forloop.counter|divisibleby:2 %}
+            </div><div class="row">
+          {% endif %}
+        {% endfor %}
+      </div>
+      
+      </div>
+      </div>
+      </div>
 </div>
-
-
-
+</body>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script> -->
 
 {% endblock %}
 
-</body>
+
