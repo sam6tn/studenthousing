@@ -22,6 +22,7 @@ class RoommateForm(forms.ModelForm):
         model = User
         fields = ('search',)
 
+
 class ReviewForm(forms.ModelForm):
 
     CHOICES = (('1', '1',), ('2', '2',), ('3', '3',), ('4', '4',), ('5', '5',))
@@ -47,7 +48,9 @@ class EditProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = (
+            'year',
             'bio',
             'phone',
             'image',
+            'need_roommate',
         )
