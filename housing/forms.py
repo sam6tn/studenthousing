@@ -14,7 +14,7 @@ class SearchForm(forms.ModelForm):
     filter = forms.ChoiceField(choices=CHOICES, widget=forms.Select, required=False)
     class Meta:
         model = Post
-        fields = ('search', 'filter',)
+        fields = ('search', 'filter')
 
 class RoommateForm(forms.ModelForm):
     search = forms.CharField(widget=forms.TextInput(attrs={'size': 115,}))
