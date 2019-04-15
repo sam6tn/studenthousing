@@ -88,8 +88,8 @@
 	}
 
   #map {
-    height: 390px;
-    width:390px;
+    height: 60%;
+    width: 100%;
     /* position: sticky;
     position: -webkit-sticky; */
     /* z-index: 1;
@@ -405,15 +405,7 @@
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYiPSla2mE7teCbpklfIOtWEGic3K0yt8&callback=initMap">
 </script>
 
-<div class="container-fluid"> 
-	<div class="row">
-      <div class="col-6">
-      </div>
-      <div class="col-6 result_heading">
-          <h1>Search Results</h1>
-      </div>
-  </div>
-</div>
+
 <div class="container-fluid text-center">
   <div class="row">
       <div class="col-4 sidenav">
@@ -434,6 +426,7 @@
         <div id= "map"></div>
       </div>
       <div class="col-8 result_scroll">
+          <h1>Search Results</h1>
         <script>
             $('.dropdown-menu a').click(function(){$('#selected').text($(this).text());});
         </script>
