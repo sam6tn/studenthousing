@@ -46,8 +46,6 @@ class ListView(TemplateView):
             args = {'posts': posts, 'form':form}
             return render(request, self.template_name, args)
         else:
-            if (len(list(get_messages(request)))==0):
-                messages.error(request, 'Please Sign In!')
             return HttpResponseRedirect("/")
 
     def post(self, request):
@@ -100,8 +98,6 @@ class PostView(TemplateView):
             args = {'post': post, 'form':form}
             return render(request, self.template_name, args)
         else:
-            if (len(list(get_messages(request)))==0):
-                messages.error(request, 'Please Sign In!')
             return HttpResponseRedirect("/")
     def post(self, request, post_name):
         form = ReviewForm(request.POST)
@@ -122,8 +118,6 @@ class ProfileView(TemplateView):
         if request.user.is_authenticated:
             return render(request, self.template_name)
         else:
-            if (len(list(get_messages(request)))==0):
-                messages.error(request, 'Please Sign In!')
             return HttpResponseRedirect("/")
 
     def post(self, request):
@@ -140,8 +134,6 @@ class RoommateView(TemplateView):
             args = {'persons': persons, 'form':form}
             return render(request, self.template_name, args)
         else:
-            if (len(list(get_messages(request)))==0):
-                messages.error(request, 'Please Sign In!')
             return HttpResponseRedirect("/")
     def post(self, request):
         form = RoommateForm(request.POST)
@@ -157,8 +149,8 @@ class RoommateView(TemplateView):
         return render(request, self.template_name, args)
     
 
-def profile(request):
-    return render(request, 'housing/profile.html')
+# def profile(request):
+#     return render(request, 'housing/profile.html')
 
 def edit_profile(request):
     if request.method == 'POST':
