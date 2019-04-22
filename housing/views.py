@@ -135,7 +135,8 @@ class RoommateView(TemplateView):
     def get(self, request):
         form = RoommateForm()
         if request.user.is_authenticated:
-            persons = User.objects.all()
+            persons = User.objects.all().exclude(profile__need_roommate=False)
+            print("checked3")
             args = {'persons': persons, 'form':form}
             return render(request, self.template_name, args)
         else:
@@ -147,9 +148,11 @@ class RoommateView(TemplateView):
         if form.is_valid():
             search = form.cleaned_data['search']
             if(search is not None):
-                persons = User.objects.filter(first_name__icontains=search)
+                persons = User.objects.filter(first_name__icontains=search).exclude(profile__need_roommate=False)
+                print("checked1")
             else:
-                persons = User.objects.all()
+                persons = User.objects.all().exclude(profile__need_roommate=False)
+                print("checked2")
         args = {'persons': persons,'form': form}
         return render(request, self.template_name, args)
     
