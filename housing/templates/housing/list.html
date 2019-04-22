@@ -99,6 +99,12 @@
     overflow-x: hidden;
     padding: 8px 8px;
   }
+  a{
+    color: inherit;
+  }
+  a:hover{
+    color: inherit;
+  }
 </style>
 
 <title>Housing Search</title>
@@ -428,13 +434,13 @@
         <script>
             $('.dropdown-menu a').click(function(){$('#selected').text($(this).text());});
         </script>
-        <div class="row">
         {% for post in posts.all %}
+          <a href="{% url 'housing:post' post.name%}">
           <div class="col-5" id="results">
             <form method="post">
             {% csrf_token %}
         
-            <h4><a href="{% url 'housing:post' post.name%}">{{ post.name }}</a></h4>
+            <h4>{{ post.name }}</h4>
             <p>{{post.address}}</p>
             <p>{{post.info}}</p>
             <span id="price">${{post.price}}</span><span id="ratingdisp">Rating:</span>
@@ -447,11 +453,10 @@
             <img src={{post.image_url}} class="img-results">
             </form>
           </div>
-          {% if forloop.counter|divisibleby:2 %}
-            </div><div class="row">
-          {% endif %}
+          </a>
+          
         {% endfor %}
-      </div>
+        
       
       </div>
       </div>
