@@ -14,7 +14,7 @@ from django.contrib.auth import logout as user_logout
 from housing.forms import EditUserForm, EditProfileForm, RoommateForm
 from django.contrib.auth.models import User
 from django.db.models import Q
-from .models import Post, Review, Profile
+from .models import Post, Review, Profile, Image
 
 class LoginView(TemplateView):
     template_name = 'housing/index.html'
@@ -94,8 +94,10 @@ class PostView(TemplateView):
                 post.rating = post_rating
             post.save()
 
+            images = post.image_set.all()
+
             form = ReviewForm()
-            args = {'post': post, 'form':form}
+            args = {'post': post, 'form':form, 'images':images}
             return render(request, self.template_name, args)
         else:
             return HttpResponseRedirect("/")

@@ -85,3 +85,7 @@ class Review(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     review_text = models.CharField(max_length=1000)
     rating = models.IntegerField(default=1,validators=[MinValueValidator(1),MaxValueValidator(5)])
+
+class Image(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    image_url = models.URLField(null=True)

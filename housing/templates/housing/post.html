@@ -2,7 +2,8 @@
 <head>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -86,6 +87,14 @@
     li{
         display: inline;
     }
+    .carousel .item {
+        height: 300px;
+    }
+
+    .carousel-image {
+        height: 500px;
+        width: 500px;
+    } 
     </style>
 
     <title>{{post.name}}</title>
@@ -131,7 +140,45 @@
         <span class="fa fa-star {% if post.rating >= 3 %}checked{% endif %}"></span>
         <span class="fa fa-star {% if post.rating >= 4 %}checked{% endif %}"></span>
         <span class="fa fa-star {% if post.rating >= 5 %}checked{% endif %}"></span>
-        <div><img src={{post.image_url}} class="img-results"></div>
+
+        <div>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" style="display:inline-block;">
+
+            <ol class="carousel-indicators">
+                {% for image in images %}
+                {% if forloop.first %}
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                {% else %}
+                <li data-target="#myCarousel" data-slide-to={{forloop.counter0}}></li>
+                {% endif %}
+                {% endfor %}
+            </ol>
+
+            <div class="carousel-inner">
+                {% for image in images %}
+                    {% if forloop.first %}
+                        <div class="item active">
+                            <img src={{image.image_url}} class="carousel-image">
+                        </div>
+                    {% else %}
+                        <div class="item">
+                            <img src={{image.image_url}} class="carousel-image">
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                
+            </div>
+          
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+            </div>
+            </div>
+
+
         <div><span class="fa fa-bed"></span><span id="rooms">{{post.rooms}}</span></div>
         <div><span class="fa fa-bath"></span><span id="baths">{{post.baths}}</span></div>
 
