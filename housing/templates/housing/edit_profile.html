@@ -40,9 +40,17 @@
       font-size: 16pt;
     }
 
+
+
     .rightmarg {
       margin-right: 50px;
     }
+
+    .btn-xl {
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 10px;
+}
 
     .leftmarg {
       margin-left: 50px;
@@ -68,7 +76,7 @@
       width: 100%;
       padding: 12px;
       border: 1px solid #ccc;
-      border-radius: 4px;
+      border-radius: 10px;
       resize: vertical;
     }
 
@@ -121,6 +129,7 @@
 
     /* Clear floats after the columns */
     .row:after {
+      font-size: 16pt;
       content: "";
       display: table;
       clear: both;
@@ -131,6 +140,10 @@
       background-color: rgba(226, 226, 226);
       /* background-color: #D9DFFE; */
     }
+
+    labelText {
+    font-weight: normal !important;
+}
 
     .logo {
       height: 70px;
@@ -146,6 +159,23 @@
     nav li:not(:last-child) {
       border-right: solid 1px orange;
     }
+
+    .fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
 
     /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
     @media screen and (max-width: 600px) {
@@ -194,26 +224,31 @@
     <div class="container">
       <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="row">
+        <div class="row" style="font-size:160%">
+        <p> </p>
           <div class="col-25">
-            <label>First Name: {{uform.first_name}}</label>
+            <label>First Name:</label>
+            <labelText>{{uform.first_name}}</labelText>
+
           </div>
         </div>
 
 
-        <div class="row">
+        <div class="row" style="font-size:160%">
           <div class="col-25">
-            <label>Last Name: {{uform.last_name}}</label>
+            <label>Last Name:</label>
+            <labelText>{{uform.last_name}}</labelText>
           </div>
         </div>
 
-        <div class="row">
+        <div class="row" style="font-size:160%">
           <div class="col-25">
-            <label>Email: {{ uform.email}}</label>
+            <label>Email: </label>
+            <labelText>{{ uform.email}}</labelText>
             {{pform.as_p}}
           </div>
         </div>
-        <button type="submit">Submit </button>
+        <button type="button" class="btn btn-secondary btn-xl" > Submit </button>
       </form>
     </div>
   </div>
