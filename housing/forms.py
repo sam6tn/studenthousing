@@ -28,7 +28,7 @@ class ReviewForm(forms.ModelForm):
     CHOICES = (('1', '1',), ('2', '2',), ('3', '3',), ('4', '4',), ('5', '5',))
     rating = forms.ChoiceField(choices=CHOICES,widget = forms.RadioSelect(attrs={'style': 'display: inline-block'}))
     # rating = forms.IntegerField(min_value=1,max_value=5)
-    review_text = forms.CharField(widget=forms.Textarea(attrs={'cols': 120, 'rows': 3}))
+    review_text = forms.CharField(widget=forms.Textarea(attrs={'cols': 80, 'rows': 3}))
     class Meta:
         model = Review
         fields = ('review_text', 'rating')
