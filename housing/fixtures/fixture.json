@@ -1,5 +1,29 @@
 [
 {
+  "model": "housing.profile",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "bio": "",
+    "phone": "",
+    "image": "avatar.jpg",
+    "need_roommate": true,
+    "year": "1"
+  }
+},
+{
+  "model": "housing.profile",
+  "pk": 2,
+  "fields": {
+    "user": 2,
+    "bio": "",
+    "phone": "",
+    "image": "avatar.jpg",
+    "need_roommate": true,
+    "year": "1"
+  }
+},
+{
   "model": "housing.post",
   "pk": 1,
   "fields": {
@@ -11,7 +35,9 @@
     "image_url": "https://livewithmsc.com/wp-content/uploads/2018/10/fred.jpg",
     "baths": 2,
     "rooms": 2,
-    "available": true
+    "available": true,
+    "lat": 38.0346159,
+    "lng": -78.4965872115102
   }
 },
 {
@@ -26,7 +52,9 @@
     "image_url": "https://s2rf64.cloudimg.io/s/cdn/x/https://s3.amazonaws.com/cdn.ucribs.com/images/listings/11125/Wertland%20Square%202.jpg",
     "baths": 2,
     "rooms": 4,
-    "available": false
+    "available": false,
+    "lat": 0.0,
+    "lng": 0.0
   }
 },
 {
@@ -35,13 +63,15 @@
   "fields": {
     "name": "1815 JPA",
     "info": "Great community, washer/dryer in unit, bus stop",
-    "address": "1815 Jefferson Park AveCharlottesville, VA 22903",
+    "address": "1815 Jefferson Park Ave, Charlottesville, VA 22903",
     "price": 550,
     "rating": 4,
     "image_url": "https://www.martinhorn.com/wp-content/uploads/2013/08/1815JPA_ext_SS_710x468.jpg",
     "baths": 2,
     "rooms": 4,
-    "available": true
+    "available": true,
+    "lat": 38.02850705,
+    "lng": -78.5106060695629
   }
 },
 {
@@ -56,7 +86,9 @@
     "image_url": "https://images1.apartments.com/i2/RWkEd_MSFPejCyjO6IWXjCW-ilssEmBL38ffVgsViJQ/111/the-flats-west-village-charlottesville-va-primary-photo.jpg",
     "baths": 4,
     "rooms": 4,
-    "available": true
+    "available": true,
+    "lat": 38.031883,
+    "lng": -78.4929221396699
   }
 },
 {
@@ -71,7 +103,9 @@
     "image_url": "https://cdn.apartmenthomeliving.com/VA/Charlottesville/3632697/170218/Oxbridge-Place-Apartments-Charlottesville-VA-photo-001_sm.jpg",
     "baths": 2,
     "rooms": 3,
-    "available": false
+    "available": false,
+    "lat": 38.0364704,
+    "lng": -78.497445057377
   }
 },
 {
@@ -86,7 +120,9 @@
     "image_url": "https://img.offcampusimages.com/gFIhfde4s7vSPZ40Z4qRVB70KPk=/660x440/left/top/smart/images/loycivccswk4vzzlgqkai_k3qrqdgo5t9atpzzfazxg.jpeg",
     "baths": 2,
     "rooms": 4,
-    "available": true
+    "available": true,
+    "lat": 38.0376871,
+    "lng": -78.4991617
   }
 },
 {
@@ -101,7 +137,9 @@
     "image_url": "http://www.brac.com/photos/14/large/14_160108_111258_5482.jpg",
     "baths": 1,
     "rooms": 1,
-    "available": true
+    "available": true,
+    "lat": 38.04286655,
+    "lng": -78.5000464769197
   }
 },
 {
@@ -116,7 +154,9 @@
     "image_url": "https://images1.apartments.com/i2/XL4c3SL88ZNx_3V9E_Z6UX2XsIc1zIl-pv4BnV78SWI/117/the-standard-at-charlottesville-charlottesville-va-primary-photo.jpg",
     "baths": 4,
     "rooms": 4,
-    "available": true
+    "available": true,
+    "lat": 38.0322268377361,
+    "lng": -78.4927312250983
   }
 },
 {
@@ -131,7 +171,9 @@
     "image_url": "https://image1.apartmentfinder.com/i2/3DPYT_IWwobkie3uL5NnjDD5ZSSSh8xfAwzPMO9vEO4/117/jefferson-commons-charlottesville-va-primary-photo.jpg",
     "baths": 2,
     "rooms": 4,
-    "available": false
+    "available": false,
+    "lat": 38.0307936,
+    "lng": -78.5079473761887
   }
 },
 {
@@ -146,7 +188,9 @@
     "image_url": "https://image1.apartmentfinder.com/i2/U9HxjQ5kqwrsp75fadlDCCZLq2B4E0VB2kpkhXhrl2g/110/university-heights-charlottesville-va-building-photo.jpg",
     "baths": 2,
     "rooms": 4,
-    "available": true
+    "available": true,
+    "lat": 0.0,
+    "lng": 0.0
   }
 },
 {
@@ -157,11 +201,13 @@
     "info": "Near the Corner",
     "address": "1303 WERTLAND STREET,  CHARLOTTESVILLE, VA 22903",
     "price": 600,
-    "rating": 0,
+    "rating": 4,
     "image_url": "https://static1.squarespace.com/static/53025668e4b0c7fb3f1c4156/54874f22e4b07ac01733ddf4/556dc904e4b0970bf67f4704/1433258253576/IMG_9130asmall.jpg?format=1500w",
     "baths": 2,
     "rooms": 2,
-    "available": true
+    "available": true,
+    "lat": 38.03507305,
+    "lng": -78.4976384480121
   }
 },
 {
@@ -176,7 +222,9 @@
     "image_url": "https://ivysquare.appfoliowebsites6.com/wp-content/uploads/sites/6136/2016/09/1910main.jpg",
     "baths": 2,
     "rooms": 3,
-    "available": true
+    "available": true,
+    "lat": 38.02689405,
+    "lng": -78.5119541424778
   }
 },
 {
@@ -191,7 +239,9 @@
     "image_url": "https://www.cbsrentals.com/majorphotos/large/majorphoto_190128_013342_7826.jpg",
     "baths": 2,
     "rooms": 4,
-    "available": true
+    "available": true,
+    "lat": 38.0382064,
+    "lng": -78.4993202000322
   }
 },
 {
@@ -206,7 +256,9 @@
     "image_url": "https://images1.apartments.com/i2/prpYnOK95NcHws64oK4glHNUXsaArEDHwHf36oQ9qfQ/111/cavalier-crossing-charlottesville-va-primary-photo.jpg",
     "baths": 3,
     "rooms": 3,
-    "available": true
+    "available": true,
+    "lat": 0.0,
+    "lng": 0.0
   }
 },
 {
@@ -327,6 +379,246 @@
     "post": 5,
     "review_text": "Mangement is bad but apartments are nice.",
     "rating": 3
+  }
+},
+{
+  "model": "housing.review",
+  "pk": 13,
+  "fields": {
+    "profile_pic": "/media/avatar.jpg",
+    "reviewer_name": "Steven",
+    "reviewer_username": "sam6tn",
+    "post": 11,
+    "review_text": "Awesome place to live!",
+    "rating": 4
+  }
+},
+{
+  "model": "housing.review",
+  "pk": 14,
+  "fields": {
+    "profile_pic": "/media/avatar.jpg",
+    "reviewer_name": "Jessica",
+    "reviewer_username": "admin",
+    "post": 11,
+    "review_text": "Another review",
+    "rating": 3
+  }
+},
+{
+  "model": "housing.review",
+  "pk": 15,
+  "fields": {
+    "profile_pic": "/media/avatar.jpg",
+    "reviewer_name": "Jessica",
+    "reviewer_username": "admin",
+    "post": 11,
+    "review_text": "Yet another reviewThis one is longerBest review yetGreat place",
+    "rating": 5
+  }
+},
+{
+  "model": "housing.review",
+  "pk": 16,
+  "fields": {
+    "profile_pic": "/media/avatar.jpg",
+    "reviewer_name": "Jessica",
+    "reviewer_username": "admin",
+    "post": 11,
+    "review_text": "This is a review that is written to be of a length long enough to hopefully be more than one line. There is no meat of information to this review. Its sole purpose is to illustrate a multi-line review",
+    "rating": 2
+  }
+},
+{
+  "model": "housing.image",
+  "pk": 1,
+  "fields": {
+    "post": 11,
+    "image_url": "https://static1.squarespace.com/static/53025668e4b0c7fb3f1c4156/54874f22e4b07ac01733ddf4/556dc904e4b0970bf67f4704/1433258253576/IMG_9130asmall.jpg?format=1500w"
+  }
+},
+{
+  "model": "housing.image",
+  "pk": 2,
+  "fields": {
+    "post": 11,
+    "image_url": "https://static1.squarespace.com/static/53025668e4b0c7fb3f1c4156/54874f22e4b07ac01733ddf4/556dd7bfe4b0d78223c07828/1433262015880/IMG_0575asmall.jpg?format=2500w"
+  }
+},
+{
+  "model": "housing.image",
+  "pk": 3,
+  "fields": {
+    "post": 3,
+    "image_url": "https://www.martinhorn.com/wp-content/uploads/2013/08/1815JPA_ext_SS_710x468.jpg"
+  }
+},
+{
+  "model": "housing.image",
+  "pk": 4,
+  "fields": {
+    "post": 3,
+    "image_url": "http://www.brac.com/photos/108/xlarge/108_110916_033355_5894.jpg"
+  }
+},
+{
+  "model": "housing.image",
+  "pk": 5,
+  "fields": {
+    "post": 3,
+    "image_url": "http://www.brac.com/photos/108/xlarge/108_110916_033355_8443.jpg"
+  }
+},
+{
+  "model": "housing.image",
+  "pk": 6,
+  "fields": {
+    "post": 12,
+    "image_url": "https://ivysquare.appfoliowebsites6.com/wp-content/uploads/sites/6136/2016/09/1910main.jpg"
+  }
+},
+{
+  "model": "housing.image",
+  "pk": 7,
+  "fields": {
+    "post": 14,
+    "image_url": "https://images1.apartments.com/i2/prpYnOK95NcHws64oK4glHNUXsaArEDHwHf36oQ9qfQ/111/cavalier-crossing-charlottesville-va-primary-photo.jpg"
+  }
+},
+{
+  "model": "housing.image",
+  "pk": 8,
+  "fields": {
+    "post": 14,
+    "image_url": "https://img.offcampusimages.com/AYZOEfo97eIgB07LH2-758WQHbc=/960x440/left/top/smart/images/xmh2dx_decvp1mau8kh5omwuiq1o8dwycwh3c_jmgy0.jpeg"
+  }
+},
+{
+  "model": "housing.image",
+  "pk": 10,
+  "fields": {
+    "post": 14,
+    "image_url": "https://s2rf64.cloudimg.io/s/cdn/x/https://s3.amazonaws.com/cdn.ucribs.com/images/listings/11116/University%20Place%204.jpg"
+  }
+},
+{
+  "model": "housing.image",
+  "pk": 11,
+  "fields": {
+    "post": 6,
+    "image_url": "https://img.offcampusimages.com/gFIhfde4s7vSPZ40Z4qRVB70KPk=/660x440/left/top/smart/images/loycivccswk4vzzlgqkai_k3qrqdgo5t9atpzzfazxg.jpeg"
+  }
+},
+{
+  "model": "housing.image",
+  "pk": 12,
+  "fields": {
+    "post": 9,
+    "image_url": "https://image1.apartmentfinder.com/i2/3DPYT_IWwobkie3uL5NnjDD5ZSSSh8xfAwzPMO9vEO4/117/jefferson-commons-charlottesville-va-primary-photo.jpg"
+  }
+},
+{
+  "model": "housing.image",
+  "pk": 13,
+  "fields": {
+    "post": 5,
+    "image_url": "https://cdn.apartmenthomeliving.com/VA/Charlottesville/3632697/170218/Oxbridge-Place-Apartments-Charlottesville-VA-photo-001_sm.jpg"
+  }
+},
+{
+  "model": "housing.image",
+  "pk": 14,
+  "fields": {
+    "post": 7,
+    "image_url": "http://www.brac.com/photos/14/large/14_160108_111258_5482.jpg"
+  }
+},
+{
+  "model": "housing.image",
+  "pk": 15,
+  "fields": {
+    "post": 1,
+    "image_url": "https://livewithmsc.com/wp-content/uploads/2018/10/fred.jpg"
+  }
+},
+{
+  "model": "housing.image",
+  "pk": 16,
+  "fields": {
+    "post": 1,
+    "image_url": "https://www.brac.com/photos/14/xlarge/14_150821_125150_7777.jpg"
+  }
+},
+{
+  "model": "housing.image",
+  "pk": 17,
+  "fields": {
+    "post": 1,
+    "image_url": "https://content.loftsmart.com/__sized__/images/property/the_fred_19-crop-c0-5__0-5-880x520-70.jpg"
+  }
+},
+{
+  "model": "housing.image",
+  "pk": 18,
+  "fields": {
+    "post": 8,
+    "image_url": "https://images1.apartments.com/i2/XL4c3SL88ZNx_3V9E_Z6UX2XsIc1zIl-pv4BnV78SWI/117/the-standard-at-charlottesville-charlottesville-va-primary-photo.jpg"
+  }
+},
+{
+  "model": "housing.image",
+  "pk": 19,
+  "fields": {
+    "post": 8,
+    "image_url": "https://images1.apartments.com/i2/XL4c3SL88ZNx_3V9E_Z6UX2XsIc1zIl-pv4BnV78SWI/117/the-standard-at-charlottesville-charlottesville-va-primary-photo.jpg"
+  }
+},
+{
+  "model": "housing.image",
+  "pk": 20,
+  "fields": {
+    "post": 8,
+    "image_url": "https://s3-media3.fl.yelpcdn.com/bphoto/gEQ2UQH8Uw_Adt9MUCdlmg/o.jpg"
+  }
+},
+{
+  "model": "housing.image",
+  "pk": 21,
+  "fields": {
+    "post": 8,
+    "image_url": "https://www.landmark-properties.com/uploads/properties/the-standard-charlottesville/gallery-1.jpg"
+  }
+},
+{
+  "model": "housing.image",
+  "pk": 22,
+  "fields": {
+    "post": 4,
+    "image_url": "https://images1.apartments.com/i2/RWkEd_MSFPejCyjO6IWXjCW-ilssEmBL38ffVgsViJQ/111/the-flats-west-village-charlottesville-va-primary-photo.jpg"
+  }
+},
+{
+  "model": "housing.image",
+  "pk": 23,
+  "fields": {
+    "post": 13,
+    "image_url": "https://www.cbsrentals.com/majorphotos/large/majorphoto_190128_013342_7826.jpg"
+  }
+},
+{
+  "model": "housing.image",
+  "pk": 24,
+  "fields": {
+    "post": 10,
+    "image_url": "https://image1.apartmentfinder.com/i2/U9HxjQ5kqwrsp75fadlDCCZLq2B4E0VB2kpkhXhrl2g/110/university-heights-charlottesville-va-building-photo.jpg"
+  }
+},
+{
+  "model": "housing.image",
+  "pk": 25,
+  "fields": {
+    "post": 2,
+    "image_url": "https://s2rf64.cloudimg.io/s/cdn/x/https://s3.amazonaws.com/cdn.ucribs.com/images/listings/11125/Wertland%20Square%202.jpg"
   }
 }
 ]
