@@ -30,6 +30,7 @@ class ListView(TemplateView):
         form = SearchForm()
         if request.user.is_authenticated:
             posts = Post.objects.all() #if no search input, displays all posts
+            print("Got posts")
             for post in posts:
                 post_rating = 0
                 count = 0
@@ -55,20 +56,24 @@ class ListView(TemplateView):
             filter = form.cleaned_data['filter']
             if(search is not None and search is not ""):
                 if (filter is not ''):
-                    if (filter != "price"):
+                    if (filter != "priceup"):
                         posts = Post.objects.filter(Q(name__icontains=search) |
                                                     Q(address__icontains=search) |
                                                     Q(info__icontains=search)).order_by('-'+filter)  # searches database based on substring
                     else:
                         posts = Post.objects.filter(Q(name__icontains=search) |
                                                     Q(address__icontains=search) |
-                                                    Q(info__icontains=search)).order_by(filter)
+                                                    Q(info__icontains=search)).order_by("price")
+                else:
+                    posts = Post.objects.filter(Q(name__icontains=search) |
+                                                Q(address__icontains=search) |
+                                                Q(info__icontains=search))
             else:
                 if(filter is not ''):
-                    if (filter != "price"):
+                    if (filter != "priceup"):
                         posts = Post.objects.all().order_by('-'+filter)
                     else:
-                        posts = Post.objects.all().order_by(filter)
+                        posts = Post.objects.all().order_by("price")
                 else:
                     posts = Post.objects.all()
         args = {'posts': posts,'form': form}

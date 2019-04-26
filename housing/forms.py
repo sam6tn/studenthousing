@@ -5,11 +5,12 @@ from django.contrib.auth.models import User
 import itertools
 
 class SearchForm(forms.ModelForm):
-    search = forms.CharField(widget=forms.TextInput(attrs={'size': 115,}), required=False, label="Search Locations, Addresses, or Info")
+    search = forms.CharField(widget=forms.TextInput(attrs={'size': 115, 'placeholder': 'Search Locations, Addresses, or Info'}), required=False)
     CHOICES = (
         ('rating', 'Recommended'),
         ('available', 'Availability'),
-        ('price', 'Price'),
+        ('priceup', 'Price: Low to High'),
+        ('price', 'Price: High to Low'),
     )
     filter = forms.ChoiceField(choices=CHOICES, widget=forms.Select, required=False)
     class Meta:
@@ -18,9 +19,17 @@ class SearchForm(forms.ModelForm):
 
 class RoommateForm(forms.ModelForm):
     search = forms.CharField(widget=forms.TextInput(attrs={'size': 115,}))
+    YEAR_OPTIONS = (
+        ('1', 'First Year'),
+        ('2', 'Second Year'),
+        ('3', 'Third Year'),
+        ('4', 'Fourth Year'),
+        ('5', 'Graduate Student'),
+    )
+    year = forms.MultipleChoiceField(choices=YEAR_OPTIONS, widget=forms.CheckboxSelectMultiple, required=False)
     class Meta:
         model = User
-        fields = ('search',)
+        fields = ('search','year')
 
 
 class ReviewForm(forms.ModelForm):
