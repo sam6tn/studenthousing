@@ -65,7 +65,7 @@ class Post(models.Model):
             self.name = 'unknown'
         ctx = ssl.create_default_context(cafile=certifi.where())
         geopy.geocoders.options.default_ssl_context = ctx
-        nom = Nominatim(scheme = 'http', user_agent='polls')
+        nom = Nominatim(scheme = 'http', user_agent='housing',timeout=10)
         location = nom.geocode(self.address)
         if (location):
             self.lat = location.latitude
@@ -85,3 +85,7 @@ class Review(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     review_text = models.CharField(max_length=1000)
     rating = models.IntegerField(default=1,validators=[MinValueValidator(1),MaxValueValidator(5)])
+
+class Image(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    image_url = models.URLField(null=True)
