@@ -456,18 +456,19 @@
         <form method="Post" style="margin: 0">
           {% csrf_token %}
           <div>
-            <input style="width: 320px; margin-bottom: 10px; color: black;" id="search" type="text" name="search"
-              placeholder="Search Housing...">
-            <button style="color: black;" class="searchbutton" type="submit">
-              <i class="fa fa-search"></i>
-            </button>
-          </div>
-          <div style="object-fit:fill; margin-bottom: 20px; margin-bottom: 20px; color: rgb(194, 113, 21);">Sort by:
+           <table>
+            <tr>
+            <td><input style="width: 320px;  margin-bottom: 10px; color: black;" id="search" type="text" name="search"
+              placeholder="Search Housing..."></td>
+           <td><div onchange style="object-fit:fill; margin-left: 15px margin-bottom: 10px; margin-bottom: 10px; color: rgb(194, 113, 21);">Sort by:
             {{ form.filter }}
-            <button style="object-fit:fill; color:black;" class="searchbutton" type="submit">
+          </div></td>
+            <td><p align ="right"; spacing = 5px><button style = "margin:10px" style="color: black;" class="searchbutton" type="submit" style = "float: right">
               <i class="fa fa-search"></i>
-            </button>
+            </button></p></td>
+           </tr></table>
           </div>
+          
         </form>
         <div id="map"></div>
       </div>
