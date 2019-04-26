@@ -79,6 +79,9 @@
         height: 500px;
         width: 500px;
     } 
+    #submitReview{
+        margin-top:10px;
+    }
     .navbar {
         color: rgb(236, 156, 5);
         background-color: rgba(226, 226, 226);
@@ -190,7 +193,7 @@
             <input name="first_name" id="first_name" type="hidden" value="{{user.first_name}}">
             <div name="rating" id="rate" style="display:none">Rating: {{form.rating}}</div>
             <div name="reviewtext" id="reviewtext" style="display:none">{{form.review_text}}</div>
-            <input type="submit" id="submitReview" style="display:none">
+            <button class="btn btn-success" type="submit" id="submitReview" style="display:none">Submit</button>
         </form>
 
         {% for review in post.review_set.all %}
