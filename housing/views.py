@@ -41,7 +41,7 @@ class ListView(TemplateView):
                 else:
                     post_rating = int(round(post_rating/count))
                     post.rating = post_rating
-                post.save()
+                post.save(update_fields=["rating"])
 
             args = {'posts': posts, 'form':form}
             return render(request, self.template_name, args)
@@ -92,7 +92,7 @@ class PostView(TemplateView):
             else:
                 post_rating = int(round(post_rating/count))
                 post.rating = post_rating
-            post.save()
+            post.save(update_fields=["rating"])
 
             images = post.image_set.all()
 

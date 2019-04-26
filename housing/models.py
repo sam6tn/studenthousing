@@ -65,7 +65,7 @@ class Post(models.Model):
             self.name = 'unknown'
         ctx = ssl.create_default_context(cafile=certifi.where())
         geopy.geocoders.options.default_ssl_context = ctx
-        nom = Nominatim(scheme = 'http', user_agent='polls')
+        nom = Nominatim(scheme = 'http', user_agent='housing',timeout=10)
         location = nom.geocode(self.address)
         if (location):
             self.lat = location.latitude
