@@ -76,7 +76,7 @@
 			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 			max-width: 300px;
 			max-height: 500px;
-			margin: 100px;
+			margin: 20px;
 			text-align: center;
 			font-family: arial;
 		}
@@ -110,11 +110,6 @@
 			font-size: 20pt;
 			margin-right: 20px;
 			font-weight: bold;
-		}
-
-		.results {
-			color: grey;
-			font-size: 18px;
 		}
 
 		.centered {
@@ -178,7 +173,7 @@
 		</div>
 	</nav>
 
-	<div class="centered">
+	<!-- <div class="centered">
 		<h2>Search for Roommates</h2>
 		<form method="Post">
 			{% csrf_token %}
@@ -187,20 +182,18 @@
 				Roommates!</button>
 		</form>
 		<span id="resulttext">Search Results:</span>
-	</div>
+	</div> -->
 
 
 	<div class="resultcontainer centered">
 		{% for person in persons.all %}
-		<div class="col-sm-5" id="col-sm-5">
-			<div class="results">
+			<div class="col-sm-5">
 				<h3>{{ person.first_name }} {{ person.last_name }}</h3>
 				<img class="profilepic" style="width:100%" src="{{ person.profile.image.url }}">
 				<p>Email: {{ person.email }}</p>
 				<p>Phone: {{ person.profile.phone }}</p>
 				<p>{{ person.profile.bio }}</p>
 			</div>
-		</div>
 		{% endfor %}
 	</div>
 
