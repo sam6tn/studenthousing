@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Post, Review, Profile
+from .models import Post, Review, Profile, Image
 from django_google_maps import widgets as map_widgets
 from django_google_maps import fields as map_fields
 
@@ -8,6 +8,10 @@ from django_google_maps import fields as map_fields
 
 class ReviewInline(admin.TabularInline):
     model = Review
+    extra = 1
+
+class ImageInline(admin.TabularInline):
+    model = Image
     extra = 1
 
 class PostAdmin(admin.ModelAdmin):
@@ -40,7 +44,7 @@ class PostAdmin(admin.ModelAdmin):
 
     search_fields = ['name']
 
-    inlines = [ReviewInline]
+    inlines = [ReviewInline,ImageInline]
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Profile)
