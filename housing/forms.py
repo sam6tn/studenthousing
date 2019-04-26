@@ -44,7 +44,8 @@ class EditUserForm(forms.ModelForm):
         )
 
 class EditProfileForm(forms.ModelForm):
-    bio = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 4}))
+    bio = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 4}), required=False)
+    phone = forms.CharField(required=False)
     class Meta:
         model = Profile
         fields = (
