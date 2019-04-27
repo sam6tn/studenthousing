@@ -24,7 +24,6 @@
 		border:1px solid black;
 		padding-bottom: 10px;
 	}
-
 	.img-results{
 		width: 400px;
 		height: 300px;
@@ -60,7 +59,10 @@
         margin-top: 20px;
 	}
     #review_list{
-        margin-bottom: 50px;
+        margin-bottom: 20px;
+        border-radius: 10px; 
+        border: rgb(2, 2, 77);
+        background-color: white;
     }
     .avatar{
         height: 30px;
@@ -78,6 +80,9 @@
     .carousel-image {
         height: 500px;
         width: 500px;
+    } 
+    #submitReview{
+        margin-top:10px;
     }
     .navbar {
         color: rgb(236, 156, 5);
@@ -123,9 +128,19 @@
 
         </nav>
 
-    <div class="container centered">
-
-        <h1>{{ post.name }}</h1>
+    <div class="container-fluid">
+        <div class="row">
+                <div class="col"> 
+                    <li class="nav-item"> <a class="nav-link" href="/housingsearch/">Back to Results</a></li>
+                </div>
+                <div class="col"> 
+                    <h1 style="position: centered;">{{ post.name }}</h1>
+                </div>
+                <div class="col"> 
+                </div>
+        </div>
+        <div class="row">
+        <div class="col">
         {% if post.available%}
             <h2 style="color:green;">Available!</h2>
         {% else %}
@@ -180,7 +195,9 @@
 
         <div><span class="fa fa-bed"></span><span id="rooms">{{post.rooms}}</span></div>
         <div><span class="fa fa-bath"></span><span id="baths">{{post.baths}}</span></div>
+        </div>
 
+        <div class="col" style="background-color: rgba(226, 226, 226);">
         <h3>Reviews:</h3>
         <input type="button" class="btn btn-primary" onClick="showReview()" name="review" id="review" value="Write a Review!" />
         <form method="Post">
@@ -190,7 +207,7 @@
             <input name="first_name" id="first_name" type="hidden" value="{{user.first_name}}">
             <div name="rating" id="rate" style="display:none">Rating: {{form.rating}}</div>
             <div name="reviewtext" id="reviewtext" style="display:none">{{form.review_text}}</div>
-            <input type="submit" id="submitReview" style="display:none">
+            <button class="btn btn-success" type="submit" id="submitReview" style="display:none">Submit</button>
         </form>
 
         {% for review in post.review_set.all %}
@@ -206,6 +223,8 @@
                 <div id="review_text">{{review.review_text}}</div>
             </div>
         {% endfor %}
+    </div>
+    </div>
     </div>
 
     <script>

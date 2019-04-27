@@ -75,10 +75,16 @@
     label {
       padding: 12px 12px 12px 0;
       display: inline-block;
+      font-size: 20px;
+    }
+label2 {
+      padding: 12px 12px 12px 0;
+      display: inline-block;
+      font-size: 14px;
     }
 
     button {
-      background-color: #4CAF50;
+      background-color: #808080;
       color: white;
       padding: 12px 20px;
       border: none;
@@ -196,20 +202,20 @@
         {% csrf_token %}
         <div class="row">
           <div class="col-25">
-            <label>First Name: {{uform.first_name}}</label>
+            <label>First Name:</label><label2> {{uform.first_name}}</label2>
           </div>
         </div>
 
 
         <div class="row">
           <div class="col-25">
-            <label>Last Name: {{uform.last_name}}</label>
+            <label>Last Name:</label> <label2> {{uform.last_name}}</label2>
           </div>
         </div>
 
         <div class="row">
           <div class="col-25">
-            <label>Email: {{ uform.email}}</label>
+            <label>Email:</label> </label2>{{ uform.email}}</label2>
             {{pform.as_p}}
           </div>
         </div>

@@ -21,7 +21,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(blank=True)
     # area = models.CharField(max_length=100, blank=True)
-    phone = models.CharField(default='', max_length=20)
+    phone = models.CharField(max_length=11, blank=True)
     image = models.ImageField(default='avatar.jpg', upload_to='')
     need_roommate = models.BooleanField(default=True)
     YEAR_CHOICES = (
