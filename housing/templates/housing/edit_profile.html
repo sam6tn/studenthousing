@@ -24,67 +24,55 @@
     .form-group {
       width: 300px;
     }
-
     #login-box {
       margin: 0 auto;
       padding: 10px;
     }
-
     .login-error {
       color: red;
       margin: 0 auto;
       text-align: center;
     }
-
     .tabs {
       font-size: 16pt;
     }
-
     .rightmarg {
       margin-right: 50px;
     }
-
+    .btn-xl {
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 10px;
+}
     .leftmarg {
       margin-left: 50px;
     }
-
     .title {
       text-shadow: 1px 1px rgb(20, 43, 121);
     }
-
     .centered {
       text-align: center;
       justify-content: center;
       margin: 0 auto;
     }
-
     * {
       box-sizing: border-box;
     }
-
     input[type=text],
     select,
     textarea {
       width: 100%;
       padding: 12px;
       border: 1px solid #ccc;
-      border-radius: 4px;
+      border-radius: 10px;
       resize: vertical;
     }
-
     label {
       padding: 12px 12px 12px 0;
       display: inline-block;
-      font-size: 20px;
     }
-label2 {
-      padding: 12px 12px 12px 0;
-      display: inline-block;
-      font-size: 14px;
-    }
-
     button {
-      background-color: #808080;
+      background-color: #4CAF50;
       color: white;
       padding: 12px 20px;
       border: none;
@@ -92,7 +80,6 @@ label2 {
       cursor: pointer;
       float: right;
     }
-
     input[type=submit] {
       background-color: #4CAF50;
       color: white;
@@ -102,60 +89,69 @@ label2 {
       cursor: pointer;
       float: right;
     }
-
     input[type=submit]:hover {
       background-color: #45a049;
     }
-
     .container {
       border-radius: 20px;
       background-color: #f2f2f2;
       padding: 50px;
     }
-
     .col-25 {
       float: left;
       width: 85%;
       margin-top: 6px;
     }
-
     .col-75 {
       float: left;
       width: 75%;
       margin-top: 6px;
     }
-
     /* Clear floats after the columns */
     .row:after {
+      font-size: 16pt;
       content: "";
       display: table;
       clear: both;
     }
-
     .navbar {
       color: rgb(236, 156, 5);
       background-color: rgba(226, 226, 226);
       /* background-color: #D9DFFE; */
     }
-
+    labelText {
+    font-weight: normal !important;
+}
     .logo {
       height: 70px;
       width: 70px;
       margin-right: 10px;
     }
-
     .nav-item {
       margin-right: 10px;
       padding-right: 10px;
     }
-
     nav li:not(:last-child) {
       border-right: solid 1px orange;
     }
-
+    .fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
     /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
     @media screen and (max-width: 600px) {
-
       .col-25,
       .col-75,
       input[type=submit] {
@@ -200,26 +196,39 @@ label2 {
     <div class="container">
       <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="row">
+        <div class="row" style="font-size:160%">
+        <p> </p>
           <div class="col-25">
-            <label>First Name:</label><label2> {{uform.first_name}}</label2>
+            <label>First Name:</label>
+            <labelText>{{uform.first_name}}</labelText>
+
           </div>
         </div>
 
 
-        <div class="row">
+        <div class="row" style="font-size:160%">
           <div class="col-25">
-            <label>Last Name:</label> <label2> {{uform.last_name}}</label2>
+            <label>Last Name:</label>
+            <labelText>{{uform.last_name}}</labelText>
+
           </div>
         </div>
 
-        <div class="row">
+        <div class="row" style="font-size:160%">
           <div class="col-25">
-            <label>Email:</label> </label2>{{ uform.email}}</label2>
+            <label>Email: </label>
+            <labelText>{{ uform.email}}</labelText>
+
+          </div>
+        </div>
+
+        <div class="row" style="font-size:160%">
+          <div class="col-25">
+
             {{pform.as_p}}
           </div>
         </div>
-        <button type="submit">Submit </button>
+        <button type="button" class="btn btn-secondary btn-xl" > Submit </button>
       </form>
     </div>
   </div>
