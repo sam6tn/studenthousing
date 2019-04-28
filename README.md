@@ -13,7 +13,7 @@ The web app works best on Google Chrome. The site was also made accessible by go
 
 **Email Username:** team1housing@gmail.com
 
-**Email password:** offgrounds
+**Email Password:** offgrounds
 
 ## Authors
 
