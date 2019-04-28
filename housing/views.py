@@ -53,7 +53,6 @@ class ListView(TemplateView):
         if form.is_valid():
             search = form.cleaned_data['search']
             filter = form.cleaned_data['filter']
-            print('search: "'+search+'" filter: "'+filter+'"')
             if(search is not None and search is not ""):
                 if (filter is not ''):
                     if (filter != "priceup"):
