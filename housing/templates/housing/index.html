@@ -13,18 +13,16 @@
     <link rel="stylesheet" href="{% static 'housing/style.css' %}" type="text/css">
 
     <style>
-        .bg { 
+        .bg {
         background-image: url("https://news.virginia.edu/sites/default/files/styles/uva_basic_article/public/article_image/aggro_page_header.jpg?itok=ZbZ5XByJ");
-        height: 100%; 
+        height: 100%;
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
         }
-
         .form-group{
             width: 300px;
         }
-
         #login-box{
             margin: 0 auto;
             padding: 10px;
@@ -64,11 +62,11 @@
         <nav class="navbar sticky-top navbar-expand-md">
                 <a href="/housingsearch/"><img class="logo" src="https://cdn.freebiesupply.com/logos/large/2x/university-of-virginia-3-logo-png-transparent.png"></a>
                 <h1 class="title">Off Grounds Housing</h1>
-            
-                <div class="collapse navbar-collapse justify-content-end tabs" id="collapsibleNavbar">   
-                    
+
+                <div class="collapse navbar-collapse justify-content-end tabs" id="collapsibleNavbar">
+
                         <a href="{% url 'social:begin' 'google-oauth2' %}">
-                            <button type="button" name="button" class="btn btn-lg btn-danger">Log in with Google</button>
+                            <button type="button" name="button" class="btn btn-lg btn-warning">Log in with Google</button>
                         </a>                                   
                     
                 </div>
