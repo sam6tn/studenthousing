@@ -45,6 +45,12 @@ class ViewTests(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
 
+    def test_post_results_found(self):
+        p = self.create_post(name="house", info="", rating=1)
+        url = reverse('housing:post', kwargs={'post_name': 'house'})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+
     def test_roommate_results_found(self):
         url = reverse('housing:roommates')
         response = self.client.get(url)

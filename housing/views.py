@@ -148,16 +148,16 @@ class RoommateView(TemplateView):
             genders = form.cleaned_data['gender']
             if(search is not None and search is not ""):
                 if(years and genders):
-                    persons = User.objects.filter(first_name__icontains=search, profile__year__in=years, profile__gender__in= genders)\
+                    persons = User.objects.filter(Q(first_name__icontains=search) | Q(profile__bio__icontains=search), profile__year__in=years, profile__gender__in= genders)\
                         .exclude(profile__need_roommate=False)
                 elif (years and not genders):
-                    persons = User.objects.filter(first_name__icontains=search, profile__year__in=years) \
+                    persons = User.objects.filter(Q(first_name__icontains=search) | Q(profile__bio__icontains=search), profile__year__in=years) \
                         .exclude(profile__need_roommate=False)
                 elif (genders and not years):
-                    persons = User.objects.filter(first_name__icontains=search, profile__gender__in=genders) \
+                    persons = User.objects.filter(Q(first_name__icontains=search) | Q(profile__bio__icontains=search), profile__gender__in=genders) \
                         .exclude(profile__need_roommate=False)
                 else:
-                    persons = User.objects.filter(first_name__icontains=search).exclude(profile__need_roommate=False)
+                    persons = User.objects.filter(Q(first_name__icontains=search) | Q(profile__bio__icontains=search)).exclude(profile__need_roommate=False)
             else:
                 if (years and genders):
                     persons = User.objects.filter(profile__year__in=years, profile__gender__in=genders) \
