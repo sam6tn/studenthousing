@@ -259,9 +259,9 @@
 			<div class="col-sm-5">
 				<h3>{{ person.first_name }} {{ person.last_name }}</h3>
 				<img class="profilepic" style="width:100%" src="{{ person.profile.image.url }}">
-				<p>Email: {{ person.email }}</p>
-				<p>Phone: {{ person.profile.phone }}</p>
-				<p>{{ person.profile.bio }}</p>
+				<p style="font-size: 12;">Email: {{ person.email }}</p>
+				<p style="font-size: 12;">Phone: {{ person.profile.phone }}</p>
+				<p style="font-size: 12;">{{ person.profile.bio }}</p>
 			</div>
 		{% endfor %}
 	</div>

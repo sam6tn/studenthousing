@@ -30,7 +30,6 @@ class ListView(TemplateView):
         form = SearchForm()
         if request.user.is_authenticated:
             posts = Post.objects.all() #if no search input, displays all posts
-            print("Got posts")
             for post in posts:
                 post_rating = 0
                 count = 0
@@ -137,7 +136,6 @@ class RoommateView(TemplateView):
         form = RoommateForm()
         if request.user.is_authenticated:
             persons = User.objects.all().exclude(profile__need_roommate=False)
-            print("checked3")
             args = {'persons': persons, 'form':form}
             return render(request, self.template_name, args)
         else:
@@ -148,7 +146,6 @@ class RoommateView(TemplateView):
             search = form.cleaned_data['search']
             years = form.cleaned_data['year']
             genders = form.cleaned_data['gender']
-            print('search:',search,' year:',years,' gender:',genders)
             if(search is not None and search is not ""):
                 if(years and genders):
                     persons = User.objects.filter(first_name__icontains=search, profile__year__in=years, profile__gender__in= genders)\
@@ -161,7 +158,6 @@ class RoommateView(TemplateView):
                         .exclude(profile__need_roommate=False)
                 else:
                     persons = User.objects.filter(first_name__icontains=search).exclude(profile__need_roommate=False)
-                print("checked1")
             else:
                 if (years and genders):
                     persons = User.objects.filter(profile__year__in=years, profile__gender__in=genders) \
@@ -174,7 +170,6 @@ class RoommateView(TemplateView):
                         .exclude(profile__need_roommate=False)
                 else:
                     persons = User.objects.exclude(profile__need_roommate=False)
-                print("checked2")
         args = {'persons': persons,'form': form}
         return render(request, self.template_name, args)
     
