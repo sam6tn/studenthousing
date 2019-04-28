@@ -62,6 +62,10 @@ class EditUserForm(forms.ModelForm):
             'first_name',
             'last_name',
         )
+        
+    widgets = {
+            'email': forms.TextInput(attrs={'class': 'form-control', 'style': 'font-size: large',})
+        }
 
 
 class EditProfileForm(forms.ModelForm):
