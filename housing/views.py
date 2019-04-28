@@ -42,7 +42,6 @@ class ListView(TemplateView):
                     post_rating = int(round(post_rating/count))
                     post.rating = post_rating
                 post.save(update_fields=["rating"])
-
             args = {'posts': posts, 'form':form}
             return render(request, self.template_name, args)
         else:
@@ -75,7 +74,7 @@ class ListView(TemplateView):
                         posts = Post.objects.all().order_by("price")
                 else:
                     posts = Post.objects.all()
-        args = {'posts': posts,'form': form}
+        args = {'posts': posts,'form': form, 'search':search}
         return render(request, self.template_name, args)
 
 #view for individual housing posts

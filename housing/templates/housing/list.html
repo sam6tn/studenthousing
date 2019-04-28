@@ -404,13 +404,14 @@
           {% csrf_token %}
           <div>
               <div class="form-inline centered">
-           <input class='form-control form-control-lg' style="width: 320px;  margin-left: 15px; margin-bottom: 10px; color: black;" id="search" type="text" name="search" placeholder="Search Housing...">
+           <input class='form-control form-control-lg' style="width: 320px;  margin-left: 15px; margin-bottom: 10px; color: black;" id="search" type="text" name="search" value="{{search}}" placeholder="Search Housing...">
               <button style = "margin:10px; color: black; float: right;" class="searchbutton" type="submit">
               <i class="fa fa-search"></i>
             </button>
               </div>
-               <div class="col"><select onchange="this.form.submit();" class="form-control form-control-lg" id="filter" name="filter" style="margin-bottom: 20px; color: rgb(194, 113, 21);">
-                    <option selected value="">Sort by:</option>
+
+               <div class="col"><select onchange="this.form.submit();" class="form-control form-control-lg" id="filter" name="filter"  style="margin-bottom: 20px; color: rgb(194, 113, 21);">
+                    <option value="">Sort by:</option>
                     <option value="rating">Recommended</option>
                     <option value="available">Availability</option>
                     <option value="priceup">Price: Low to High</option>
