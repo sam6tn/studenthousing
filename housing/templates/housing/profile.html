@@ -136,7 +136,7 @@
 
 {% block content %}
 <div class="centered">
-    <h2 class="account-heading">Welcome, {{ user.username }}!</h2>
+    <h2 class="account-heading">Welcome, {{ user.first_name }}!</h2>
     <img class="profilepic" style="width:100%" src="{{user.profile.image.url}}">
     <div class="title2">
         <p>First name: {{ user.first_name }}</p>
