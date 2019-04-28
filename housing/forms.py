@@ -18,7 +18,7 @@ class SearchForm(forms.ModelForm):
         fields = ('search', 'filter')
 
 class RoommateForm(forms.ModelForm):
-    search = forms.CharField(widget=forms.TextInput(attrs={'size': 115,}))
+    search = forms.CharField(widget=forms.TextInput(attrs={'size': 115, 'placeholder': 'Search roommates...'}), required=False)
     YEAR_OPTIONS = (
         ('1', 'First Year'),
         ('2', 'Second Year'),
@@ -26,10 +26,18 @@ class RoommateForm(forms.ModelForm):
         ('4', 'Fourth Year'),
         ('5', 'Graduate Student'),
     )
-    year = forms.MultipleChoiceField(choices=YEAR_OPTIONS, widget=forms.CheckboxSelectMultiple, required=False)
+    year = forms.MultipleChoiceField(choices=YEAR_OPTIONS, widget=forms.CheckboxSelectMultiple(attrs={'class' : 'form-check'}), required=False)
+    GENDER_CHOICES = (
+        ('w', 'Woman'),
+        ('m', 'Man'),
+        ('gnc', 'Gender Non-Conforming'),
+        ('t', 'Transgender'),
+        ('pnts', 'Prefer Not To Say'),
+    )
+    gender = forms.MultipleChoiceField(choices=GENDER_CHOICES, widget=forms.CheckboxSelectMultiple(attrs={'class' : 'form-check'}), required=False, )
     class Meta:
         model = User
-        fields = ('search','year')
+        fields = ('search','year', 'gender')
 
 
 class ReviewForm(forms.ModelForm):
@@ -53,12 +61,13 @@ class EditUserForm(forms.ModelForm):
         )
 
 class EditProfileForm(forms.ModelForm):
-    bio = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 4}), required=False)
+    bio = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 4}), required=False, help_text="Tell us about yourself! Let people know what you're looking for in a roommate.")
     phone = forms.CharField(required=False)
     class Meta:
         model = Profile
         fields = (
             'year',
+            'gender',
             'bio',
             'phone',
             'image',

@@ -1,106 +1,61 @@
-<html>
+{% block body %}
 
 <head>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
-        integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"
-        integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
-        crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"
+		integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 
-    <link rel="icon"
-        href="https://cdn.freebiesupply.com/logos/large/2x/university-of-virginia-3-logo-png-transparent.png">
 
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'housing/style.css' %}" type="text/css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <style>
-        .form-group {
-            width: 300px;
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'housing/style.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+	body {
+	    height: 100%;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+	}
+	.sidenav {
+      padding-top: 30px;
+      background-color: rgb(21, 46, 100);
+      height: 100%;
+      position: fixed;
+    }
+    .result_scroll {
+      display: inline-block;
+      position: relative;
+      margin-bottom: 10px;
+      /* margin-right: 30px; */
+      margin-left: 35%;
+      width: 100%
+    }
+	    ul {
+          list-style: none;
         }
-        #login-box {
-            margin: 0 auto;
-            padding: 10px;
-        }
-        .title {
-            text-shadow: 1px 1px rgb(20, 43, 121);
-        }
-        .login-error {
-            color: red;
-            margin: 0 auto;
-            text-align: center;
-        }
-        .tabs {
-            font-size: 16pt;
-        }
-        .rightmarg {
-            margin-right: 50px;
-        }
-        .profilepic {
-            width: 200px;
-            height: 200px;
-            justify-content: center;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .title2 {
-            color: grey;
-            font-size: 18px;
-        }
-        button {
-            border: none;
-            outline: 0;
-            display: inline-block;
-            padding: 8px;
-            color: black;
-            text-align: center;
-            cursor: pointer;
-            width: 100%;
-            font-size: 18px;
-        }
-        button:hover, a:hover {
-            opacity: 0.7;
-        }
-        .centered {
-            text-align: center;
-            justify-content: center;
-            margin: 0 auto;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            max-width: 300px;
-            margin: auto;
-            text-align: center;
-            font-family: arial;
-        }
-        .navbar {
-            color: rgb(236, 156, 5);
-            background-color: rgba(226, 226, 226);
-            /* background-color: #AFB5D5; */
-        }
-        .logo {
-            height: 70px;
-            width: 70px;
-            margin-right: 10px;
-        }
-        .nav-item {
-            margin-right: 10px;
-            padding-right: 10px;
-        }
-        nav li:not(:last-child) {
-            border-right: solid 1px orange;
-        }
-    </style>
 
-    <title>Profile</title>
-
+		#filter-button {
+			width: 200px;
+		}
+		.checked {
+			color: orange;
+		}
+		#ratingdisp {
+			font-size: 16pt;
+		}
 		#results {
 			display: inline-block;
 			margin-bottom: 100px;
@@ -110,7 +65,6 @@
 			background-color: whitesmoke;
 			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 		}
-
 		button {
 			border: none;
 			outline: 0;
@@ -122,7 +76,6 @@
 			width: 100%;
 			font-size: 18px;
 		}
-
 		button:hover, a:hover {
 			opacity: 0.7;
 		}
@@ -134,7 +87,6 @@
 			margin-bottom: 100px;
 			margin-right: 100px;
 		}
-
 		.col-sm-5 {
 			text-align: center;
 			justify-content: center;
@@ -146,7 +98,6 @@
 			text-align: center;
 			font-family: arial;
 		}
-
 		.img-results {
 			width: 400px;
 			height: 300px;
@@ -154,45 +105,36 @@
 			margin: 0 auto;
 			text-align: center;
 		}
-
 		.botmarg {
 			margin-bottom: 80px;
 		}
-
 		.title {
 			text-shadow: 1px 1px rgb(20, 43, 121);
 		}
-
 		.tabs {
 			font-size: 16pt;
 		}
-
 		#price {
 			font-size: 16pt;
 			margin-right: 30px;
 		}
-
 		#resulttext {
 			font-size: 20pt;
 			margin-right: 20px;
 			font-weight: bold;
 		}
-
 		.centered {
 			justify-content: center;
 			text-align: center;
 			margin: 0 auto;
 		}
-
 		.dropdown {
 			width: 100px !important;
 		}
-
 		.profilepic {
 			width: 200px;
 			height: 200px;
 		}
-
 		.navbar {
 			color: rgb(236, 156, 5);
 			background-color: rgba(226, 226, 226);
@@ -218,57 +160,115 @@
 
 <body>
 
-    <nav class="navbar sticky-top navbar-expand-md">
-        <a href="/housingsearch/"><img class="logo"
-                src="https://cdn.freebiesupply.com/logos/large/2x/university-of-virginia-3-logo-png-transparent.png"></a>
-        <h1 class="title">Off Grounds Housing</h1>
+	<nav class="navbar sticky-top navbar-expand-md">
+		<a href="/housingsearch/"><img class="logo"
+				src="https://cdn.freebiesupply.com/logos/large/2x/university-of-virginia-3-logo-png-transparent.png"></a>
+		<h1 class="title">Off Grounds Housing</h1>
 
-        <div class="collapse navbar-collapse justify-content-end tabs" id="collapsibleNavbar">
-            <ul class="navbar-nav">
-                <li class="nav-item"> <a class="nav-link" href="/housingsearch/">Housing</a></li>
-                <li class="nav-item"><a class="nav-link" href="/roommates/">Roommates</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">{{ user.first_name }}</a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="/profile"><span class="glyphicon glyphicon-user"></span>
-                            Profile</a>
-                        <a class="dropdown-item" href="/logout/"><span class="glyphicon glyphicon-log-in"></span>
-                            Logout</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
+		<div class="collapse navbar-collapse justify-content-end tabs" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"> <a class="nav-link" href="/housingsearch/">Housing</a></li>
+				<li class="nav-item"><a class="nav-link" href="/roommates/">Roommates</a></li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false">{{ user.first_name }}</a>
+					<div class="dropdown-menu dropdown-menu-right">
+						<a class="dropdown-item" href="/profile"><span class="glyphicon glyphicon-user"></span> Profile</a>
+						<a class="dropdown-item" href="/logout/"><span class="glyphicon glyphicon-log-in"></span> Logout</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+      <div class="row">
+        <div class="col-md-8" style="margin-left: 300px">
+		<form method="Post">
+			{% csrf_token %}
+            <div class="form-group" style="width: 500px;  margin-bottom: 10px; margin-left: 150">
+                <input class='form-control form-control-lg' style="margin-bottom: 10px; color: black;" id="search" type="text" name="search" placeholder="Search roommates...">
+            </div>
+            <div class="col-sm-4" style="margin-left: 140px">
+            <div class="form-group" id="gender"><span style="font-size: 11pt; font-weight: 500; margin-right: 20px">Gender Preference:</span>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="gender" id="m" value="m">
+                  <label class="form-check-label" for="m" style="margin-left: 20px; font-size: 10pt; font-weight: 500;">Man</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="gender" id="w" value="w">
+                  <label class="form-check-label" for="w" style="margin-left: 20px; font-size: 10pt; font-weight: 500;">Woman</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="gender" id="gnc" value="gnc">
+                  <label class="form-check-label" for="gnc" style="margin-left: 20px; font-size: 10pt; font-weight: 500;">Gender Non-Conforming</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="gender" id="t" value="t">
+                  <label class="form-check-label" for="t" style="margin-left: 20px; font-size: 10pt; font-weight: 500;">Transgender</label>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4" style="margin-left: 30px">
+                <div class="form-group" id="year"><span style="font-size: 11pt; font-weight: 500; margin-right: 20px;">Year Preference:</span>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="year" id="1" value="1">
+                  <label class="form-check-label" for="1" style="margin-left: 20px; font-size: 10pt; font-weight: 500;">First Year</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="year" id="2" value="2">
+                  <label class="form-check-label" for="2" style="margin-left: 20px; font-size: 10pt; font-weight: 500;">Second Year</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="year" id="3" value="3">
+                  <label class="form-check-label" for="3" style="margin-left: 20px; font-size: 10pt; font-weight: 500;">Third Year</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="year" id="4" value="4">
+                  <label class="form-check-label" for="4" style="margin-left: 20px; font-size: 10pt; font-weight: 500;">Fourth Year</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="year" id="5" value="5">
+                  <label class="form-check-label" for="5" style="margin-left: 20px; font-size: 10pt; font-weight: 500;">Graduate Student</label>
+                </div>
+                </div>
+            </div>
+        <button class="btn btn-secondary" type="submit" style="width: 150px; margin-left: 345px;">Search Roommates!</button>
+            </form>
+            <br>
+    </div>
+</div>
+    <br>
+    <hr />
+        <br>
+    <p style="text-align: center; font-weight: 500; font-size: 18pt;">Search Results:</p>
+    <br>
 
-    </nav>
+	<!-- <div class="centered">
+		<h2>Search for Roommates</h2>
+		<form method="Post">
+			{% csrf_token %}
+			<div style="margin-bottom: 20px;">{{ form.search }}</div>
+			<button class="btn btn-success btn-block" type="submit" style="width: 900px; margin-left: 180px;">Search
+				Roommates!</button>
+		</form>
+		<span id="resulttext">Search Results:</span>
+	</div>-->
+
+
+	<div class="resultcontainer centered">
+		{% for person in persons.all %}
+			<div class="col-sm-5">
+				<h3>{{ person.first_name }} {{ person.last_name }}</h3>
+				<img class="profilepic" style="width:100%" src="{{ person.profile.image.url }}">
+				<p>Email: {{ person.email }}</p>
+				<p>Phone: {{ person.profile.phone }}</p>
+				<p>{{ person.profile.bio }}</p>
+			</div>
+		{% endfor %}
+	</div>
+
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script> -->
+
+	{% endblock %}
 
 </body>
-
-</html>
-
-
-{% block content %}
-<div class="centered">
-    <h2 class="account-heading">Welcome, {{ user.username }}!</h2>
-    <img class="profilepic" style="width:100%" src="{{user.profile.image.url}}">
-    <div class="title2">
-        <p>First name: {{ user.first_name }}</p>
-        <p>Last name: {{ user.last_name }}</p>
-        <p>Email: {{ user.email }}</p>
-        <p>Bio: {{ user.profile.bio }}</p>
-        <p>Phone: {{ user.profile.phone }}</p>
-    </div>
-
-
-    <form method='POST'>
-        <button>
-            {% csrf_token %}
-            <input type="submit" value="Edit Profile">
-        </button>
-    </form>
-</div>
-
-
-
-
-{% endblock content %}

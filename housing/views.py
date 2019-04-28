@@ -146,11 +146,34 @@ class RoommateView(TemplateView):
         form = RoommateForm(request.POST)
         if form.is_valid():
             search = form.cleaned_data['search']
-            if(search is not None):
-                persons = User.objects.filter(first_name__icontains=search).exclude(profile__need_roommate=False)
+            years = form.cleaned_data['year']
+            genders = form.cleaned_data['gender']
+            print('search:',search,' year:',years,' gender:',genders)
+            if(search is not None and search is not ""):
+                if(years and genders):
+                    persons = User.objects.filter(first_name__icontains=search, profile__year__in=years, profile__gender__in= genders)\
+                        .exclude(profile__need_roommate=False)
+                elif (years and not genders):
+                    persons = User.objects.filter(first_name__icontains=search, profile__year__in=years) \
+                        .exclude(profile__need_roommate=False)
+                elif (genders and not years):
+                    persons = User.objects.filter(first_name__icontains=search, profile__gender__in=genders) \
+                        .exclude(profile__need_roommate=False)
+                else:
+                    persons = User.objects.filter(first_name__icontains=search).exclude(profile__need_roommate=False)
                 print("checked1")
             else:
-                persons = User.objects.all().exclude(profile__need_roommate=False)
+                if (years and genders):
+                    persons = User.objects.filter(profile__year__in=years, profile__gender__in=genders) \
+                        .exclude(profile__need_roommate=False)
+                elif (years and not genders):
+                    persons = User.objects.filter(profile__year__in=years) \
+                        .exclude(profile__need_roommate=False)
+                elif (genders and not years):
+                    persons = User.objects.filter(profile__gender__in=genders) \
+                        .exclude(profile__need_roommate=False)
+                else:
+                    persons = User.objects.exclude(profile__need_roommate=False)
                 print("checked2")
         args = {'persons': persons,'form': form}
         return render(request, self.template_name, args)
