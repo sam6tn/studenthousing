@@ -9,9 +9,9 @@ Heroku link: http://uvahousing.herokuapp.com/ <br/>
 
 The web app works best on Google Chrome. The site was also made accessible by google accounts, so the following email information below can be used to sign in.
 
-## Sign In Information
+## Sign-In Information
 
-Email Profile: team1housing@gmail.com
+Email Username: team1housing@gmail.com
 
 Email password: offgrounds
 
