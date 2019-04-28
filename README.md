@@ -1,8 +1,8 @@
-# UVA Housing App
+# UVA Off-Grounds Housing App
 
 A web application that allows UVa students to search off-grounds housing locations in the Charlottesville area. 
 
-Heroku link: http://uvahousing.herokuapp.com/ <br/>
+Heroku Link: http://uvahousing.herokuapp.com/ <br/>
 [![Build Status](https://travis-ci.com/UVA-CS3240-S19/project-103-team1.svg?token=s7jA4ZewGAqaqnesk2ju&branch=master)](https://travis-ci.com/UVA-CS3240-S19/project-103-team1)
 
 ## Instruction Tips
@@ -11,9 +11,9 @@ The web app works best on Google Chrome. The site was also made accessible by go
 
 ## Sign-In Information
 
-Email Username: team1housing@gmail.com
+**Email Username:** team1housing@gmail.com
 
-Email password: offgrounds
+**Email password:** offgrounds
 
 ## Authors
 
