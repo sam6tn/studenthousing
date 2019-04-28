@@ -1,8 +1,9 @@
 # UVA Housing App
+
+A web application that allows UVa students to search off-grounds housing locations in the Charlottesville area. 
+
 Heroku link: http://uvahousing.herokuapp.com/ <br/>
 [![Build Status](https://travis-ci.com/UVA-CS3240-S19/project-103-team1.svg?token=s7jA4ZewGAqaqnesk2ju&branch=master)](https://travis-ci.com/UVA-CS3240-S19/project-103-team1)
-
-An app that allows UVa students to search off-grounds housing locations in the Charlottesville area. 
 
 ## Instruction Tips
 
@@ -18,8 +19,8 @@ Email password: offgrounds
 
 * **Akanksha Alok (aa8dp) - Scrum Master**
 * **Corban Cress (cc8en) - Requirements Manager**
-* **Jessica Krynitsky (jmk8vr) - Software Architect **
+* **Jessica Krynitsky (jmk8vr) - Software Architect**
 * **Steven Morrison (sam6tn) - Configuration Manager**
-* **Hana Nur (hrn4ch) - Testing Manager **
+* **Hana Nur (hrn4ch) - Testing Manager**
 
 
