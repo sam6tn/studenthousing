@@ -25,13 +25,23 @@ class Profile(models.Model):
     image = models.ImageField(default='avatar.jpg', upload_to='')
     need_roommate = models.BooleanField(default=True)
     YEAR_CHOICES = (
+        ('u', 'Unspecified'),
         ('1', 'First Year'),
         ('2', 'Second Year'),
         ('3', 'Third Year'),
         ('4', 'Fourth Year'),
         ('5', 'Graduate Student'),
     )
-    year = models.CharField(max_length=1, choices=YEAR_CHOICES, default="1")
+    year = models.CharField(max_length=1, choices=YEAR_CHOICES, default="u")
+    GENDER_CHOICES = (
+        ('u', 'Unspecified'),
+        ('w', 'Woman'),
+        ('m', 'Man'),
+        ('gnc', 'Gender Non-Conforming'),
+        ('t', 'Transgender'),
+        ('pnts', 'Prefer Not To Say'),
+    )
+    gender = models.CharField(max_length=4, choices=GENDER_CHOICES, default="u")
 
     def __str__(self):
         return f'{self.user.username} Profile'

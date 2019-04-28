@@ -55,20 +55,24 @@ class ListView(TemplateView):
             filter = form.cleaned_data['filter']
             if(search is not None and search is not ""):
                 if (filter is not ''):
-                    if (filter != "price"):
+                    if (filter != "priceup"):
                         posts = Post.objects.filter(Q(name__icontains=search) |
                                                     Q(address__icontains=search) |
                                                     Q(info__icontains=search)).order_by('-'+filter)  # searches database based on substring
                     else:
                         posts = Post.objects.filter(Q(name__icontains=search) |
                                                     Q(address__icontains=search) |
-                                                    Q(info__icontains=search)).order_by(filter)
+                                                    Q(info__icontains=search)).order_by("price")
+                else:
+                    posts = Post.objects.filter(Q(name__icontains=search) |
+                                                Q(address__icontains=search) |
+                                                Q(info__icontains=search))
             else:
                 if(filter is not ''):
-                    if (filter != "price"):
+                    if (filter != "priceup"):
                         posts = Post.objects.all().order_by('-'+filter)
                     else:
-                        posts = Post.objects.all().order_by(filter)
+                        posts = Post.objects.all().order_by("price")
                 else:
                     posts = Post.objects.all()
         args = {'posts': posts,'form': form}
@@ -132,7 +136,6 @@ class RoommateView(TemplateView):
         form = RoommateForm()
         if request.user.is_authenticated:
             persons = User.objects.all().exclude(profile__need_roommate=False)
-            print("checked3")
             args = {'persons': persons, 'form':form}
             return render(request, self.template_name, args)
         else:
@@ -141,12 +144,32 @@ class RoommateView(TemplateView):
         form = RoommateForm(request.POST)
         if form.is_valid():
             search = form.cleaned_data['search']
-            if(search is not None):
-                persons = User.objects.filter(first_name__icontains=search).exclude(profile__need_roommate=False)
-                print("checked1")
+            years = form.cleaned_data['year']
+            genders = form.cleaned_data['gender']
+            if(search is not None and search is not ""):
+                if(years and genders):
+                    persons = User.objects.filter(first_name__icontains=search, profile__year__in=years, profile__gender__in= genders)\
+                        .exclude(profile__need_roommate=False)
+                elif (years and not genders):
+                    persons = User.objects.filter(first_name__icontains=search, profile__year__in=years) \
+                        .exclude(profile__need_roommate=False)
+                elif (genders and not years):
+                    persons = User.objects.filter(first_name__icontains=search, profile__gender__in=genders) \
+                        .exclude(profile__need_roommate=False)
+                else:
+                    persons = User.objects.filter(first_name__icontains=search).exclude(profile__need_roommate=False)
             else:
-                persons = User.objects.all().exclude(profile__need_roommate=False)
-                print("checked2")
+                if (years and genders):
+                    persons = User.objects.filter(profile__year__in=years, profile__gender__in=genders) \
+                        .exclude(profile__need_roommate=False)
+                elif (years and not genders):
+                    persons = User.objects.filter(profile__year__in=years) \
+                        .exclude(profile__need_roommate=False)
+                elif (genders and not years):
+                    persons = User.objects.filter(profile__gender__in=genders) \
+                        .exclude(profile__need_roommate=False)
+                else:
+                    persons = User.objects.exclude(profile__need_roommate=False)
         args = {'persons': persons,'form': form}
         return render(request, self.template_name, args)
     
