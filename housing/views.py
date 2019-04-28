@@ -146,9 +146,6 @@ class RoommateView(TemplateView):
             search = form.cleaned_data['search']
             years = form.cleaned_data['year']
             genders = form.cleaned_data['gender']
-            print(search)
-            print(years)
-            print(genders)
             if(search is not None and search is not ""):
                 if(years and genders):
                     persons = User.objects.filter(Q(first_name__icontains=search) | Q(profile__bio__icontains=search), profile__year__in=years, profile__gender__in= genders)\

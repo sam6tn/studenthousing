@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ea61e526-b9e1-478e-b7de-a855e0954e41" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/housing/templates/housing/profile.html" afterPath="$PROJECT_DIR$/housing/templates/housing/profile.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/housing/templates/housing/roommates.html" afterPath="$PROJECT_DIR$/housing/templates/housing/roommates.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/housing/tests.py" afterPath="$PROJECT_DIR$/housing/tests.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/housing/views.py" afterPath="$PROJECT_DIR$/housing/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -77,11 +72,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/housing/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="30" column="41" lean-forward="true" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
+            <state relative-caret-position="251">
+              <caret line="151" column="39" lean-forward="false" selection-start-line="151" selection-start-column="39" selection-end-line="151" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -99,7 +94,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="roommates.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="roommates.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/housing/templates/housing/roommates.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
@@ -237,10 +232,10 @@
         <option value="$PROJECT_DIR$/housing/models.py" />
         <option value="$PROJECT_DIR$/housing/forms.py" />
         <option value="$PROJECT_DIR$/housing/templates/housing/profile.html" />
-        <option value="$PROJECT_DIR$/housing/views.py" />
         <option value="$PROJECT_DIR$/housing/templates/housing/list.html" />
         <option value="$PROJECT_DIR$/housing/tests.py" />
         <option value="$PROJECT_DIR$/housing/templates/housing/roommates.html" />
+        <option value="$PROJECT_DIR$/housing/views.py" />
       </list>
     </option>
   </component>
@@ -558,14 +553,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/housing/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="30" column="41" lean-forward="true" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/housing/templates/housing/profile.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="215">
@@ -660,6 +647,14 @@
             <element signature="n#style#0;n#p#1;n#div#0;n#div#1;n#body#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#p#2;n#div#0;n#div#1;n#body#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/housing/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="151" column="39" lean-forward="false" selection-start-line="151" selection-start-column="39" selection-end-line="151" selection-end-column="39" />
+          <folding />
         </state>
       </provider>
     </entry>
