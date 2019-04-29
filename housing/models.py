@@ -19,7 +19,7 @@ from geopy.geocoders import Nominatim
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(blank=True)
+    bio = models.CharField(max_length=300, blank=True)
     # area = models.CharField(max_length=100, blank=True)
     phone = models.CharField(max_length=11, blank=True)
     image = models.ImageField(default='avatar.jpg', upload_to='')
