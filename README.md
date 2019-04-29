@@ -7,7 +7,7 @@ Heroku Link: http://uvahousing.herokuapp.com/ <br/>
 
 ## Instruction Tips
 
-The web app works best on Google Chrome. The site was also made accessible by google accounts, so the following email information below can be used to sign in.
+The web app works best on Google Chrome. The site was also made accessible by google accounts, so the following email information below can be used to sign in. If you have trouble logging in, please try using an incognito tab or try making sure no other google accounts are currently signed in. If these suggestions do not work, please send us an email.
 
 ## Sign-In Information
 
